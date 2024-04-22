@@ -70,6 +70,6 @@ class FoodsController < ApplicationController
     end
 
     def authenticate_user
-      redirect_to root_path, alert: "You are not authorized to visit the page" unless user_signed_in and current_user.admin?
+      redirect_to root_path, alert: "You are not authorized to visit the page" unless current_user&.admin?
     end
 end

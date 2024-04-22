@@ -12,13 +12,13 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 me-auto ms-auto">
           <li class="nav-item">
-            <%= button_to "Add New Food Item" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
+            <%= link_to "Add New Food Item" , new_food_path, class: "nav-link active"%>
           </li>
           <li class="nav-item">
-            <%= button_to "Restock Food Item" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
+            <%= link_to "Restock Food Item" , destroy_user_session_path, class: "nav-link active"%>
           </li>
           <li class="nav-item">
-            <%= button_to "View Orders" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
+            <%= link_to "View Orders" , destroy_user_session_path, class: "nav-link active"%>
           </li>
         </ul>
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
