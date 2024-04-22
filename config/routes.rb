@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "customer#home"
+  get "/admin" => "admin#home", as: :admin_home
 end
