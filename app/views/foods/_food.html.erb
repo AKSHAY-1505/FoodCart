@@ -17,7 +17,7 @@
   </p>
   <p>
     <strong>Category:</strong>
-    <%= food.category_id %>
+    <%= Category.find(food.category_id).name %>
   </p>
   <p>
     <strong>Image:</strong>
