@@ -1,0 +1,34 @@
+<div id="<%= dom_id food %>">
+  <p>
+    <strong>Name:</strong>
+    <%= food.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= food.description %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= food.price %>
+  </p>
+
+  <p>
+    <strong>Quantity:</strong>
+    <%= food.quantity %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= food.category_id %>
+  </p>
+
+  <p>
+    <strong>Images:</strong>
+    <% food.images.each do |image| %>
+      <div><%= link_to image.filename, image %></div>
+    <% end %>
+  </p>
+
+</div>
