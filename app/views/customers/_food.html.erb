@@ -1,10 +1,14 @@
-<div id="<%= dom_id food %>">
+<div id="<%= dom_id food %>" class="food_item d-flex">
 
-  <%= render partial: 'food_carousel', locals: {food: food} %>
-  
+  <div class = "image_container">
+    <%= image_tag food.images.first.variant(:thumb) %>
+  </div>
+
+  <div class = "food_details p-2"
+
   <p>
     <strong>Name:</strong>
-    <%= food.name %>
+    <%= link_to food.name, food %>
   </p>
   <p>
     <strong>Description:</strong>
@@ -14,12 +18,20 @@
     <strong>Price:</strong>
     <%= food.price %>
   </p>
+  
+  <!-- 
   <p>
     <strong>Quantity:</strong>
     <%= food.quantity %>
   </p>
+
+ 
   <p>
     <strong>Category:</strong>
     <%= Category.find(food.category_id).name %>
-  </p>
+  </p> 
+  -->
+
+  </div>
+  
 </div>

@@ -10,6 +10,7 @@ class CustomersController < ApplicationController
     end
 
     def home
+        @foods = Food.all
     end
 
     private
