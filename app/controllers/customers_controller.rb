@@ -23,10 +23,9 @@ class CustomersController < ApplicationController
     def update
         @customer = Customer.find_by(user: current_user)
         if @customer.update(customer_edit_params)
-            redirect_to root_path, notice: "Address Updated Successfully"
+            redirect_to edit_user_registration_path, notice: "Address Updated Successfully"
         else
-            flash.now[:alert] = @customer.errors.full_messages.join(', ')
-            render :edit
+            redirect_to edit_user_registration_path, alert: @customer.errors.full_messages.join(', ')
         end
     end
 
