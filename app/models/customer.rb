@@ -1,6 +1,5 @@
 class Customer < ApplicationRecord
   belongs_to :user
-  accepts_nested_attributes_for :user
 
   validates :house_number, presence: true
   validates :street, presence: true

@@ -11,7 +11,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with(model: user, url: customer_path(user), local: true) do |form| %>
+        <%= form_with(model: @customer,method: :patch,url: customer_path(@customer), local: true) do |form| %>
           <div>
             <%= form.label :house_number %>
             <%= form.text_field :house_number %>
@@ -35,10 +35,6 @@
           <%= form.submit "Update Address", data: { 'bs-dismiss': "modal" } %>
         <% end %>
       </div>
-      <!-- > <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
   </div>
 </div>

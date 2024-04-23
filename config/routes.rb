@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :foods
-  devise_for :users
-  resources :customers, only: [:new,:create,:edit,:update]
+  devise_for :users, controllers: {
+        registrations: 'users/registrations'
+      }
+  resources :customers, only: [:edit,:update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -10,5 +12,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "customers#home"
-  get "/admin" => "admin#home", as: :admin_home
+  get "/admin" => "admins#home", as: :admin_home
 end
