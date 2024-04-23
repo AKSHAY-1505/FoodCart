@@ -1,30 +1,8 @@
-<h2>Update Profile</h2>
+<h2>Update Delivery Address</h2>
 <% if flash[:alert] %>
   <p> <%= flash[:alert] %> </p>
 <% end %>
 <%= form_with(model: @customer, local: true) do |form| %>
-  <%= form.fields_for :user do |user_form| %>
-    <div>
-      <%= user_form.label :name %>
-      <%= user_form.text_field :name %>
-    </div>
-    <div>
-      <%= user_form.label :email %>
-      <%= user_form.text_field :email %>
-    </div>
-    <div>
-      <%= user_form.label :password %>
-      <%= user_form.password_field :password %>
-    </div>
-    <div>
-      <%= user_form.label :password_confirmation %>
-      <%= user_form.password_field :password_confirmation %>
-    </div>
-    <div>
-      <%= user_form.label :current_password %>
-      <%= user_form.password_field :current_password %>
-    </div>
-  <% end %>
   <div>
     <%= form.label :house_number %>
     <%= form.text_field :house_number %>

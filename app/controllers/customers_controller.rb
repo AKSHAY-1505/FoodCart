@@ -21,7 +21,13 @@ class CustomersController < ApplicationController
     end
 
     def update
-        
+        @customer = Customer.find_by(user: current_user)
+        if @customer.update(customer_edit_params)
+            redirect_to root_path, notice: "Address Updated Successfully"
+        else
+            flash.now[:alert] = @customer.errors.full_messages.join(', ')
+            render :edit
+        end
     end
 
     def home
@@ -34,6 +40,6 @@ class CustomersController < ApplicationController
     end
 
     def customer_edit_params
-        params.require(:customer).permit(:house_number,:street,:locality,:city,:phone_number,user_attributes: [:name,:email,:password,:password_confirmation,:current_password])
+        params.require(:customer).permit(:house_number,:street,:locality,:city,:phone_number)
     end
 end

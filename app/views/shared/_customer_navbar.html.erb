@@ -13,10 +13,13 @@
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <% if current_user&.customer? %>
             <li class="nav-item">
-              <%= button_to "Log out" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
+              <%= link_to "Change Address", edit_customer_path(current_user), class: "nav-link active"%>
             </li>
             <li class="nav-item">
-              <%= link_to "Profile", edit_customer_path(current_user), class: "nav-link active"%>
+              <%= link_to "Profile", edit_user_registration_path, class: "nav-link active"%>
+            </li>
+            <li class="nav-item">
+              <%= button_to "Log out" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
             </li>
           <% else %>
             <li class="nav-item">
