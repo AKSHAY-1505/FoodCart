@@ -9,5 +9,6 @@
 #   end
 
 
-admin = User.create!(name: 'Admin 1', email: 'admin@mail.com', password: '111111', password_confirmation: '111111', role: :admin)
+user = User.create!(name: 'Admin 1', email: 'admin@mail.com', password: '111111', password_confirmation: '111111', role: :admin)
+Admin.create(user: user)
 

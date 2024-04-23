@@ -8,12 +8,5 @@ class User < ApplicationRecord
 
   has_one :admin, dependent: :destroy
   has_one :customer, dependent: :destroy
-  
-  after_create :create_admin_or_customer
 
-  private
-
-  def create_admin_or_customer
-    self.admin? ? Admin.create(user_id: self.id) : Customer.create(user_id: self.id)
-  end
 end
