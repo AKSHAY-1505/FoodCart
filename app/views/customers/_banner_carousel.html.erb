@@ -25,26 +25,26 @@
     <span class="visually-hidden">Next</span>
 </button>
 </div> -->
-
-
-<div id="carouselExample" class="carousel slide">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-    <%= image_tag 'banner1.jpg', class: "d-block w-100 carousel_image" %>
+<div class="carousel_container">
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag 'banner1.jpg', class: "d-block w-100 carousel_image" %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag 'banner2.jpg', class: "d-block w-100 carousel_image" %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag 'banner3.jpg', class: "d-block w-100 carousel_image" %>
+      </div>
     </div>
-    <div class="carousel-item">
-    <%= image_tag 'banner2.jpg', class: "d-block w-100 carousel_image" %>
-    </div>
-    <div class="carousel-item">
-    <%= image_tag 'banner3.jpg', class: "d-block w-100 carousel_image" %>
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
