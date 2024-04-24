@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "profile_update", "data-turbo-track": "reload" %>
 <h1>My Profile</h1>
 <br />
 <div class="center">
@@ -30,8 +29,8 @@
         <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
         <%= f.password_field :current_password, autocomplete: "current-password" %>
       </div>
-      <div class="submit">
-        <%= f.submit "Update", class: "btn btn-success" %>
+      <div class="center">
+        <%= f.submit "Reset Password", class: "btn btn-success" %>
       </div>
     <% end %>
   </div>
@@ -39,18 +38,22 @@
     <div class = "shadow_box container">
       <h3>Delete Account</h3>
       <hr />
-      <div class="delete_account container">
+      <div class="container">
         <p> Delete Account Permanently </p>
-        <%= button_to "Delete my account", registration_path(resource_name), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?"},class: "btn btn-danger" %></div>
+        <div class="center">
+          <%= button_to "Delete my account", registration_path(resource_name), method: :delete, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?"},class: "btn btn-danger" %>
+        </div>
+      </div>
     </div>
     <br />
     <hr /><br />
     <% if current_user.customer? %>
-      <div class=" shadow_box container">
+      <div class="shadow_box container">
         <h3>Chage Delivery Address</h3>
         <hr />
-        <%= render 'shared/update_address' %>
-      </div>
-    <% end %>
+        <div class="center">
+          <%= render 'shared/update_address' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>

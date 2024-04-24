@@ -41,3 +41,11 @@ body {
   padding: 5px;
   margin: 5px;
 }
+
+.field {
+  margin: 15px;
+}
+
+.field * {
+  padding: 5px;
+}
