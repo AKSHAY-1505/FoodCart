@@ -13,23 +13,24 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <% if current_user&.customer? %>
-            <li class="nav-item center">
+            <li class="nav-item center btn btn-dark">
               <%= link_to cart_path(current_customer.cart), class: "nav-link active" do %>
                 <i class="bi bi-cart2 me-0"></i>
-                Cart
+                Cart <span id="quantity-badge" class="badge text-bg-danger">4</span>
               <% end %>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item center btn btn-dark">
               <%= link_to "Profile", edit_user_registration_path, class: "nav-link active"%>
             </li>
-            <li class="nav-item">
+            <li class="nav-item center btn btn-dark">
               <%= button_to "Log out" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
             </li>
           <% else %>
-            <li class="nav-item">
+            <li class="nav-item center btn btn-dark">
               <%= link_to "Sign in" , new_user_session_path, class: "nav-link active"%>
             </li>
-            <li class="nav-item">
+            <li class="nav-item center btn btn-dark">
               <%= link_to "Sign up" , new_user_registration_path, class: "nav-link active"%>
             </li>
           <% end %>

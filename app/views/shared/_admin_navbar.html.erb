@@ -12,26 +12,26 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 me-auto ms-auto">
-          <li class="nav-item">
+          <li class="nav-item center btn btn-dark">
             <%= link_to "Add New Food Item" , new_food_path, class: "nav-link active"%>
           </li>
-          <li class="nav-item">
+          <li class="nav-item center btn btn-dark">
             <%= link_to "Restock Food Item" , destroy_user_session_path, class: "nav-link active"%>
           </li>
-          <li class="nav-item">
+          <li class="nav-item center btn btn-dark">
             <%= link_to "View Orders" , destroy_user_session_path, class: "nav-link active"%>
           </li>
         </ul>
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <!--    <% if current_user&.admin? %>  -->
-          <li class="nav-item">
+          <li class="nav-item center btn btn-dark">
             <%= button_to "Log out" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
           </li>
-          <li class="nav-item">
+          <li class="nav-item center btn btn-dark">
             <%= link_to "Profile", edit_user_registration_path, class: "nav-link active"%>
           </li>
           <!--    <% else %>
-            <li class="nav-item">
+            <li class="nav-item center btn btn-dark">
               <%= link_to "Sign in" , new_user_session_path, class: "nav-link active"%>
             </li>
           <% end %>    -->

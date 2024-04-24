@@ -1,4 +1,11 @@
+
 $(document).ready(function () {
+
+  function setCartQuantityBadge(quantity) {
+    $("#quantity-badge").text(quantity);
+    $("#quantity-badge").css("visibility", "visible");
+  }
+
   $(".increment").on("click", function () {
     let $quantityInput = $(this).siblings(".quantity");
     let currentValue = parseInt($quantityInput.val());
@@ -38,12 +45,12 @@ $(document).ready(function () {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') 
       },
       success: function(response) {
-        console.log(response);
-        console.log("SUCCESS !");
+        // console.log(response);
+        $('#quantity').val(1);
+        setCartQuantityBadge(response.cart_quantity)
       },
       error: function(xhr, status, error) {
-        // console.error('Error:', error);
-        console.log("ERROR !");
+        console.error('Error:', error);
       }
     });
   });

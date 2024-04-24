@@ -11,7 +11,7 @@ class CartItemsController < ApplicationController
         end
 
         if @cart_item.save
-            render json: { message: 'Item added to cart successfully.', cart_qauntity: cart_items_count }, status: :created
+            render json: { message: 'Item added to cart successfully.', cart_quantity: cart_items_count }, status: :created
         else
             render json: { message: 'Failed to add item to cart.' }, status: :unprocessable_entity
         end
