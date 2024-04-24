@@ -18,4 +18,36 @@ $(document).ready(function () {
       $quantityInput.val(currentValue - 1);
     }
   });
+
+  $('.add_to_cart_form').on('submit', function(event) {
+    event.preventDefault(); 
+    
+    let quantity = $(this).find('#quantity').val();
+    let foodId = $(this).find('#quantity').data('food-id');
+
+    let data = {
+      quantity: quantity,
+      food_id: foodId,
+    }
+
+    $.ajax({
+      url: '/addToCart',
+      type: 'POST',
+      data: data,
+      headers: { // Alternatively you can skip authenticity token verification in the controller
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') 
+      },
+      success: function(response) {
+        console.log(response);
+        console.log("SUCCESS !");
+      },
+      error: function(xhr, status, error) {
+        // console.error('Error:', error);
+        console.log("ERROR !");
+      }
+    });
+  });
 });
+
+
+

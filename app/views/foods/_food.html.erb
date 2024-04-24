@@ -1,6 +1,8 @@
 <div id="<%= dom_id food %>">
-
-  <%= render partial: 'food_carousel', locals: {food: food} %>
+  <h3> Images </h3>
+  <% food.images.each do |image| %>
+    <%= image_tag image.variant(:thumb) %>
+  <% end %>
   
   <p>
     <strong>Name:</strong>

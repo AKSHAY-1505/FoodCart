@@ -1,6 +1,6 @@
 <div id="<%= dom_id food %>" class="food_item ">
   <div class = "image_container">
-    <%= image_tag food.images.first.variant(:thumb) %>
+    <%= image_tag food.images.first.variant(:thumb) if food.images.any? %>
   </div>
   <div class = "food_details p-2">
     <p>
@@ -16,12 +16,12 @@
       <%= food.price %>
     </p>
     <div class="center">
-      <%= form_with do |form| %>
+      <%= form_with remote: true, class: "add_to_cart_form" do |form| %>
         <div>
-          <%= render partial: '/shared/quantity_selector', locals: {form: form}%>
+          <%= render partial: '/shared/quantity_selector', locals: {form: form, food: food}%>
         </div>
-        <div>
-          <%= form.submit "Add to Cart" %>
+        <div class="center">
+          <%= form.submit "Add to Cart", class: "btn btn-dark mt-3" %>
         </div>
       <% end %>
     </div>
