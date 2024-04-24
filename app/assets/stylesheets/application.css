@@ -13,9 +13,31 @@
  *= require_tree .
  *= require_self
  */
-
+body {
+  background-color: rgb(242, 242, 242);
+}
 #navbar_logo {
   height: 50px;
   width: 50px;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shadow_box {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  margin: 15px;
+  padding: 15px;
+  width: fit-content;
+}
+
+.center_text {
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+}
