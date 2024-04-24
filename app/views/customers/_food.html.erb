@@ -1,4 +1,4 @@
-<div id="<%= dom_id food %>" class="food_item d-flex">
+<div id="<%= dom_id food %>" class="food_item ">
 
   <div class = "image_container">
     <%= image_tag food.images.first.variant(:thumb) %>
@@ -19,19 +19,6 @@
     <%= food.price %>
   </p>
   
-  <!-- 
-  <p>
-    <strong>Quantity:</strong>
-    <%= food.quantity %>
-  </p>
-
- 
-  <p>
-    <strong>Category:</strong>
-    <%= Category.find(food.category_id).name %>
-  </p> 
-  -->
-
   </div>
   
 </div>

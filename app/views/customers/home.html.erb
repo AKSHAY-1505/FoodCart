@@ -1,9 +1,13 @@
 <%= stylesheet_link_tag "customer_home", "data-turbo-track": "reload" %>
-
 <%= render 'banner_carousel' %>
 
 <div id="foods">
-  <% @foods.each do |food| %>
-    <%= render partial: 'food', locals: {food: food} %>
+  <% @categories.each do |category| %>
+    <h3> <%= category.name %> </h3>
+    <div class="category">
+      <% category.foods.each do |food| %>
+        <%= render partial: 'food', locals: {food: food} %>
+      <% end %>
+    </div>
   <% end %>
 </div>

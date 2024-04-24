@@ -11,6 +11,7 @@ class CustomersController < ApplicationController
 
     def home
         @foods = Food.all
+        @categories = Category.all
     end
 
     private
