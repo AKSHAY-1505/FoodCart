@@ -1,6 +1,6 @@
+<%= javascript_include_tag 'home_page' %>
 <%= stylesheet_link_tag "customer_home", "data-turbo-track": "reload" %>
 <%= render 'banner_carousel' %>
-
 <div id="foods">
   <% @categories.each do |category| %>
     <h3> <%= category.name %> </h3>

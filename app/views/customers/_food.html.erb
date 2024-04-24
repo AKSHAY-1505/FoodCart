@@ -1,24 +1,29 @@
 <div id="<%= dom_id food %>" class="food_item ">
-
   <div class = "image_container">
     <%= image_tag food.images.first.variant(:thumb) %>
   </div>
-
-  <div class = "food_details p-2"
-
-  <p>
-    <strong>Name:</strong>
-    <%= link_to food.name, food %>
-  </p>
-  <p>
-    <strong>Description:</strong>
-    <%= food.description %>
-  </p>
-  <p>
-    <strong>Price:</strong>
-    <%= food.price %>
-  </p>
-  
+  <div class = "food_details p-2">
+    <p>
+      <strong>Name:</strong>
+      <%= link_to food.name, food %>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <%= food.description %>
+    </p>
+    <p>
+      <strong>Price:</strong>
+      <%= food.price %>
+    </p>
+    <div class="center">
+      <%= form_with do |form| %>
+        <div>
+          <%= render partial: '/shared/quantity_selector', locals: {form: form}%>
+        </div>
+        <div>
+          <%= form.submit "Add to Cart" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  
 </div>
