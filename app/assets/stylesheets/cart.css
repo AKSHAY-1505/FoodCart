@@ -1,0 +1,67 @@
+/* General Styles */
+body {
+  background-color: #f8f9fa; /* Light grey background */
+}
+
+h2 {
+  color: #343a40; /* Dark grey color */
+  margin-bottom: 20px;
+}
+
+/* Shopping Cart Row */
+.cart-row {
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6; /* Light border between rows */
+  margin-bottom: 10px;
+}
+
+/* Product Image */
+.product-image {
+  width: 80px; /* Image size */
+  height: 80px;
+}
+
+/* Quantity Input */
+.quantity-input {
+  width: 80px; /* Narrow input field */
+}
+
+/* Remove Button */
+.remove-button {
+  margin-top: 5px;
+}
+
+/* Cart Summary */
+.cart-summary {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #dee2e6; /* Border around summary */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #fff;
+}
+
+/* Checkout Button */
+.text-right.mt-3 {
+  margin-top: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .cart-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .quantity-input {
+      width: 100%; /* Full width on small screens */
+  }
+
+  .remove-button {
+      width: 100%; /* Full width on small screens */
+  }
+
+  .cart-summary {
+      width: 100%;
+  }
+}

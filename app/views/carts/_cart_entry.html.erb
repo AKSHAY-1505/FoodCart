@@ -1,0 +1,31 @@
+<div class="row cart-row">
+        <!-- Product Image -->
+        <div class="col-md-2">
+            <%= image_tag item.food.images.first.variant(:thumb), class: "img-fluid product-image"%>
+        </div>
+
+        <!-- Product Name -->
+        <div class="col-md-3">
+            <p><%= item.food.name %></p>
+        </div>
+
+        <!-- Product Price -->
+        <div class="col-md-2">
+            <p>Rs <%= item.food.price %></p>
+        </div>
+
+        <!-- Quantity -->
+        <div class="col-md-2">
+            <p><%= item.quantity %></p>
+        </div>
+
+        <!-- Total Price -->
+        <div class="col-md-2">
+            <p>Rs <%= item.quantity * item.food.price %></p>
+        </div>
+
+        <!-- Remove Button -->
+        <div class="col-md-1">
+            <button class="btn btn-danger btn-sm remove-button">Remove</button>
+        </div>
+    </div>
