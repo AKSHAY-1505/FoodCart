@@ -1,9 +1,10 @@
 
 $(document).ready(function () {
 
-  function setCartQuantityBadge(quantity) {
-    $("#quantity-badge").text(quantity);
-    $("#quantity-badge").css("visibility", "visible");
+  function showToast() {
+    var toastElement = document.getElementById('addToCartToast');
+    var toast = new bootstrap.Toast(toastElement);
+    toast.show();
   }
 
   $(".increment").on("click", function () {
@@ -46,8 +47,8 @@ $(document).ready(function () {
       },
       success: function(response) {
         // console.log(response);
-        $('#quantity').val(1);
-        setCartQuantityBadge(response.cart_quantity)
+        $(this).find('#quantity').val(1);
+        showToast()
       },
       error: function(xhr, status, error) {
         console.error('Error:', error);

@@ -1,0 +1,46 @@
+
+$(document).ready(function () {
+
+    function updateCartSummary(subtotal) {
+        $('#subtotal').text(subtotal);
+        let deliveryCharge = subtotal > 500 ? 0 : 30;
+        $('#delivery-charge').text(deliveryCharge);
+        $('#total').text(subtotal + deliveryCharge);
+    }
+  
+    $('.remove-button').on('click', function(event) {
+      
+      let cartItemId = $(this).data('cart-item-id');
+      let currentButton = $(this);
+
+      
+      data = {
+        cartItemId: cartItemId
+      };
+  
+      $.ajax({
+        url: '/removeFromCart',
+        type: 'DELETE',
+        data: data,
+        headers: { // Alternatively you can skip authenticity token verification in the controller
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') 
+        },
+        success: function(response) {
+          console.log(response);
+          let parentDiv = currentButton.closest('.row.cart-row');
+          parentDiv.remove();
+          subtotal = response.total;
+
+          updateCartSummary(subtotal);
+
+        },
+        error: function(xhr, status, error) {
+          console.error('Error:', error);
+        }
+      });
+    });
+  });
+  
+  
+  
+  

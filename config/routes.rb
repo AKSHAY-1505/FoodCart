@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   root "customers#home"
   get "/admin" => "admins#home", as: :admin_home
   post "/addToCart" => "cart_items#create", as: :add_to_cart
+  delete "/removeFromCart" => "cart_items#destroy", as: :remove_from_cart
 end
