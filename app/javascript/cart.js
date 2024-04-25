@@ -34,11 +34,12 @@ $(document).ready(function () {
           updateCartSummary(subtotal);
 
         },
-        error: function(xhr, status, error) {
+        error: function(error) {
           console.error('Error:', error);
         }
       });
     });
+    
   });
   
   

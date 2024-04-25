@@ -55,7 +55,10 @@
 
             <!-- Checkout button -->
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <button class="btn btn-success" id="checkout-button">Checkout</button>
+                <!-- <button class="btn btn-success" id="checkout-button">Checkout</button> -->
+                <%= form_with url: orders_path, method: :post,remote: true do |form|%>
+                    <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
+                <% end %>
             </div>
         </div>
 

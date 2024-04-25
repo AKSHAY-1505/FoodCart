@@ -1,19 +1,10 @@
 class CartItemsController < ApplicationController
 
     def create
-        cart_id = current_customer.cart.id
-        item_in_cart = item_present_in_cart(cart_id,params[:food_id])
-        quantity = params[:quantity].to_i
+        cart_item = create_or_update_cart_item
 
-        if item_in_cart.any?
-            @cart_item = item_in_cart.first
-            @cart_item.quantity += quantity
-        else
-            @cart_item = CartItem.new(quantity: params[:quantity],food_id: params[:food_id],cart_id: cart_id)
-        end
-
-        if @cart_item.save
-            increase_cart_total(@cart_item, quantity)
+        if cart_item.save
+            increase_cart_total(cart_item, params[:quantity].to_i)
             render json: { message: 'Item added to cart successfully.' }, status: :created
         else
             render json: { message: 'Failed to add item to cart.' }, status: :unprocessable_entity
@@ -35,12 +26,21 @@ class CartItemsController < ApplicationController
 
     private 
 
-    def cart_items_count
-        CartItem.where(cart: current_customer.cart).count
-    end
+    def create_or_update_cart_item
+        cart = current_customer.cart
+        quantity = params[:quantity].to_i
+        food_id = params[:food_id]
 
-    def item_present_in_cart(cart_id,food_id)
-        CartItem.where(cart_id: cart_id, food_id: food_id)
+        item_in_cart = CartItem.where(cart: cart, food_id: food_id)
+
+        if item_in_cart.any?
+            cart_item = item_in_cart.first
+            cart_item.quantity += quantity
+        else
+            cart_item = CartItem.new(quantity: quantity,food_id: food_id,cart: cart)
+        end
+
+        cart_item
     end
 
     def increase_cart_total(cart_item, quantity)

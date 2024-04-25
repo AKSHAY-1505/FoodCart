@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     helper_method :current_customer
     
+    # Return the currently logged in customer
     def current_customer
         if current_user&.customer?
             current_user.customer
@@ -9,6 +10,7 @@ class ApplicationController < ActionController::Base
 
     private
     
+    # Override devise method
     def after_sign_in_path_for(user)
         user.admin? ? admin_home_path : root_path
     end

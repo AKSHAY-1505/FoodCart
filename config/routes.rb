@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       }
   resources :customers, only: [:edit,:update]
   resources :carts, only: [:show]
+  resources :orders, only: [:create]
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
