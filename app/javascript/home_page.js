@@ -1,6 +1,4 @@
-
 $(document).ready(function () {
-
   function showSuccessToast() {
     var toastElement = document.getElementById('addToCartToast');
     var toast = new bootstrap.Toast(toastElement);
@@ -12,8 +10,8 @@ $(document).ready(function () {
     var toast = new bootstrap.Toast(toastElement);
     toast.show();
   }
-
-  $(".increment").on("click", function () {
+  // Unbind existing event handlers to prevent multiple bindings
+  $(".increment").off("click").on("click", function () {
     let $quantityInput = $(this).siblings(".quantity");
     let currentValue = parseInt($quantityInput.val());
     if (isNaN(currentValue)) {
@@ -22,7 +20,7 @@ $(document).ready(function () {
     $quantityInput.val(currentValue + 1);
   });
 
-  $(".decrement").on("click", function () {
+  $(".decrement").off("click").on("click", function () {
     let $quantityInput = $(this).siblings(".quantity");
     let currentValue = parseInt($quantityInput.val());
     if (isNaN(currentValue)) {
@@ -33,35 +31,31 @@ $(document).ready(function () {
     }
   });
 
-  $('.add_to_cart_form').on('submit', function(event) {
-    event.preventDefault(); 
+  $('.add_to_cart_form').off('submit').on('submit', function(event) {
+    event.preventDefault();
     
     let quantity = $(this).find('#quantity').val();
     let foodId = $(this).find('#quantity').data('food-id');
-
+    
     let data = {
       quantity: quantity,
       food_id: foodId,
-    }
+    };
 
     $.ajax({
       url: '/cart_items',
       type: 'POST',
       data: data,
-      headers: { // Alternatively you can skip authenticity token verification in the controller
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') 
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
       success: function(response) {
-        // console.log(response);
         $(this).find('#quantity').val(1);
-        showSuccessToast()
+        showSuccessToast();
       },
       error: function(error) {
-        showDangerToast()
+        showDangerToast();
       }
     });
   });
 });
-
-
-
