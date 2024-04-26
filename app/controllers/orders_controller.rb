@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
         cart_items = CartItem.where(cart: cart)
 
         cart_items.each do |item| 
-            OrderItem.create(order: order, food: item.food, quantity: item.quantity)
+            OrderItem.create(order: order, food_name: item.food.name, food_price: item.food.price, quantity: item.quantity)
         end
 
         clear_cart(cart)
