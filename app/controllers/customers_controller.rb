@@ -15,6 +15,7 @@ class CustomersController < ApplicationController
     end
 
     def customer_orders
+        @orders = current_customer.orders
     end
 
     private
