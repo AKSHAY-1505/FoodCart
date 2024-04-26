@@ -14,6 +14,9 @@ class CustomersController < ApplicationController
         @categories = Category.all
     end
 
+    def customer_orders
+    end
+
     private
 
     def customer_edit_params

@@ -1,14 +1,17 @@
 <%= javascript_include_tag 'home_page' %>
 <%= stylesheet_link_tag "customer_home", "data-turbo-track": "reload" %>
 <%= render 'banner_carousel' %>
-<%= render 'shared/toast' %>
+<%= render 'shared/success_toast' %>
+<%= render 'shared/danger_toast' %>
 <div id="foods">
   <% @categories.each do |category| %>
-    <h3> <%= category.name %> </h3>
-    <div class="category">
-      <% category.foods.each do |food| %>
-        <%= render partial: 'food', locals: {food: food} %>
-      <% end %>
-    </div>
+    <% if category.foods.count > 0 %>
+      <h3> <%= category.name %> </h3>
+      <div class="category">
+        <% category.foods.each do |food| %>
+          <%= render partial: 'food', locals: {food: food} %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>

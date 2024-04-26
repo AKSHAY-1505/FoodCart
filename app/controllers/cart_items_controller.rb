@@ -13,7 +13,7 @@ class CartItemsController < ApplicationController
 
 
     def destroy
-        cart_item = CartItem.find(params[:cartItemId])
+        cart_item = CartItem.find(params[:id])
 
         if cart_item.destroy!
             reduce_cart_total(cart_item)

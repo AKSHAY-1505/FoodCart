@@ -12,16 +12,10 @@ $(document).ready(function () {
       
       let cartItemId = $(this).data('cart-item-id');
       let currentButton = $(this);
-
-      
-      data = {
-        cartItemId: cartItemId
-      };
   
       $.ajax({
-        url: '/removeFromCart',
+        url: '/cart_items/'+cartItemId,
         type: 'DELETE',
-        data: data,
         headers: { // Alternatively you can skip authenticity token verification in the controller
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') 
         },

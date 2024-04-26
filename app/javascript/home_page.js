@@ -1,8 +1,14 @@
 
 $(document).ready(function () {
 
-  function showToast() {
+  function showSuccessToast() {
     var toastElement = document.getElementById('addToCartToast');
+    var toast = new bootstrap.Toast(toastElement);
+    toast.show();
+  }
+
+  function showDangerToast() {
+    var toastElement = document.getElementById('pleaseLoginToast');
     var toast = new bootstrap.Toast(toastElement);
     toast.show();
   }
@@ -39,7 +45,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-      url: '/addToCart',
+      url: '/cart_items',
       type: 'POST',
       data: data,
       headers: { // Alternatively you can skip authenticity token verification in the controller
@@ -48,10 +54,10 @@ $(document).ready(function () {
       success: function(response) {
         // console.log(response);
         $(this).find('#quantity').val(1);
-        showToast()
+        showSuccessToast()
       },
       error: function(error) {
-        console.error('Error:', error);
+        showDangerToast()
       }
     });
   });

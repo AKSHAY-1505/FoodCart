@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :customers, only: [:edit,:update]
   resources :carts, only: [:show]
   resources :orders, only: [:create]
+  resources :cart_items, only: [:create, :destroy]
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -17,6 +18,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "customers#home"
   get "/admin" => "admins#home", as: :admin_home
-  post "/addToCart" => "cart_items#create", as: :add_to_cart
-  delete "/removeFromCart" => "cart_items#destroy", as: :remove_from_cart
+  get "/myorders" => "customers#customer_orders", as: :customer_orders
 end

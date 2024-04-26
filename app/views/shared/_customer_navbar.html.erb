@@ -19,7 +19,9 @@
                 Cart
               <% end %>
             </li>
-
+            <li class="nav-item center btn btn-dark">
+              <%= link_to "My Orders", customer_orders_path, class: "nav-link active"%>
+            </li>
             <li class="nav-item center btn btn-dark">
               <%= link_to "Profile", edit_user_registration_path, class: "nav-link active"%>
             </li>
