@@ -2,25 +2,20 @@ class FoodsController < ApplicationController
   before_action :set_food, only: %i[ show edit update destroy ]
   before_action :authenticate_user, only: %i[ edit update new create destroy ]
 
-  # GET /foods or /foods.json
   def index
     @categories = Category.all
   end
 
-  # GET /foods/1 or /foods/1.json
   def show
   end
 
-  # GET /foods/new
   def new
     @food = Food.new
   end
 
-  # GET /foods/1/edit
   def edit
   end
 
-  # POST /foods or /foods.json
   def create
     @food = Food.new(food_params)
 
@@ -44,6 +39,8 @@ class FoodsController < ApplicationController
   end
 
   def destroy
+    remove_food_from_users_carts(@food)
+
     if @food.destroy
       render json: { message: 'Food Deleted Successfully !' }, status: :ok
     else
@@ -62,5 +59,18 @@ class FoodsController < ApplicationController
 
     def authenticate_user
       redirect_to root_path, alert: "You are not authorized to visit the page" unless current_user&.admin?
+    end
+
+    def remove_food_from_users_carts(food)
+      cart_items = CartItem.where(food: food)
+
+      cart_items.each do |item|
+        amount = item.quantity * item.food.price
+        cart = item.cart
+        cart.total -= amount
+        cart.save
+      end
+
+      cart_items.delete_all
     end
 end

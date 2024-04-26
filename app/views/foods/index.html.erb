@@ -2,19 +2,21 @@
 <h1 class="center">Foods</h1>
 <div class="categories">
   <% @categories.each do |category| %>
-    <h3> <%= category.name %></h3>
-    <hr />
-    <div class="foods">
-      <% category.foods.each do |food| %>
-        <div class="food" id="full-food-<%= food.id %>">
-          <%= render food %>
-          <div class="food-form center">
-            <%= render 'food_update_modal', food: food%>
-            <%= link_to 'Delete this Food', food_path(food), method: :delete, class: "delete-button btn btn-danger ms-2", data: { 'food-id': food.id } %>
+    <% if category.foods.count > 0 %>
+      <h3> <%= category.name %></h3>
+      <hr />
+      <div class="foods">
+        <% category.foods.each do |food| %>
+          <div class="food" id="full-food-<%= food.id %>">
+            <%= render food %>
+            <div class="food-form center">
+              <%= render 'food_update_modal', food: food%>
+              <%= link_to 'Delete this Food', food_path(food), method: :delete, class: "delete-button btn btn-danger ms-2", data: { 'food-id': food.id } %>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
 </div>
