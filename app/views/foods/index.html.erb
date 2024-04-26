@@ -6,10 +6,11 @@
     <hr />
     <div class="foods">
       <% category.foods.each do |food| %>
-        <div class="food">
+        <div class="food" id="full-food-<%= food.id %>">
           <%= render food %>
           <div class="food-form center">
             <%= render 'food_update_modal', food: food%>
+            <%= link_to 'Delete this Food', food_path(food), method: :delete, class: "delete-button btn btn-danger ms-2", data: { 'food-id': food.id } %>
           </div>
         </div>
       <% end %>

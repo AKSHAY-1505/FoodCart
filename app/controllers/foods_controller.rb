@@ -44,11 +44,10 @@ class FoodsController < ApplicationController
   end
 
   def destroy
-    @food.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to foods_url, notice: "Food was successfully destroyed." }
-      format.json { head :no_content }
+    if @food.destroy
+      render json: { message: 'Food Deleted Successfully !' }, status: :ok
+    else
+      render json: { message: 'Error! Unable to Delete Food' }, status: :unprocessable_entity
     end
   end
 

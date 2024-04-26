@@ -24,5 +24,25 @@ $(document).ready(function () {
       });
     });
 
+    $('.delete-button').on('click', function(event) {
+        event.preventDefault()
+        let id = $(this).data('food-id');
+        let url = $(this).attr('href')
+  
+        $.ajax({
+          url: url,
+          type: 'DELETE',
+          headers: { // Alternatively you can skip authenticity token verification in the controller
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') 
+          },
+          success: function(response) {
+            $('#full-food-'+id).remove()
+          },
+          error: function(error) {
+            console.error('Error:', error);
+          }
+        });
+      });
+
 
 });
