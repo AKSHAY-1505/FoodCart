@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
     end
 
     def home
-        @foods = Food.all
+        # @foods = Food.all
         @categories = Category.all
     end
 

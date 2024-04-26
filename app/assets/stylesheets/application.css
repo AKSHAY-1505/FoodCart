@@ -69,3 +69,26 @@ body {
 .increase-btn {
   border-radius: 0 5px 5px 0; /* Rounded corners on the right side for increase button */
 }
+
+.foods {
+  display: flex;
+  flex-direction: row;
+}
+
+.food-container {
+  display: flex;
+}
+
+.food-images img {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+}
+
+.food-images {
+  height: 250px;
+  width: 250px;
+  display: flex; /* Display images in a row */
+  overflow-x: auto;
+  gap: 10px;
+}

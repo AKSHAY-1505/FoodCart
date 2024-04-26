@@ -1,27 +1,26 @@
-<div id="<%= dom_id food %>">
-  <h3> Images </h3>
-  <% food.images.each do |image| %>
-    <%= image_tag image.variant(:thumb) %>
-  <% end %>
-  
-  <p>
-    <strong>Name:</strong>
-    <%= food.name %>
-  </p>
-  <p>
-    <strong>Description:</strong>
-    <%= food.description %>
-  </p>
-  <p>
-    <strong>Price:</strong>
-    <%= food.price %>
-  </p>
-  <p>
-    <strong>Quantity:</strong>
-    <%= food.quantity %>
-  </p>
-  <p>
-    <strong>Category:</strong>
-    <%= Category.find(food.category_id).name %>
-  </p>
+<div id="<%= dom_id food %>" class="shadow_box food-container">
+  <div class="food-images p-1 m-1">
+    <% food.images.each do |image| %>
+      <%= image_tag image.variant(:thumb) %>
+    <% end %>
+  </div>
+  <div class="food-details p-1 m-1">
+    <p>
+      <strong>Name:</strong>
+      <span class="food-name"><%= food.name %></span>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <span class="food-description"><%= food.description %></span>
+    </p>
+    <p>
+      <strong>Price:</strong>
+      <span class="food-price"><%= food.price %></span>
+    </p>
+    <p>
+      <strong>Quantity:</strong>
+      <span class="food-quantity"><%= food.quantity %></span>
+    </p>
+    <!--  <%= render 'food_update_modal', food: food%> -->
+  </div>
 </div>

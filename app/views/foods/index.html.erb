@@ -1,12 +1,19 @@
-<h1>Foods</h1>
-
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
+<%= javascript_include_tag 'food_update' %>
+<h1 class="center">Foods</h1>
+<div class="categories">
+  <% @categories.each do |category| %>
+    <h3> <%= category.name %></h3>
+    <hr />
+    <div class="foods">
+      <% category.foods.each do |food| %>
+        <div class="food">
+          <%= render food %>
+          <div class="food-form center">
+            <%= render 'food_update_modal', food: food%>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New food", new_food_path %>
+</div>

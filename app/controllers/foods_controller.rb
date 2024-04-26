@@ -4,7 +4,7 @@ class FoodsController < ApplicationController
 
   # GET /foods or /foods.json
   def index
-    @foods = Food.all
+    @categories = Category.all
   end
 
   # GET /foods/1 or /foods/1.json
@@ -35,20 +35,14 @@ class FoodsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /foods/1 or /foods/1.json
   def update
-    respond_to do |format|
       if @food.update(food_params)
-        format.html { redirect_to food_url(@food), notice: "Food was successfully updated." }
-        format.json { render :show, status: :ok, location: @food }
+        render partial: 'food', locals: { food: @food }, status: :ok
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @food.errors, status: :unprocessable_entity }
+        render json: { message: 'Error! Unable to Update Food' }, status: :unprocessable_entity
       end
-    end
   end
 
-  # DELETE /foods/1 or /foods/1.json
   def destroy
     @food.destroy!
 
@@ -59,12 +53,10 @@ class FoodsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_food
       @food = Food.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def food_params
       params.require(:food).permit(:name, :description, :price, :quantity, :category_id, images: [])
     end

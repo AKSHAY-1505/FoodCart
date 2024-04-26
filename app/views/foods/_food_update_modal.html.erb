@@ -1,0 +1,46 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Update Food
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Food</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mt-0">
+        <%= form_with(model: food, class: "food-update-form", data: { 'food-id': food.id }) do |form| %>
+          <div class="field mt-0">
+            <%= form.label :name, style: "display: block" %>
+            <%= form.text_field :name %>
+          </div>
+          <div class="field">
+            <%= form.label :description, style: "display: block" %>
+            <%= form.text_area :description %>
+          </div>
+          <div class="field">
+            <%= form.label :price, style: "display: block" %>
+            <%= form.number_field :price %>
+          </div>
+          <div class="field">
+            <%= form.label :category_id, style: "display: block" %>
+            <%= form.text_field :category_id %>
+          </div>
+          <div class="field">
+            <%= form.label :images, style: "display: block" %>
+            <%= form.file_field :images, multiple: true %>
+          </div>
+          <h5> Restock </h3>
+          <hr />
+          <div class="field mt-0">
+            <%= form.label :quantity, style: "display: block" %>
+            <%= form.number_field :quantity %>
+          </div>
+          <div class="field center">
+            <%= form.submit class: "btn btn-success", data: { 'bs-dismiss': "modal" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
