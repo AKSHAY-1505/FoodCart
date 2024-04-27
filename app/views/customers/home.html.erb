@@ -6,6 +6,7 @@
 <div id="foods">
   <% @categories.each do |category| %>
     <% if category.foods.count > 0 %>
+      <hr />
       <h3> <%= category.name %> </h3>
       <div class="category">
         <% category.foods.each do |food| %>

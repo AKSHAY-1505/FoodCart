@@ -73,6 +73,7 @@ body {
 .foods {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .food-container {

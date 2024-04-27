@@ -4,7 +4,8 @@
 }
 .category {
   display: flex;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  /* overflow-x: auto; */
 }
 .food_item {
   display: flex;

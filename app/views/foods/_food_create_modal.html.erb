@@ -1,15 +1,15 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#food-update-<%= food.id %>">
-  Update Food
+<button type="button" class="btn btn-success ms-3" data-bs-toggle="modal" data-bs-target="#foodCreateModal">
+  <span><i class="bi bi-plus-lg"></i></span> Create a new Food
 </button>
-<div class="modal fade" id="food-update-<%= food.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="foodCreateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Food</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new Food</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body mt-0">
-        <%= form_with(model: food) do |form| %>
+        <%= form_with(model: food, id: "food_create_form") do |form| %>
           <div class="field mt-0">
             <%= form.label :name, style: "display: block" %>
             <%= form.text_field :name %>
@@ -30,9 +30,7 @@
             <%= form.label :images, style: "display: block" %>
             <%= form.file_field :images, multiple: true %>
           </div>
-          <h5> Restock </h3>
-          <hr />
-          <div class="field mt-0">
+          <div class="field">
             <%= form.label :quantity, style: "display: block" %>
             <%= form.number_field :quantity %>
           </div>

@@ -21,6 +21,9 @@
       <strong>Quantity:</strong>
       <span class="food-quantity"><%= food.quantity %></span>
     </p>
-    <!--  <%= render 'food_update_modal', food: food%> -->
+    <div class="food-form center">
+      <%= render 'food_update_modal', food: food%>
+      <button class="food-delete-button btn btn-danger ms-2" data-food-id="<%= food.id %>">Delete this Food</button>
+    </div>
   </div>
 </div>

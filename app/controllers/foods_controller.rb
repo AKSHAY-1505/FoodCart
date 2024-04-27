@@ -1,8 +1,9 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[ show edit update destroy ]
-  before_action :authenticate_user, only: %i[ edit update new create destroy ]
+  before_action :authenticate_user
 
   def index
+    @food = Food.new
     @categories = Category.all
   end
 
@@ -19,14 +20,10 @@ class FoodsController < ApplicationController
   def create
     @food = Food.new(food_params)
 
-    respond_to do |format|
-      if @food.save
-        format.html { redirect_to food_url(@food), notice: "Food was successfully created." }
-        format.json { render :show, status: :created, location: @food }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @food.errors, status: :unprocessable_entity }
-      end
+    if @food.save 
+      render partial: 'food', locals: {food: @food}, status: :created
+    else
+      render json: {message: "Error! Unable to create Food!"}, status: :unprocessable_entity
     end
   end
 

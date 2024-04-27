@@ -15,17 +15,15 @@
       <strong>Price:</strong>
       <%= food.price %>
     </p>
-    <% if current_customer %>
-      <div class="center">
-        <%= form_with remote: true, class: "add_to_cart_form" do |form| %>
-          <div>
-            <%= render partial: '/shared/quantity_selector', locals: {form: form, food: food}%>
-          </div>
-          <div class="center">
-            <%= form.submit "Add to Cart", class: "btn btn-dark mt-3" %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="center">
+      <%= form_with remote: true, class: "add_to_cart_form" do |form| %>
+        <div>
+          <%= render partial: '/shared/quantity_selector', locals: {form: form, food: food}%>
+        </div>
+        <div class="center">
+          <%= form.submit "Add to Cart", class: "btn btn-dark mt-3" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
