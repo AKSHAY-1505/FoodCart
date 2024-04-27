@@ -4,7 +4,7 @@
   <%= render 'food_create_modal', food: @food %>
 </div>
 <div id="categories">
-  <div id="newly_created">
+  <div id="newly_created" class="foods">
   </div>
   <% @categories.each do |category| %>
     <% if category.foods.count > 0 %>

@@ -36,7 +36,7 @@ class FoodsController < ApplicationController
   end
 
   def destroy
-    remove_food_from_users_carts(@food)
+    # remove_food_from_users_carts(@food)
 
     if @food.destroy
       render json: { message: 'Food Deleted Successfully !' }, status: :ok

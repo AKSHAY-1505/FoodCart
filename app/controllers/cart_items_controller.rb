@@ -4,7 +4,6 @@ class CartItemsController < ApplicationController
         cart_item = create_or_update_cart_item
 
         if cart_item.save
-            increase_cart_total(cart_item, params[:quantity].to_i)
             render json: { message: 'Item added to cart successfully.' }, status: :created
         else
             render json: { message: 'Failed to add item to cart.' }, status: :unprocessable_entity
@@ -16,7 +15,6 @@ class CartItemsController < ApplicationController
         cart_item = CartItem.find(params[:id])
 
         if cart_item.destroy!
-            reduce_cart_total(cart_item)
             render json: { message: 'Item removed from cart successfully.', total: current_customer.cart.total }, status: :created
         else
             render json: { message: 'Failed to remove item from cart.' }, status: :unprocessable_entity
@@ -36,6 +34,7 @@ class CartItemsController < ApplicationController
         if item_in_cart.any?
             cart_item = item_in_cart.first
             cart_item.quantity += quantity
+            update_cart_total(cart,cart_item,quantity)
         else
             cart_item = CartItem.new(quantity: quantity,food_id: food_id,cart: cart)
         end
@@ -43,18 +42,9 @@ class CartItemsController < ApplicationController
         cart_item
     end
 
-    def increase_cart_total(cart_item, quantity)
+    def update_cart_total(cart,cart_item, quantity)
         amount = quantity * cart_item.food.price
-        cart = current_customer.cart
         cart.total += amount
         cart.save
     end
-
-    def reduce_cart_total(cart_item)
-        amount = cart_item.quantity * cart_item.food.price
-        cart = current_customer.cart
-        cart.total -= amount
-        cart.save
-    end
-
 end
