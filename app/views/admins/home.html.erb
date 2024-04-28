@@ -1,1 +1,51 @@
-<h1> Admin Home </h1>
+<%= javascript_include_tag 'admin.js' %>
+<%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+<h1>Orders Received</h1>
+<div class="orders container border border-dark mt-1">
+  <% if @active_orders.any? %>
+    <div class="orders-header">
+      <div class="row p-3 m-3 border-bottom border-dark">
+        <div class="col center">
+          <h5>Customer Name</h5>
+        </div>
+        <div class="col center">
+          <h5>Placed At</h5>
+        </div>
+        <div class="col center">
+          <h5>Delivery Address</h5>
+        </div>
+        <div class="col center">
+          <h5>Status</h5>
+        </div>
+        <div class="col center">
+          <h5>Delivery Agent</h5>
+        </div>
+      </div>
+    </div>
+    <div class="orders-body">
+      <% @active_orders.each do |order| %>
+        <div class="row p-3 m-3 border-bottom border-dark overflow-auto" id="order<%= order.id %>">
+          <div class="col center">
+            <p><%= order.customer.user.name %></p>
+          </div>
+          <div class="col center">
+            <p><%= order.created_at %></p>
+          </div>
+          <div class="col center">
+            <p><%= delivery_address(order) %></p>
+          </div>
+          <div class="col center">
+            <p class="status"><%= order.status.titleize %></p>
+          </div>
+          <div class="col center delivery_agent">
+            <% if order.delivery_agent %>
+              <p><%= order.delivery_agent.user.name %></p>
+            <% else %>
+              <%= render 'assign_agent_modal', order: order %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

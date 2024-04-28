@@ -1,0 +1,4 @@
+.orders-body {
+  max-height: 70vh; /* Adjust this value based on your needs */
+  overflow-y: auto;
+}

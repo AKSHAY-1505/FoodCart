@@ -1,0 +1,31 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateStatusModal<%= order.id %>">
+  Assign Delivery Agent
+</button>
+<!-- Modal -->
+<div class="modal fade" id="updateStatusModal<%= order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="delivery_agent">Select a Delivery Agent: </label>
+        <%= form_with url: assign_agent_path(order), class: "assign_agent_form" do |form| %>
+          <select name="delivery_agent" id="delivery_agent" class="form-select mt-2">
+            <% @agents.each do |agent| %>
+              <option value="<%= agent.id %>"><%= agent.user.name %></option>
+            <% end %>
+          </select>
+          <div class="center mt-3">
+            <%= form.submit "Assign Delivery Agent", class: "btn btn-success", data: {'bs-dismiss': 'modal'} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

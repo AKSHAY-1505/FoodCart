@@ -2,6 +2,8 @@ class AdminsController < ApplicationController
   before_action :authenticate_user
 
   def home
+    @active_orders = Order.where(is_active: true).order(created_at: :desc)
+    @agents = DeliveryAgent.all
   end
 
   private

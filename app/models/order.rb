@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_items, dependent: :destroy
-  enum status: %i[order_placed out_for_delivery delivered]
+  belongs_to :delivery_agent
+  enum status: %i[order_placed delivery_agent_assigned out_for_delivery delivered]
 end

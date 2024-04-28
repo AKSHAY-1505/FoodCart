@@ -18,13 +18,26 @@ class OrdersController < ApplicationController
     end
   end
 
+  def assign_agent
+    order = Order.find(params[:id])
+    agent = DeliveryAgent.find(params[:delivery_agent])
+
+    order.delivery_agent = agent
+    order.status = 'delivery_agent_assigned'
+    if order.save
+      render json: { orderId: order.id, agentName: agent.user.name }, status: :ok
+    else
+      render json: { message: 'Unable to Assign Agent!' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def create_order_items(cart, order)
     cart_items = CartItem.where(cart:)
 
     cart_items.each do |item|
-      OrderItem.create(order:, food_name: item.food.name, food_price: item.food.price,
+      OrderItem.create(order: order, food_name: item.food.name, food_price: item.food.price, # rubocop:disable Style/HashSyntax
                        quantity: item.quantity)
     end
 
