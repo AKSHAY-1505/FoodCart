@@ -1,0 +1,12 @@
+<div class="progress-bar" style="border: 2px solid green;">
+  <% if order.status == "order_placed"%>
+    <div class="bar" style="height: 10px; width: 33%; background-color: green;">
+    </div>
+  <% elsif order.status == "out_for_delivery"%>
+    <div class="bar" style="height: 10px; width: 66%; background-color: green;">
+    </div>
+  <% else %>
+    <div class="bar" style="height: 10px; width: 100%; background-color: green;">
+    </div>
+  <% end %>
+</div>

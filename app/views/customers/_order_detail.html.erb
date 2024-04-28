@@ -1,0 +1,74 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#orderDetailsModal<%= order.id %>">
+  Order Details
+</button>
+<!-- Modal -->
+<div class="modal fade" id="orderDetailsModal<%= order.id %>" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Placed On: </strong><%= order.created_at.to_date
+         %></p>
+        <div class="order card shadow-sm mb-4">
+          <div class="card-body">
+            <div class="order_items mb-3">
+              <h5 class="mb-2">Order Items:</h6>
+              <% order.order_items.each do |item| %>
+                <div class="row">
+                  <div class="col-6">
+                    <p><strong><%= item.food_name %></strong> x <%= item.quantity %></p>
+                  </div>
+                  <div class="col-6">
+                    <p class="ms">Rs <%= item.food_price * item.quantity %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+              <hr />
+              <div class="order_summary">
+                <div class="row">
+                  <div class="col-6">
+                    <p><strong>Subtotal</strong></p>
+                  </div>
+                  <div class="col-6">
+                    <p>Rs <%= order.subtotal%></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <p><strong>Delivery Charge</strong></p>
+                  </div>
+                  <div class="col-6">
+                    <p>Rs <%= order.delivery_charge%></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <p><strong>Discount</strong></p>
+                  </div>
+                  <div class="col-6">
+                    <p>Rs <%= order.discount%></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <p><strong>Total</strong></p>
+                  </div>
+                  <div class="col-6">
+                    <p>Rs <%= order.total%></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

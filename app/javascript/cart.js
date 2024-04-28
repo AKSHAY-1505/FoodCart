@@ -23,7 +23,7 @@ $(document).ready(function () {
           console.log(response);
           let parentDiv = currentButton.closest('.row.cart-row');
           parentDiv.remove();
-          subtotal = response.total;
+          let subtotal = response.total;
 
           updateCartSummary(subtotal);
 

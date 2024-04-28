@@ -1,0 +1,47 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderTracking<%= order.id %>">
+  Track Order
+</button>
+<!-- Modal -->
+<div class="modal fade" id="orderTracking<%= order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 d-block" id="exampleModalLabel">Order ID: #<%= order.id %> Tracking</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-4 center">
+            <i class="bi bi-shop" style="font-size: 6rem;"></i>
+          </div>
+          <div class="col-4 center">
+            <i class="bi bi-arrow-right" style="font-size: 6rem;"></i>
+          </div>
+          <div class="col-4 center">
+            <i class="bi bi-geo-alt-fill" style="font-size: 6rem;"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 center">
+            <p>Indiranagar, Bangalore</p>
+          </div>
+          <div class="col-4">
+          </div>
+          <div class="col-4 center">
+            <p><%= delivery_address(order) %></p>
+          </div>
+        </div>
+        <%= render 'progress' , order: order %>
+        <div class="center">
+          <p><strong>Status: </strong><%= order.status.titleize %></p>
+        </div>
+        <p>Order placed <%= time_ago_in_words(order.created_at) %> ago </p>
+        <p><strong>Estimated Delivery in: </strong><span id="est_<%= order.id %>">20 Minutes</span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
