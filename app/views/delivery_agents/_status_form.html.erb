@@ -1,0 +1,31 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateStatusModal<%= order.id %>">
+  Update Status
+</button>
+<!-- Modal -->
+<div class="modal fade" id="updateStatusModal<%= order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Order Status</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: order_path(order), class: "status_update_form" do |form| %>
+          <% @statuses.each do |key,value| %>
+            <div class="p-1 m-1">
+              <%= form.radio_button :status, value, id: "status_#{value}_#{order.id}", disabled: @statuses[order.status] >= value %>
+              <%= form.label key.titleize, for: "status_#{value}_#{order.id}" %>
+            </div>
+          <% end %>
+          <div class="center">
+            <%= form.submit "Update Status", class: "btn btn-success", data: {'bs-dismiss': 'modal'} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

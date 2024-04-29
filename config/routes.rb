@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }
   resources :customers, only: %i[edit update]
   resources :carts, only: [:show]
-  resources :orders, only: [:create]
+  resources :orders, only: [:create, :update]
   resources :cart_items, only: %i[create destroy]
   resources :delivery_agents, only: %i[new create]
 
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'customers#home'
   get '/admin' => 'admins#home', as: :admin_home
+  get '/delivery_agent' => 'delivery_agents#home', as: :delivery_agent_home
   get '/myorders' => 'customers#customer_orders', as: :customer_orders
   post '/admin/assignAgent/:id' => 'orders#assign_agent', as: :assign_agent
 end

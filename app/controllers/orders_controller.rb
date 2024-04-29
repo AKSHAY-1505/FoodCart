@@ -8,8 +8,7 @@ class OrdersController < ApplicationController
 
     # Update discount here
     order = Order.new(customer: current_customer, subtotal: cart.total, delivery_charge:,
-                      discount: 0, total:)
-
+                      discount: 0, total:, delivery_agent: nil)
     if order.save
       create_order_items(cart, order)
       redirect_to root_path, notice: 'Order Placed !'
@@ -31,16 +30,32 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    order = Order.find(params[:id])
+    order.status = params[:status].to_i
+    if order.save
+      update_active_status(order)
+      render json: { order_id: order.id, status: order.status.titleize, active: order.is_active }, status: :ok
+    else
+      render json: { message: 'Unable to update status' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def create_order_items(cart, order)
     cart_items = CartItem.where(cart:)
-
     cart_items.each do |item|
       OrderItem.create(order: order, food_name: item.food.name, food_price: item.food.price, # rubocop:disable Style/HashSyntax
                        quantity: item.quantity)
     end
-
     cart_items.destroy_all
+  end
+
+  def update_active_status(order)
+    return unless order.status == 'delivered'
+
+    order.is_active = false
+    order.save
   end
 end
