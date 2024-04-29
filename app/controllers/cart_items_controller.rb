@@ -12,8 +12,10 @@ class CartItemsController < ApplicationController
   def destroy
     cart_item = CartItem.find(params[:id])
 
-    if cart_item.destroy!
-      render json: { total: current_customer.cart.total }, status: :created
+    if cart_item.destroy
+      cart = current_customer.cart
+      render json: { subtotal: cart.subtotal, delivery_charge: cart.delivery_charge, discount: cart.discount, total: cart.total },
+             status: :created
     else
       render json: { message: 'Failed to remove item from cart.' }, status: :unprocessable_entity
     end

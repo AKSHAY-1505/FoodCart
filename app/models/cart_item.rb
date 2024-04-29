@@ -1,28 +1,13 @@
 class CartItem < ApplicationRecord
   belongs_to :cart
   belongs_to :food
-  after_create :increase_cart_amount
-  before_destroy :reduce_cart_amount
-  before_update :update_cart_amount
+  after_create :calculate_cart_total
+  after_destroy :calculate_cart_total
+  after_update :calculate_cart_total
 
   private
 
-  def reduce_cart_amount
-    amount = quantity * food.price
-    cart.total -= amount
-    cart.save
-  end
-
-  def increase_cart_amount
-    amount = quantity * food.price
-    cart.total += amount
-    cart.save
-  end
-
-  def update_cart_amount
-    diff_in_quantity = quantity - quantity_was
-    amount = food.price * diff_in_quantity
-    cart.total += amount
-    cart.save
+  def calculate_cart_total
+    Services::Cart::CartTotalCalculator.new(cart).call
   end
 end

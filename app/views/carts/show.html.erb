@@ -1,72 +1,55 @@
 <%= stylesheet_link_tag 'cart' %>
 <%= javascript_include_tag 'cart' %>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
 <% if @cart_items.any? %>
-    
-    <div class="container mt-5">
-        <h2 class="mb-4">Shopping Cart</h2>
-
-        <!-- Headers for the shopping cart -->
-        <div class="row mb-3">
-            <div class="col-md-2"><strong>Product Image</strong></div>
-            <div class="col-md-3"><strong>Product Name</strong></div>
-            <div class="col-md-2"><strong>Price</strong></div>
-            <div class="col-md-2"><strong>Quantity</strong></div>
-            <div class="col-md-2"><strong>Total</strong></div>
-            <div class="col-md-1"><strong>Remove</strong></div>
+  <div class="container mt-5">
+    <h2 class="mb-4">Shopping Cart</h2>
+    <!-- Headers for the shopping cart -->
+    <div class="row mb-3">
+      <div class="col-md-2"><strong>Product Image</strong></div>
+      <div class="col-md-3"><strong>Product Name</strong></div>
+      <div class="col-md-2"><strong>Price</strong></div>
+      <div class="col-md-2"><strong>Quantity</strong></div>
+      <div class="col-md-2"><strong>Total</strong></div>
+      <div class="col-md-1"><strong>Remove</strong></div>
+    </div>
+    <!-- Shopping cart rows -->
+    <% @cart_items.each do |item| %>
+      <%= render partial: 'cart_entry', locals: {item: item} %>
+    <% end %>
+    <!-- Cart summary and checkout button -->
+    <div class="row mt-4">
+      <!-- Cart summary -->
+      <div class="col-md-6 cart-summary">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Subtotal</td>
+                <td>Rs <span id="subtotal"><%= @cart.subtotal %></span></td>
+              </tr>
+              <tr>
+                <td>Delivery Charge</td>
+                <td>Rs <span id="delivery-charge"><%= @cart.delivery_charge %></span></td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>Rs <span id="total"><%= @cart.total %></span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <!-- Shopping cart rows -->
-        <% @cart_items.each do |item| %>
-            <%= render partial: 'cart_entry', locals: {item: item} %>
+      </div>
+      <!-- Checkout button -->
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <!-- <button class="btn btn-success" id="checkout-button">Checkout</button> -->
+        <%= form_with url: orders_path, method: :post,remote: true do |form|%>
+          <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
         <% end %>
-
-        <!-- Cart summary and checkout button -->
-        <div class="row mt-4">
-            <!-- Cart summary -->
-            <div class="col-md-6 cart-summary">
-                <div class="table-responsive">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Subtotal</td>
-                                <td>Rs <span id="subtotal"><%= @subtotal %></span></td>
-                            </tr>
-                            <tr>
-                                <td>Delivery Charge</td>
-                                <td>Rs <span id="delivery-charge"><%= @delivery_charge %></span></td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td>Rs <span id="total"><%= @total %></span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Checkout button -->
-            <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <!-- <button class="btn btn-success" id="checkout-button">Checkout</button> -->
-                <%= form_with url: orders_path, method: :post,remote: true do |form|%>
-                    <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
-                <% end %>
-            </div>
-        </div>
-
+      </div>
     </div>
+  </div>
 <% else %>
-    <div class="center">
-        <h1>Your Cart is Empty</h1>
-    </div>
+  <div class="center">
+    <h1>Your Cart is Empty</h1>
+  </div>
 <% end %>
-</body>
-</html>

@@ -6,7 +6,7 @@ class Customer < ApplicationRecord
   validates :locality, presence: true
   validates :city, presence: true
   validates :phone_number, presence: true
-  validates :phone_number, length: {is: 10, message: "must be 10 digits!"}
+  validates :phone_number, length: { is: 10, message: 'must be 10 digits!' }
   has_one :cart
   has_many :orders
   after_create :create_cart
@@ -16,7 +16,4 @@ class Customer < ApplicationRecord
   def create_cart
     Cart.create(customer: self)
   end
-
-
-
 end

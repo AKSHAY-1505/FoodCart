@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     current_user.customer
   end
 
+  # Returns delivery address for an order
   def delivery_address(order)
     customer = order.customer
     [customer.house_number, customer.street, customer.locality, customer.city].join(',')

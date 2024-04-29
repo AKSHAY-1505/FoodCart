@@ -2,14 +2,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user, only: [:index]
   def create
     cart = current_customer.cart
-    delivery_charge = cart.total > 500 ? 0 : 30
-
-    # Subtract discount here
-    total = cart.total + delivery_charge
-
-    # Update discount here
-    order = Order.new(customer: current_customer, subtotal: cart.total, delivery_charge:,
-                      discount: 0, total:, delivery_agent: nil)
+    order = Order.new(customer: current_customer, subtotal: cart.subtotal, delivery_charge: cart.delivery_charge,
+                      discount: cart.discount, total: cart.total, delivery_agent: nil)
     if order.save
       create_order_items(cart, order)
       redirect_to root_path, notice: 'Order Placed !'
