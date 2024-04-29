@@ -58,10 +58,10 @@ $(document).ready(function () {
         success: function (response) {
           console.log(response);
           $(this).find("#quantity").val(1);
-          // showSuccessToast();
+          showSuccessToast();
         },
         error: function (error) {
-          // showDangerToast();
+          showDangerToast();
         },
       });
     });

@@ -13,8 +13,7 @@ class CartItemsController < ApplicationController
     cart_item = CartItem.find(params[:id])
 
     if cart_item.destroy!
-      render json: { message: 'Item removed from cart successfully.', total: current_customer.cart.total },
-             status: :created
+      render json: { total: current_customer.cart.total }, status: :created
     else
       render json: { message: 'Failed to remove item from cart.' }, status: :unprocessable_entity
     end
@@ -23,26 +22,13 @@ class CartItemsController < ApplicationController
   private
 
   def create_or_update_cart_item
-    cart = current_customer.cart
-    quantity = params[:quantity].to_i
-    food_id = params[:food_id]
+    item_in_cart = CartItem.where(cart: current_customer.cart, food_id: params[:food_id]).first
 
-    item_in_cart = CartItem.where(cart:, food_id:)
-
-    if item_in_cart.any?
-      cart_item = item_in_cart.first
-      cart_item.quantity += quantity
-      update_cart_total(cart, cart_item, quantity)
+    if item_in_cart
+      item_in_cart.quantity += params[:quantity].to_i
+      item_in_cart
     else
-      cart_item = CartItem.new(quantity:, food_id:, cart:)
+      CartItem.new(quantity: params[:quantity].to_i, food_id: params[:food_id], cart: current_customer.cart)
     end
-
-    cart_item
-  end
-
-  def update_cart_total(cart, cart_item, quantity)
-    amount = quantity * cart_item.food.price
-    cart.total += amount
-    cart.save
   end
 end

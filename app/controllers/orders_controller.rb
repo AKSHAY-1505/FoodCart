@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, only: [:index]
   def create
     cart = current_customer.cart
     delivery_charge = cart.total > 500 ? 0 : 30

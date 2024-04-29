@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'admin.js' %>
 <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
 <h1 class="center mt-3">Orders Received</h1>
-<div class="orders container border border-dark mt-5">
+<div class="container border border-dark mt-5">
   <% if @active_orders.any? %>
     <div class="orders-header">
       <div class="row p-2 m-2 border-bottom border-dark">

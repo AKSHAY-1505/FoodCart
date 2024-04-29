@@ -3,8 +3,10 @@
   <p><strong>Amount Paid: </strong>Rs <%= order.total %></p>
   <p><strong>Order Status: </strong><%= order.status.titleize %></p>
   <hr />
-  <%= render 'shared/order_detail', order: order %>
-  <% if order.is_active %>
-    <%= render 'tracking', order: order %>
-  <% end %>
+  <div class="d-flex gap-2 center">
+    <%= render 'shared/order_detail', order: order %>
+    <% if order.is_active %>
+      <%= render 'tracking', order: order %>
+    <% end %>
+  </div>
 </div>
