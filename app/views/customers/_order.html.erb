@@ -3,7 +3,7 @@
   <p><strong>Amount Paid: </strong>Rs <%= order.total %></p>
   <p><strong>Order Status: </strong><%= order.status.titleize %></p>
   <hr />
-  <%= render 'order_detail', order: order %>
+  <%= render 'shared/order_detail', order: order %>
   <% if order.is_active %>
     <%= render 'tracking', order: order %>
   <% end %>

@@ -1,10 +1,10 @@
 <%= javascript_include_tag 'admin.js' %>
 <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
-<h1>Orders Received</h1>
-<div class="orders container border border-dark mt-1">
+<h1 class="center mt-3">Orders Received</h1>
+<div class="orders container border border-dark mt-5">
   <% if @active_orders.any? %>
     <div class="orders-header">
-      <div class="row p-3 m-3 border-bottom border-dark">
+      <div class="row p-2 m-2 border-bottom border-dark">
         <div class="col center">
           <h5>Customer Name</h5>
         </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="orders-body">
       <% @active_orders.each do |order| %>
-        <div class="row p-3 m-3 border-bottom border-dark overflow-auto" id="order<%= order.id %>">
+        <div class="row p-2 m-2 border-bottom border-dark overflow-auto" id="order<%= order.id %>">
           <div class="col center">
             <p><%= order.customer.user.name %></p>
           </div>
@@ -48,4 +48,7 @@
       <% end %>
     </div>
   <% end %>
+</div>
+<div class="apple_pagination center">
+  <%= will_paginate @active_orders %>
 </div>

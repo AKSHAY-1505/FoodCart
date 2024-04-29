@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user
   def create
     cart = current_customer.cart
     delivery_charge = cart.total > 500 ? 0 : 30
@@ -41,12 +42,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def index
+    @orders = Order.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+  end
+
   private
 
   def create_order_items(cart, order)
-    cart_items = CartItem.where(cart:)
+    cart_items = CartItem.where(cart: cart)
     cart_items.each do |item|
-      OrderItem.create(order: order, food_name: item.food.name, food_price: item.food.price, # rubocop:disable Style/HashSyntax
+      OrderItem.create(order: order, food_name: item.food.name, food_price: item.food.price,
                        quantity: item.quantity)
     end
     cart_items.destroy_all
@@ -57,5 +62,9 @@ class OrdersController < ApplicationController
 
     order.is_active = false
     order.save
+  end
+
+  def authenticate_user
+    redirect_to root_path, alert: 'You are not authorized to access this page!' unless current_user&.admin?
   end
 end

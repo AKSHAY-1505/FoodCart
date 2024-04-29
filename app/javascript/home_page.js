@@ -56,6 +56,7 @@ $(document).ready(function () {
           "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+          console.log(response);
           $(this).find("#quantity").val(1);
           // showSuccessToast();
         },

@@ -1,5 +1,7 @@
 class DeliveryAgentsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_admin, only: %i[new create]
+  before_action :authenticate_user, only: %i[home]
+
   def create
     @agent = DeliveryAgent.new(delivery_agent_params)
     @agent.user.role = 2
@@ -28,5 +30,9 @@ class DeliveryAgentsController < ApplicationController
 
   def authenticate_user
     redirect_to root_path alert: 'You are ot authorized to visit that page!' unless current_user&.delivery_agent?
+  end
+
+  def authenticate_admin
+    redirect_to root_path alert: 'You are ot authorized to visit that page!' unless current_user&.admin?
   end
 end

@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
 
   # Override devise method
   def after_sign_in_path_for(user)
-    # user.admin? ? admin_home_path : root_path
     if user.admin?
       admin_home_path
     elsif user.delivery_agent?

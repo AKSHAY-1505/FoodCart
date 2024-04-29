@@ -1,0 +1,51 @@
+<%= stylesheet_link_tag 'pagination', media: 'all', 'data-turbolinks-track': 'reload' %>
+<h1 class="center mt-2">Order History</h1>
+<div class="container border border-black mt-4">
+  <div class="row m-2 p-2 border-bottom border-black">
+    <div class="col center">
+      <h5>Order ID</h5>
+    </div>
+    <div class="col center">
+      <h5>Customer Name</h5>
+    </div>
+    <div class="col center">
+      <h5>Placed At</h5>
+    </div>
+    <div class="col center">
+      <h5>Status</h5>
+    </div>
+    <div class="col center">
+      <h5>Amount Paid</h5>
+    </div>
+    <div class="col center">
+      <h5>Order Details</h5>
+    </div>
+  </div>
+  <div class="orders-body">
+    <% @orders.each do |order| %>
+      <div class = "row m-2 p-2 border-bottom" id="order_<%= order.id %>">
+        <div class="col center">
+          <p>#<%= order.id %></p>
+        </div>
+        <div class="col center">
+          <p><%= order.customer.user.name %></p>
+        </div>
+        <div class="col center">
+          <p><%= order.created_at.to_date %></p>
+        </div>
+        <div class="col center">
+          <p><%= order.status.titleize %></p>
+        </div>
+        <div class="col center">
+          <p>Rs <%= order.total %></p>
+        </div>
+        <div class="col center">
+          <%= render 'shared/order_detail', order: order %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="apple_pagination center">
+  <%= will_paginate @posts %>
+</div>
