@@ -1,0 +1,38 @@
+<%= javascript_include_tag 'home_page' %>
+<%= render 'shared/success_toast' %>
+<%= render 'shared/danger_toast' %>
+<div class="container d-flex gap-5 mt-5">
+  <div class="foodCarouselContainer">
+    <%= render 'food_carousel', food: @food %>
+  </div>
+  <div class="food-details w-25">
+    <h3><%= @food.name %></h3>
+    <hr />
+    <p><strong>Description: </strong><%= @food.description %></p>
+    <p><strong>Price: </strong>Rs <%= @food.price %></p>
+    <div class="qunatity_selector w-50">
+      <%= form_with remote: true, class: "add_to_cart_form" do |form| %>
+        <div>
+          <%= render partial: '/shared/quantity_selector', locals: {form: form, food: @food}%>
+        </div>
+        <div class="center">
+          <%= form.submit "Add to Cart", class: "btn btn-dark mt-3" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="promotions w-25">
+    <h3>Promotions</h3>
+    <hr />
+    <% @food.promotions.each do |promotion| %>
+      <div class="promotion shadow_box">
+        <p><strong>Title: </strong><%= promotion.title %></p>
+        <p><strong>Description: </strong><%= promotion.description %></p>
+        <div class="d-flex gap-3">
+          <p><strong>Valid From: </strong><%= promotion.from %></p>
+          <p><strong>Valid Till: </strong><%= promotion.to %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

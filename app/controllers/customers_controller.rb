@@ -12,6 +12,10 @@ class CustomersController < ApplicationController
     @categories = Category.all
   end
 
+  def view_food
+    @food = Food.find(params[:id])
+  end
+
   def customer_orders
     @active_orders = current_customer.orders.where(is_active: true)
     @past_orders = current_customer.orders.where(is_active: false)

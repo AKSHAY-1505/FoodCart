@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'customers#home'
+  get '/customer/food/:id' => 'customers#view_food', as: :view_food
   get '/admin' => 'admins#home', as: :admin_home
   get '/delivery_agent' => 'delivery_agents#home', as: :delivery_agent_home
   get '/myorders' => 'customers#customer_orders', as: :customer_orders
