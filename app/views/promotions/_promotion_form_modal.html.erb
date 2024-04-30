@@ -1,0 +1,39 @@
+<div class="modal fade" id="PromotionForm<%= promotion.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Promotion</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model:promotion do |form| %>
+          <div class="field">
+            <%= form.label :title, style: "display: block" %>
+            <%= form.text_field :title %>
+          </div>
+          <div class="field">
+            <%= form.label :description, style: "display: block" %>
+            <%= form.text_area :description %>
+          </div>
+          <div class="field">
+            <%= form.label :from, style: "display: block" %>
+            <%= form.date_field :from %>
+          </div>
+          <div class="field">
+            <%= form.label :to, style: "display: block" %>
+            <%= form.date_field :to %>
+          </div>
+          <div class="field">
+            <%= form.label :discount_percentage, style: "display: block" %>
+            <%= form.number_field :discount_percentage %>
+          </div>
+          <%= form.hidden_field :food_id, value: food.id %>
+          <%= form.submit class: "btn btn-success field center promotion-submit-button", data: { 'bs-dismiss': "modal", 'promotion-id': promotion.id } %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

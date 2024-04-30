@@ -7,7 +7,7 @@
   <div class="food-details p-1 m-1">
     <p>
       <strong>Name:</strong>
-      <span class="food-name"><%= food.name %></span>
+      <%= link_to food.name, food_path(food) %>
     </p>
     <p>
       <strong>Description:</strong>

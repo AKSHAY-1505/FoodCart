@@ -1,11 +1,24 @@
-
-<%= render @food %>
-
-<!-- Handle Later -->
-<% if current_user&.admin? %>
+<%= javascript_include_tag 'promotions' %>
+<div class="center">
+  <%= render @food %>
+</div>
+<div class="center">
+  <br />
   <div>
-    <%= link_to "Edit this food", edit_food_path(@food) %> |
-    <%= link_to "Back to foods", foods_path %>
-    <%= button_to "Destroy this food", @food, method: :delete %>
+    <div class="header">
+      <div class="d-flex center gap-3">
+        <h3>Promotions</h3>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PromotionForm<%= @promotion.id %>">
+          Create New Promotion
+        </button>
+        <%= render partial: 'promotions/promotion_form_modal', locals: { promotion: @promotion, food: @food } %>
+      </div>
+    </div>
+    <hr />
+    <div class="promotions d-flex flex-wrap" id="promotions">
+      <% @food.promotions.each do |promotion| %>
+        <%= render partial: 'promotions/promotion', locals: { promotion: promotion, food: @food } %>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

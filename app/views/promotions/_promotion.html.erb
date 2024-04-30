@@ -1,0 +1,16 @@
+<div class="promotion shadow_box" id="promotion_<%= promotion.id %>">
+  <p><strong>Title: </strong><%= promotion.title %></p>
+  <p><strong>Description: </strong><%= promotion.description %></p>
+  <div class="d-flex gap-3">
+    <p><strong>Valid From: </strong><%= promotion.from %></p>
+    <p><strong>Valid Till: </strong><%= promotion.to %></p>
+  </div>
+  <p><strong>Percentage Discount: </strong><%= promotion.discount_percentage %></p>
+  <div class="d-flex gap-3">
+    <%= button_to "Delete Promotion", promotion_path(promotion), method: :delete, class: "btn btn-danger promotion-delete-button"%>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PromotionForm<%= promotion.id %>">
+      Update Promotion
+    </button>
+    <%= render partial: 'promotions/promotion_form_modal', locals: { promotion: promotion, food: food } %>
+  </div>
+</div>

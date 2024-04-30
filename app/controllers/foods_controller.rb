@@ -8,6 +8,7 @@ class FoodsController < ApplicationController
   end
 
   def show
+    @promotion = Promotion.new
   end
 
   def new
