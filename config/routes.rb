@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   get '/admin' => 'admins#home', as: :admin_home
   get '/delivery_agent' => 'delivery_agents#home', as: :delivery_agent_home
   get '/myorders' => 'customers#customer_orders', as: :customer_orders
-  post '/admin/assignAgent/:id' => 'orders#assign_agent', as: :assign_agent
+  patch '/admin/assignAgent/:id' => 'orders#assign_agent', as: :assign_agent
 end

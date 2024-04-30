@@ -11,7 +11,6 @@ class CartsController < ApplicationController
   def authenticate_user
     return if params[:id].to_i == current_customer.cart.id
 
-    redirect_to root_path,
-                alert: 'Error! You are not authorized to visit this page'
+    redirect_to root_path, alert: 'Error! You are not authorized to visit this page'
   end
 end

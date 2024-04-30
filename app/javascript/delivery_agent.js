@@ -4,6 +4,7 @@ $(document).ready(function () {
     let url = $(this).attr("action");
     let data = new FormData($(this)[0]);
 
+
     // AJAX PUT request
     $.ajax({
       url: url,

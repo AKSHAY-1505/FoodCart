@@ -1,6 +1,7 @@
 class CartItemsController < ApplicationController
   def create
-    cart_item = create_or_update_cart_item
+    cart_item = Services::CartItemHelper::CartItemCreator.new(current_customer.cart, cart_item_params[:food_id],
+                                                              cart_item_params[:quantity]).call
 
     if cart_item.save
       render json: { message: 'Item added to cart successfully.' }, status: :created
@@ -23,14 +24,7 @@ class CartItemsController < ApplicationController
 
   private
 
-  def create_or_update_cart_item
-    item_in_cart = CartItem.where(cart: current_customer.cart, food_id: params[:food_id]).first
-
-    if item_in_cart
-      item_in_cart.quantity += params[:quantity].to_i
-      item_in_cart
-    else
-      CartItem.new(quantity: params[:quantity].to_i, food_id: params[:food_id], cart: current_customer.cart)
-    end
+  def cart_item_params
+    params.require(:cart_item).permit(:quantity, :food_id).merge(cart_id: current_customer.cart.id)
   end
 end

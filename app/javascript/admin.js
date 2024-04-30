@@ -6,7 +6,7 @@ $(document).ready(function () {
     console.log("FORM SUBMITTED");
     console.log(url);
 
-    // FOOD Create AJAX
+    // Agent assign AJAX
     $.ajax({
       url: url,
       type: "POST",
