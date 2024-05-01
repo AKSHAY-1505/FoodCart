@@ -2,6 +2,7 @@ $(document).ready(function () {
   function updateCartSummary(subtotal, deliveryCharge, discount, total) {
     $("#subtotal").text(subtotal);
     $("#delivery-charge").text(deliveryCharge);
+    $("#cart_discount").text(discount);
     $("#total").text(total);
   }
 

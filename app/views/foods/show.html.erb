@@ -18,7 +18,7 @@
     <div class="promotions d-flex flex-wrap" id="promotions">
       <% @food.promotions.each do |promotion| %>
         <%= render partial: 'promotions/promotion', locals: { promotion: promotion, food: @food } %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

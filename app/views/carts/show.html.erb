@@ -32,6 +32,10 @@
                 <td>Rs <span id="delivery-charge"><%= @cart.delivery_charge %></span></td>
               </tr>
               <tr>
+                <td>Discount</td>
+                <td>- Rs <span id="cart_discount"><%= @cart.discount %></span></td>
+              </tr>
+              <tr>
                 <td>Total</td>
                 <td>Rs <span id="total"><%= @cart.total %></span></td>
               </tr>
@@ -43,7 +47,12 @@
       <div class="col-md-6 d-flex justify-content-center align-items-center">
         <!-- <button class="btn btn-success" id="checkout-button">Checkout</button> -->
         <%= form_with url: orders_path, method: :post,remote: true do |form|%>
-          <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
+          <div class="field">
+            <%= form.label :promotion, "Promotions Applicable to your Cart: "%>
+          </div>
+          <div class="center">
+            <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
+          </div>
         <% end %>
       </div>
     </div>

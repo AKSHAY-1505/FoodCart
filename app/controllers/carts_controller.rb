@@ -4,6 +4,7 @@ class CartsController < ApplicationController
   def show
     @cart = current_customer.cart
     @cart_items = CartItem.where(cart: @cart)
+    Services::Cart::CartTotalCalculator.new(@cart).call
   end
 
   private
