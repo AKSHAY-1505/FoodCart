@@ -35,6 +35,6 @@ class PromotionsController < ApplicationController
   private
 
   def promotion_params
-    params.require(:promotion).permit(:title, :description, :from, :to, :discount_percentage, :food_id)
+    params.require(:promotion).permit(:title, :description, :from_date, :to_date, :discount_percentage, :food_id)
   end
 end

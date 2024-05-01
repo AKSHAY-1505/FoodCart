@@ -15,10 +15,10 @@
       </div>
     </div>
     <hr />
-    <div class="promotions d-flex flex-wrap" id="promotions">
+    <div class="promotions d-flex flex-row flex-wrap" id="promotions">
       <% @food.promotions.each do |promotion| %>
         <%= render partial: 'promotions/promotion', locals: { promotion: promotion, food: @food } %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
