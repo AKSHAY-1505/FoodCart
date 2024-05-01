@@ -15,7 +15,7 @@
     </div>
     <!-- Shopping cart rows -->
     <% @cart_items.each do |item| %>
-      <%= render partial: 'cart_entry', locals: {item: item, discount: @discounts[item.id]} %>
+      <%= render partial: 'cart_entry', locals: {item: item} %>
     <% end %>
     <!-- Cart summary and checkout button -->
     <div class="row mt-4">

@@ -17,14 +17,10 @@
   </div>
   <!-- Total Price -->
   <div class="col center">
-    <p>Rs <%= item.quantity * item.food.price %></p>
+    <p>Rs <%= item.subtotal %></p>
   </div>
   <div class="col center">
-    <% if discount %>
-      <p>Rs <%= discount %></p>
-    <% else %>
-      <p>Rs 0 </p>
-    <% end %>
+    <p>Rs <%= item.discount %></p>
   </div>
   <!-- Remove Button -->
   <div class="col center">
