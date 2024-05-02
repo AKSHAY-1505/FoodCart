@@ -11,7 +11,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with do |form| %>
+        <%= form_with url: 'reports/download.pdf', method: :get, html: { accept: 'application/pdf' } do |form| %>
           <div class="field">
             <%= form.label :start_date %><br />
             <%= form.date_field :start_date %>

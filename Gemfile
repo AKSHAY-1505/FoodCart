@@ -75,3 +75,6 @@ gem 'rubocop'
 gem 'will_paginate', '~> 4.0'
 
 gem 'whenever', require: false
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
