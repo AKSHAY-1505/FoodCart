@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :cart_items, only: %i[create destroy]
   resources :delivery_agents, only: %i[new create]
   resources :promotions, only: %i[new create edit update destroy]
+  resources :addresses, only: %i[create]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -25,4 +26,5 @@ Rails.application.routes.draw do
   get '/myorders' => 'customers#customer_orders', as: :customer_orders
   patch '/admin/assignAgent/:id' => 'orders#assign_agent', as: :assign_agent
   get 'reports/download' => 'reports#download', as: :download_report
+  get '/checkout/:id' => 'carts#checkout', as: :checkout
 end

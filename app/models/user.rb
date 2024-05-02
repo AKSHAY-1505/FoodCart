@@ -9,11 +9,20 @@ class User < ApplicationRecord
   has_one :admin, dependent: :destroy
   has_one :customer, dependent: :destroy
   has_one :delivery_agent, dependent: :destroy
+  after_create :create_customer
 
-  accepts_nested_attributes_for :customer
+  # accepts_nested_attributes_for :customer
 
   def self.from_google(u)
     create_with(uid: u[:uid], provider: 'google',
                 password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])
+  end
+
+  private
+
+  def create_customer
+    return unless role == 'customer'
+
+    Customer.create(user: self)
   end
 end

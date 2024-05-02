@@ -46,15 +46,7 @@
       </div>
       <!-- Checkout button -->
       <div class="col-md-6 d-flex justify-content-center align-items-center">
-        <!-- <button class="btn btn-success" id="checkout-button">Checkout</button> -->
-        <%= form_with url: orders_path, method: :post,remote: true do |form|%>
-          <div class="field">
-            <%= form.label :promotion, "Promotions Applicable to your Cart: "%>
-          </div>
-          <div class="center">
-            <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
-          </div>
-        <% end %>
+        <%= link_to "Proceed To Checkout", checkout_path(@cart), class: "btn btn-success"%>
       </div>
     </div>
   </div>

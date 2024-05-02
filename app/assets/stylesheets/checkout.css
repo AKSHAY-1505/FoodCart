@@ -1,0 +1,20 @@
+input[type="radio"] {
+  display: none;
+}
+
+.address.field {
+  border: 1px solid green;
+  /* padding: 5px; */
+  margin: 15px;
+  border-radius: 5px;
+  display: block;
+  height: auto;
+}
+
+/* Styling the label elements for selected radio buttons */
+input[type="radio"]:checked + label {
+  background-color: lightgreen;
+  border-radius: 5px;
+  padding: 10px;
+  display: block;
+}

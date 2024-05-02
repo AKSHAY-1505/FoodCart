@@ -29,7 +29,7 @@
           <div class="col-4">
           </div>
           <div class="col-4 center">
-            <p><%= delivery_address(order) %></p>
+            <p><%= delivery_address(order.address) %></p>
           </div>
         </div>
         <%= render 'progress' , order: order %>

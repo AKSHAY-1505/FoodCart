@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   def create
     cart = current_customer.cart
     order = Order.new(customer: current_customer, subtotal: cart.subtotal, delivery_charge: cart.delivery_charge,
-                      discount: cart.discount, total: cart.total, delivery_agent: nil)
+                      discount: cart.discount, total: cart.total, delivery_agent: nil, address_id: params[:address_id].to_i)
     if order.save
       redirect_to root_path, notice: 'Order Placed !'
     else

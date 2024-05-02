@@ -32,7 +32,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user = User.from_google(from_google_params)
 
     if user.present?
-      create_customer(user)
       sign_out_all_scopes
       flash[:notice] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect user, event: :authentication
@@ -52,13 +51,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth
     @auth ||= request.env['omniauth.auth']
-  end
-
-  private
-
-  def create_customer(user)
-    return if user.customer
-
-    Customer.create(user: user)
   end
 end

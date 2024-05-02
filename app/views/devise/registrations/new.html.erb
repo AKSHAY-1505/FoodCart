@@ -24,37 +24,6 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
       </div>
-      <br />
-      <h5>Address</h5>
-      <hr />
-      <%= f.fields_for :customer do |customer_form| %>
-        <div class="d-flex">
-          <div class="field">
-            <%= customer_form.label :house_number %><br />
-            <%= customer_form.text_field :house_number %>
-          </div>
-          <div class="field">
-            <%= customer_form.label :street %><br />
-            <%= customer_form.text_field :street %>
-          </div>
-        </div>
-        <div class="d-flex">
-          <div class="field">
-            <%= customer_form.label :locality %><br />
-            <%= customer_form.text_field :locality %>
-          </div>
-          <div class="field">
-            <%= customer_form.label :city %><br />
-            <%= customer_form.text_field :city %>
-          </div>
-        </div>
-        <div class="center">
-          <div class="field">
-            <%= customer_form.label :phone_number %><br />
-            <%= customer_form.number_field :phone_number %>
-          </div>
-        </div>
-      <% end %>
       <div class="center">
         <%= f.submit "Sign up", class: "btn btn-success" %>
       </div>

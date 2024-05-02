@@ -1,0 +1,41 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addressCreateModal">
+  <i class="bi bi-plus-lg me-2"></i>Add a new Delivery Address
+</button>
+<!-- Modal -->
+<div class="modal fade" id="addressCreateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a new</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: @address, url: addresses_path, method: :post, remote: true, id: "new-address-form" do |form| %>
+          <div class="field">
+            <%= form.text_field :house_number, placeholder: "House/Apartment Number", class: "form-control" %>
+          </div>
+          <div class="field">
+            <%= form.text_field :street_name, placeholder: "Street", class: "form-control" %>
+          </div>
+          <div class="field">
+            <%= form.text_field :locality, placeholder: "Locality", class: "form-control" %>
+          </div>
+          <div class="field">
+            <%= form.text_field :city, placeholder: "City", class: "form-control" %>
+          </div>
+          <div class="field">
+            <%= form.text_field :phone_number, placeholder: "10 Digit Phone Number", class: "form-control" %>
+          </div>
+          <%= form.hidden_field :customer_id, value: current_customer.id %>
+          <div class="field center">
+            <%= form.submit "Add Address", class: "btn btn-success", data: { 'bs-dismiss': 'modal'} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

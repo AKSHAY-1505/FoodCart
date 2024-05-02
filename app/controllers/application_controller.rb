@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
   end
 
   # Returns delivery address for an order
-  def delivery_address(order)
-    customer = order.customer
-    [customer.house_number, customer.street, customer.locality, customer.city].join(',')
+  def delivery_address(address)
+    [address.house_number, address.street_name, address.locality, address.city].join(',')
   end
 
   private

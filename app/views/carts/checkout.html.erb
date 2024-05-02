@@ -1,0 +1,25 @@
+<%= javascript_include_tag 'checkout' %>
+<%= stylesheet_link_tag "checkout", "data-turbo-track": "reload" %>
+<div class="center">
+  <div class="container shadow_box">
+    <div class="d-flex gap-3 mt-3">
+      <h3>Select your Delivery Address</h3>
+      <%= render 'address_create_modal' %>
+    </div>
+    <div>
+      <%= form_with url: orders_path, method: :post,remote: true do |form|%>
+        <div class="addresses">
+          <% @addresses.each do |address| %>
+            <div class="address field">
+              <%= form.radio_button :address_id, address.id, id: address.id %>
+              <%= form.label :address_id, delivery_address(address), for: address.id %>
+            </div>
+          <% end %>
+        </div>
+        <div class="center">
+          <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

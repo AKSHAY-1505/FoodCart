@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_items, dependent: :destroy
+  belongs_to :address
   belongs_to :delivery_agent, optional: true
   before_create :address_present?
 
@@ -28,6 +29,5 @@ class Order < ApplicationRecord
   end
 
   def address_present?
-    
   end
 end
