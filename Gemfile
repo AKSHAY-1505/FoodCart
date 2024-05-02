@@ -78,3 +78,6 @@ gem 'whenever', require: false
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'

@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_items, dependent: :destroy
   belongs_to :delivery_agent, optional: true
+  before_create :address_present?
 
   enum status: %i[order_placed delivery_agent_assigned out_for_delivery delivered]
 
@@ -24,5 +25,9 @@ class Order < ApplicationRecord
   def create_order_items
     cart = customer.cart
     Services::Order::OrderItemsCreator.new(self, cart).call
+  end
+
+  def address_present?
+    
   end
 end
