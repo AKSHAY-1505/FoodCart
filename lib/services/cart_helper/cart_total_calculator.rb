@@ -1,5 +1,5 @@
 module Services
-  module Cart
+  module CartHelper
     class CartTotalCalculator
       def initialize(cart)
         @cart = cart

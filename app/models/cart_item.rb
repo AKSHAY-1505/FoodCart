@@ -8,6 +8,6 @@ class CartItem < ApplicationRecord
   private
 
   def calculate_cart_total
-    Services::Cart::CartTotalCalculator.new(cart).call
+    Services::CartHelper::CartTotalCalculator.new(cart).call
   end
 end

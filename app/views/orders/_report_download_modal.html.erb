@@ -1,0 +1,31 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#downloadReportModal">
+  <span><i class="bi bi-file-earmark-arrow-down-fill me-2"></i></span>Download Report
+</button>
+<!-- Modal -->
+<div class="modal fade" id="downloadReportModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Download Orders Report</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with do |form| %>
+          <div class="field">
+            <%= form.label :start_date %><br />
+            <%= form.date_field :start_date %>
+          </div>
+          <div class="field">
+            <%= form.label :end_date %><br />
+            <%= form.date_field :end_date %>
+          </div>
+          <%= form.submit data: {'bs-dismiss': 'modal'}%>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

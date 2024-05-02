@@ -10,16 +10,24 @@ $(document).ready(function () {
     var toast = new bootstrap.Toast(toastElement);
     toast.show();
   }
+
+  function displayWarning(button, quantity) {
+    let warningContainer = button.closest(".container").find(".warning");
+    let warning = $("<p>").text(`Only ${quantity} left in Stock.`);
+    warningContainer.html(warning);
+  }
   // Unbind existing event handlers to prevent multiple bindings
   $(".increment")
     .off("click")
     .on("click", function () {
+      let quantity = $(this).data("quantity");
       let $quantityInput = $(this).siblings(".quantity");
       let currentValue = parseInt($quantityInput.val());
       if (isNaN(currentValue)) {
         currentValue = 0;
       }
-      $quantityInput.val(currentValue + 1);
+      if (currentValue < quantity) $quantityInput.val(currentValue + 1);
+      else displayWarning($(this), quantity);
     });
 
   $(".decrement")

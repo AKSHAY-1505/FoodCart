@@ -4,8 +4,11 @@
       <i class="bi bi-dash"></i>
     </button>
     <input type="number" id="quantity" class="form-control text-center quantity" value="1" data-food-id="<%= food.id %>">
-    <button class="btn btn-success increment" type="button">
+    <button class="btn btn-success increment" type="button" data-quantity="<%= food.quantity %>">
       <i class="bi bi-plus"></i>
     </button>
+  </div>
+  <div class="center">
+    <p class="warning text-danger mt-1"></p>
   </div>
 </div>

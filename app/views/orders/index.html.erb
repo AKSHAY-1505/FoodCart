@@ -1,5 +1,8 @@
 <%= stylesheet_link_tag 'pagination', media: 'all', 'data-turbolinks-track': 'reload' %>
-<h1 class="center mt-2">Order History</h1>
+<div class=" center d-flex gap-3">
+  <h1 class="center mt-2">Order History</h1>
+  <%= render 'report_download_modal' %>
+</div>
 <div class="container border border-black mt-4">
   <div class="row m-2 p-2 border-bottom border-black">
     <div class="col center">

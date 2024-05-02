@@ -11,6 +11,7 @@ module Services
           OrderItem.create(order: @order, food_name: item.food.name, food_price: item.food.price,
                            quantity: item.quantity)
         end
+        debugger
         @cart.cart_items.destroy_all
       end
     end
