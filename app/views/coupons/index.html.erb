@@ -1,0 +1,12 @@
+<% javascript_include_tag 'coupon' %>
+<div class="container coupons mt-2">
+  <div class="d-flex">
+    <h3 class="me-3">Coupons</h3>
+    <%= render 'coupon_create_modal' %>
+  </div>
+</div>
+<div class="coupons container d-flex flex-wrap">
+  <% @coupons.each do |coupon| %>
+    <%= render 'coupon', coupon: coupon %>
+  <% end %>
+</div>

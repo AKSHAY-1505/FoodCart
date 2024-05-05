@@ -18,37 +18,7 @@
       <%= render partial: 'cart_entry', locals: {item: item} %>
     <% end %>
     <!-- Cart summary and checkout button -->
-    <div class="row mt-4">
-      <!-- Cart summary -->
-      <div class="col-md-6 cart-summary">
-        <div class="table-responsive">
-          <table class="table">
-            <tbody>
-              <tr>
-                <td>Subtotal</td>
-                <td>Rs <span id="subtotal"><%= @cart.subtotal %></span></td>
-              </tr>
-              <tr>
-                <td>Delivery Charge</td>
-                <td>Rs <span id="delivery-charge"><%= @cart.delivery_charge %></span></td>
-              </tr>
-              <tr>
-                <td>Discount</td>
-                <td>- Rs <span id="cart_discount"><%= @cart.discount %></span></td>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td>Rs <span id="total"><%= @cart.total %></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- Checkout button -->
-      <div class="col-md-6 d-flex justify-content-center align-items-center">
-        <%= link_to "Proceed To Checkout", new_order_path, class: "btn btn-success"%>
-      </div>
-    </div>
+    <%= render 'cart_summary', cart: @cart %>
   </div>
 <% else %>
   <div class="center">

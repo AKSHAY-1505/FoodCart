@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  from_date: 2024-05-06
+  to_date: 2024-05-06
+  min_amount: 1
+  discount: 1
+
+two:
+  code: MyString
+  from_date: 2024-05-06
+  to_date: 2024-05-06
+  min_amount: 1
+  discount: 1

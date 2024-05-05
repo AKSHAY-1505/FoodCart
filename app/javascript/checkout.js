@@ -18,7 +18,7 @@ $(document).ready(function () {
         var addressField = $("<div>").addClass("address field");
         var radioButton = $("<input>").attr({
           type: "radio",
-          name: "order[address_id]",
+          name: "address_id",
           value: newAddress.id,
           id: "address_" + newAddress.id,
         });

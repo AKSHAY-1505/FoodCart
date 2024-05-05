@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :promotions, only: %i[new create edit update destroy]
   resources :addresses, only: %i[create]
   resources :categories, only: %i[create]
+  resources :coupons, only: %i[index new create destroy]
 
   get 'up' => 'rails/health#show', as: :rails_health_check
 
