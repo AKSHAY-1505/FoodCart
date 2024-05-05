@@ -4,7 +4,7 @@
   <div class="container shadow_box">
     <div class="d-flex gap-3 mt-3">
       <h3>Select your Delivery Address</h3>
-      <%= render 'address_create_modal' %>
+      <%= render 'shared/address_create_modal' %>
     </div>
     <div>
       <%= form_with url: orders_path, method: :post,remote: true do |form|%>

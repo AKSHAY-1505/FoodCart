@@ -25,28 +25,7 @@
     </div>
   </div>
   <div class="orders-body">
-    <% @orders.each do |order| %>
-      <div class = "row m-2 p-2 border-bottom" id="order_<%= order.id %>">
-        <div class="col center">
-          <p>#<%= order.id %></p>
-        </div>
-        <div class="col center">
-          <p><%= order.customer.user.name %></p>
-        </div>
-        <div class="col center">
-          <p><%= order.created_at.to_date %></p>
-        </div>
-        <div class="col center">
-          <p><%= order.status.titleize %></p>
-        </div>
-        <div class="col center">
-          <p>Rs <%= order.total %></p>
-        </div>
-        <div class="col center">
-          <%= render 'shared/order_detail', order: order %>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: 'order', collection: @orders %>
   </div>
 </div>
 <div class="apple_pagination center">

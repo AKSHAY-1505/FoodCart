@@ -71,4 +71,27 @@ $(document).ready(function () {
       },
     });
   });
+
+  $("#new-category-form").on("submit", function (event) {
+    event.preventDefault();
+    let url = $(this).attr("action");
+    let data = new FormData($(this)[0]);
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: data,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        const newCategory = response;
+
+        const newOption = $("<option>")
+          .val(newCategory.category.id)
+          .text(newCategory.category.name);
+
+        $("#food_category_id").append(newOption);
+      },
+    });
+  });
 });

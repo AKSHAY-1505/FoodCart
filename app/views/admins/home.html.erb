@@ -35,7 +35,7 @@
             <p><%= order.created_at %></p>
           </div>
           <div class="col center">
-            <p><%= delivery_address(order) %></p>
+            <p><%= delivery_address(order.address) %></p>
           </div>
           <div class="col center">
             <p class="status"><%= order.status.titleize %></p>

@@ -7,11 +7,6 @@ class CartsController < ApplicationController
     Services::CartHelper::CartDiscountApplier.new(@cart).call # To apply best discounts available at the moment
   end
 
-  def checkout
-    @address = Address.new
-    @addresses = Address.where(customer: current_customer)
-  end
-
   private
 
   def authenticate_user

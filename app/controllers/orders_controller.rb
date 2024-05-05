@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_admin, only: [:index]
 
+  def new
+    @address = Address.new
+    @addresses = Address.where(customer: current_customer)
+  end
+
   def create
     cart = current_customer.cart
     order = Order.new(customer: current_customer, subtotal: cart.subtotal, delivery_charge: cart.delivery_charge,

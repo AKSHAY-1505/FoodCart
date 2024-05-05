@@ -11,10 +11,8 @@ class User < ApplicationRecord
   has_one :delivery_agent, dependent: :destroy
   after_create :create_customer
 
-  # accepts_nested_attributes_for :customer
-
   def self.from_google(u)
-    create_with(uid: u[:uid], provider: 'google',
+    create_with(uid: u[:uid], provider: 'google', name: u[:info][:name],
                 password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])
   end
 
