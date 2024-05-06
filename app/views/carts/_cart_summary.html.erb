@@ -28,4 +28,21 @@
   <div class="col-md-6 d-flex justify-content-center align-items-center">
     <%= link_to "Proceed To Checkout", new_order_path, class: "btn btn-success"%>
   </div>
+  <div class="row mt-6">
+    <div class="coupons-container">
+      <!-- Coupon Form -->
+      <% if cart.coupon %>
+        <div class="col-md-6 coupon center mt-3 border p-2 d-flex gap-3" id="coupon-remove-container">
+          <p><strong class="text-success">Coupon Applied: </strong><%= cart.coupon.code %></p>
+          <%= button_to remove_coupon_path, method: :post, class: "btn btn-danger remove-coupon" do %>
+            <i class="bi bi-x-lg"></i> Remove Coupon
+          <% end %>
+        </div>
+      <% else %>
+        <div class="col-md-6 d-flex mt-4" id="coupon-selection-container">
+          <%= render 'carts/coupon_selection_form' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

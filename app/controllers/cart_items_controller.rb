@@ -13,7 +13,6 @@ class CartItemsController < ApplicationController
   def destroy
     cart_item = CartItem.find(params[:id])
     cart = cart_item.cart
-
     if cart_item.destroy
       render partial: 'carts/cart_summary', locals: { cart: cart }, status: :ok
     else

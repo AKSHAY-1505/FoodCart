@@ -8,6 +8,16 @@ class CartItem < ApplicationRecord
   private
 
   def calculate_cart_total
+    # validate_coupon
     Services::CartHelper::CartTotalCalculator.new(cart).call
   end
+
+  # def validate_coupon
+  #   return unless cart.coupon
+
+  #   return unless cart.subtotal < cart.coupon.min_amount
+
+  #   cart.coupon = nil
+  #   cart.save
+  # end
 end

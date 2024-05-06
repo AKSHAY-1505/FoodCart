@@ -30,6 +30,7 @@ $(document).ready(function () {
       let url = form.attr("action");
       id = $(element).attr("id");
 
+      // Coupon Update Ajax
       $.ajax({
         url: url,
         type: "PATCH",

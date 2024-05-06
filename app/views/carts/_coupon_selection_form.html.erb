@@ -1,0 +1,10 @@
+<p>Have any Coupon Code?</p>
+<%= form_with url: apply_coupon_path , method: :post do |form| %>
+  <div class="field">
+    <%= form.label :coupon_code, "Coupon Code" %>
+    <%= form.text_field :coupon_code, class: "form-control" %>
+  </div>
+  <div class="center">
+    <%= form.submit "Apply Coupon", class: "btn btn-dark apply-coupon-button" %>
+  </div>
+<% end %>
