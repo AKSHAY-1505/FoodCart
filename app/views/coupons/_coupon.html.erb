@@ -5,4 +5,8 @@
   <p><strong>Minimum Spend: </strong><%= coupon.min_amount %></p>
   <p><strong>Discount: </strong><%= coupon.discount %></p>
   <button class="coupon-delete-button btn btn-danger" data-coupon-id="<%= coupon.id %>">Delete this Coupon</button>
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#couponFormModal_<%= coupon.id %>">
+    Update Coupun
+  </button>
+  <%= render 'coupon_form_modal', coupon: coupon%>
 </div>

@@ -20,7 +20,7 @@ $(document).ready(function () {
           $("#promotion_" + id).replaceWith($(response));
         },
         error: function (error) {
-          console.error("AKshay:", error);
+          console.error("Error:", error);
         },
       });
     } else if (element.hasClass("promotion-delete-button")) {

@@ -28,6 +28,15 @@ class CouponsController < ApplicationController
     end
   end
 
+  def update
+    coupon = Coupon.find(params[:id])
+    if coupon.update(coupon_params)
+      render partial: 'coupons/coupon', locals: { coupon: coupon }, status: :ok
+    else
+      render json: { message: 'Unable to Create Coupon' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def coupon_params

@@ -1,9 +1,5 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#couponCreateModal">
-  <span><i class="bi bi-plus-lg"></i></span> Create a Coupon
-</button>
 <!-- Modal -->
-<div class="modal fade" id="couponCreateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="couponFormModal_<%= coupon.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with model: @coupon, url: coupons_path, method: :post, remote: true, id: "coupon-create-form" do |form|%>
+        <%= form_with model: coupon, remote: true, id: "coupon-create-form" do |form|%>
           <div class="field">
             <%= form.label :code, "Coupon Code" %>
             <%= form.text_field :code, class: "form-control" %>
@@ -32,9 +28,7 @@
             <%= form.label :to_date, "Valid Till" %>
             <%= form.date_field :to_date, class: "form-control" %>
           </div>
-          <div class="field center">
-            <%= form.submit "Create", class: "btn btn-success", data: {'bs-dismiss': 'modal'} %>
-          </div>
+          <%= form.submit class: "btn btn-success form-submit-button", id: coupon.id, data: { 'bs-dismiss': "modal" } %>
         <% end %>
       </div>
       <div class="modal-footer">

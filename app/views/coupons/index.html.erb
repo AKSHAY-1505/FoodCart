@@ -1,8 +1,11 @@
 <%= javascript_include_tag 'coupon' %>
-<div class="container coupons mt-2">
+<div class="container mt-2 header">
   <div class="d-flex">
     <h3 class="me-3">Coupons</h3>
-    <%= render 'coupon_create_modal' %>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#couponFormModal_<%= @coupon.id %>">
+      <span><i class="bi bi-plus-lg"></i></span> Create a Coupon
+    </button>
+    <%= render 'coupon_form_modal', coupon: @coupon %>
   </div>
 </div>
 <div class="coupons container d-flex flex-wrap">
