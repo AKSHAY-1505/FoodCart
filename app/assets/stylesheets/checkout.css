@@ -1,4 +1,4 @@
-input[type="radio"] {
+input[type="radio"].hidden-radio {
   display: none;
 }
 
@@ -14,6 +14,13 @@ input[type="radio"] {
 /* Styling the label elements for selected radio buttons */
 input[type="radio"]:checked + label {
   background-color: lightgreen;
+  border-radius: 5px;
+  padding: 10px;
+  display: block;
+}
+
+input[type="radio"]:not(checked) + label {
+  border: 2px solid black;
   border-radius: 5px;
   padding: 10px;
   display: block;

@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
     agent = DeliveryAgent.find(params[:delivery_agent])
 
     if @order.assign_agent(agent)
-      render json: { orderId: order.id, agentName: agent.user.name }, status: :ok
+      render json: { orderId: @order.id, agentName: agent.user.name }, status: :ok
     else
       render json: { message: 'Unable to Assign Agent!' }, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update_status(params[:status].to_i)
-      render json: { order_id: order.id, status: order.status.titleize, active: order.is_active }, status: :ok
+      render json: { order_id: @order.id, status: @order.status.titleize, active: @order.is_active }, status: :ok
     else
       render json: { message: 'Unable to update status' }, status: :unprocessable_entity
     end

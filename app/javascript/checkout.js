@@ -21,6 +21,7 @@ $(document).ready(function () {
           name: "address_id",
           value: newAddress.id,
           id: "address_" + newAddress.id,
+          class: "hidden-radio",
         });
         var label = $("<label>")
           .attr("for", "address_" + newAddress.id)

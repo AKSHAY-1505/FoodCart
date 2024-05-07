@@ -59,7 +59,7 @@ $(document).ready(function () {
         "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
       },
       success: function (response) {
-        console.log(response);
+        console.log(response)
         let parentDiv = currentButton.closest(".row.cart-row");
         parentDiv.remove();
         $("#cart-summary").replaceWith($(response));

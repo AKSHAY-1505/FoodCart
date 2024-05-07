@@ -29,10 +29,10 @@ class DeliveryAgentsController < ApplicationController
   end
 
   def authenticate_user
-    redirect_to root_path alert: 'You are ot authorized to visit that page!' unless current_user&.delivery_agent?
+    redirect_to root_path alert: 'You are not authorized to visit that page!' unless current_user&.delivery_agent?
   end
 
   def authenticate_admin
-    redirect_to root_path alert: 'You are ot authorized to visit that page!' unless current_user&.admin?
+    redirect_to root_path alert: 'You are not authorized to visit that page!' unless current_user&.admin?
   end
 end
