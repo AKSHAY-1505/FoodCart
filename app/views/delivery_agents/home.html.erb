@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'delivery_agent.js' %>
 <% if @active_orders.any? %>
-  <div class="container">
+  <div class="pending-orders container">
     <h1>Pending Orders</h1>
     <hr />
     <div class="active_orders border border-black p-2 m-2">
@@ -24,7 +24,12 @@
             <p class="status"><%= order.status.titleize %></p>
           </div>
           <div class="col center">
-            <%= render 'status_form', order: order %>
+            <% render_out_for_delivery_button(order) do %>
+              <button class="btn btn-success out-for-delivery" data-order-id="<%= order.id %>" data-status="out_for_delivery">Mark as Out For Delivery</button>
+            <% end %>
+            <% render_delivered_button(order) do %>
+              <button class="btn btn-success delivered" data-order-id="<%= order.id %>" data-status="delivered">Mark as Delivered</button>
+            <% end %>
           </div>
         </div>
       <% end %>
