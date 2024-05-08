@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
 
   def home
     @categories = Category.all
-    @suggested_foods = Services::CustomerService::FoodSuggestion.new(current_customer).call if user_signed_in?
+    # @suggested_foods = Services::CustomerService::FoodSuggestion.new(current_user).call if user_signed_in?
   end
 
   def view_food
@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
   end
 
   def customer_orders
-    @active_orders = current_customer.orders.where(is_active: true)
+    @active_orders = current_user.orders.where(is_active: true)
     @past_orders = current_customer.orders.where(is_active: false)
   end
 

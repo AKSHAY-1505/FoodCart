@@ -3,9 +3,9 @@
 <%= render 'banner_carousel' %>
 <%= render 'shared/toast' %>
 <div id="foods">
-  <% if current_customer %>
+  <% if user_is_customer? %>
     <hr>
-    <%= render 'suggestion_accordian', suggestions: @suggested_foods %>
+    <!-- "<%" render 'suggestion_accordian', suggestions: @suggested_foods "%>" -->
   <% end %>
   <% @categories.each do |category| %>
     <% if category.foods.count > 0 %>

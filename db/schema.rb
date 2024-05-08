@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_08_223014) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,17 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
     t.string "locality"
     t.string "city"
     t.string "phone_number"
-    t.bigint "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_addresses_on_customer_id"
-  end
-
-  create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_admins_on_user_id"
   end
 
   create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -71,7 +62,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
   end
 
   create_table "carts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "customer_id", null: false
     t.integer "subtotal", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,7 +70,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
     t.integer "total", default: 0
     t.bigint "coupon_id"
     t.index ["coupon_id"], name: "index_carts_on_coupon_id"
-    t.index ["customer_id"], name: "index_carts_on_customer_id"
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -97,20 +86,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
     t.integer "discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "customers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_customers_on_user_id"
-  end
-
-  create_table "delivery_agents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_delivery_agents_on_user_id"
   end
 
   create_table "foods", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -135,7 +110,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "customer_id", null: false
     t.integer "subtotal"
     t.integer "delivery_charge"
     t.integer "discount"
@@ -144,11 +118,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_active", default: true
-    t.bigint "delivery_agent_id"
     t.bigint "address_id"
+    t.bigint "user_id", null: false
     t.index ["address_id"], name: "index_orders_on_address_id"
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["delivery_agent_id"], name: "index_orders_on_delivery_agent_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "promotions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -163,6 +136,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
     t.index ["food_id"], name: "index_promotions_on_food_id"
   end
 
+  create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -170,29 +149,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_195236) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
+    t.bigint "role_id", default: 3
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "addresses", "customers"
-  add_foreign_key "admins", "users"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "foods"
   add_foreign_key "carts", "coupons"
-  add_foreign_key "carts", "customers"
-  add_foreign_key "customers", "users"
-  add_foreign_key "delivery_agents", "users"
   add_foreign_key "foods", "categories"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "addresses"
-  add_foreign_key "orders", "customers"
-  add_foreign_key "orders", "delivery_agents"
+  add_foreign_key "orders", "users"
   add_foreign_key "promotions", "foods"
+  add_foreign_key "users", "roles"
 end

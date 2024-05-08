@@ -1,6 +1,6 @@
-<% if current_user&.admin? %>
+<% if user_is_admin? %>
   <%= render 'shared/admin_navbar' %>
-<% elsif current_user&.delivery_agent? %>
+<% elsif user_is_delivery_agent? %>
   <%= render 'shared/delivery_agent_navbar' %>
 <% else %>
   <%= render 'shared/customer_navbar' %>

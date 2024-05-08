@@ -12,3 +12,6 @@
 user = User.create!(name: 'Admin 1', email: 'admin@mail.com', password: '111111', password_confirmation: '111111', role: :admin)
 Admin.create(user: user)
 
+Role.create(name: 'Admin')
+Role.create(name: 'Delivery Agent')
+Role.create(name: 'Customer')

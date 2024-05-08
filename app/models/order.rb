@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :customer
+  belongs_to :user
   has_many :order_items, dependent: :destroy
   belongs_to :address
   belongs_to :delivery_agent, optional: true

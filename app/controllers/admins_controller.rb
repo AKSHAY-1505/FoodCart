@@ -9,6 +9,6 @@ class AdminsController < ApplicationController
   private
 
   def authenticate_user
-    redirect_to root_path, alert: 'You are not authorised to access this page!' unless current_user&.admin?
+    redirect_to root_path, alert: 'You are not authorised to access this page!' unless user_is_admin?
   end
 end
