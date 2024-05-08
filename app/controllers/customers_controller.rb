@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   def update
-    @customer = Customer.find_by(user: current_user)
+    @customer = current_customer.user
     if @customer.update(customer_edit_params)
       redirect_to edit_user_registration_path, notice: 'Address Updated Successfully'
     else
@@ -10,6 +10,7 @@ class CustomersController < ApplicationController
 
   def home
     @categories = Category.all
+    @suggested_foods = Services::CustomerService::FoodSuggestion.new(current_customer).call if user_signed_in?
   end
 
   def view_food

@@ -1,4 +1,10 @@
 $(document).ready(function () {
+  function showSuccessToast() {
+    var toastElement = document.getElementById("success-toast-message");
+    $("#success-toast-message .toast-body").text("Status Updated Successfully");
+    var toast = new bootstrap.Toast(toastElement);
+    toast.show();
+  }
   $(".pending-orders").on("click", function (e) {
     element = $(e.target);
 
@@ -16,7 +22,7 @@ $(document).ready(function () {
           "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-          console.log(response);
+          showSuccessToast();
           if (response.active) {
             $(`#order_${response.order_id} .status`).text(response.status);
             let newButton = $("<button>", {
@@ -49,7 +55,7 @@ $(document).ready(function () {
           "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-          console.log(response);
+          showSuccessToast();
           if (response.active) {
             $(`#order_${response.order_id} .status`).text(response.status);
           } else {

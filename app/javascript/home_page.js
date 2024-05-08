@@ -1,12 +1,12 @@
 $(document).ready(function () {
   function showSuccessToast() {
-    var toastElement = document.getElementById("addToCartToast");
+    var toastElement = document.getElementById("success-toast-message");
     var toast = new bootstrap.Toast(toastElement);
     toast.show();
   }
 
   function showDangerToast() {
-    var toastElement = document.getElementById("pleaseLoginToast");
+    var toastElement = document.getElementById("danger-toast-message");
     var toast = new bootstrap.Toast(toastElement);
     toast.show();
   }

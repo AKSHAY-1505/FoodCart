@@ -1,9 +1,12 @@
 <%= javascript_include_tag 'home_page' %>
 <%= stylesheet_link_tag "customer_home", "data-turbo-track": "reload" %>
 <%= render 'banner_carousel' %>
-<%= render 'shared/success_toast' %>
-<%= render 'shared/danger_toast' %>
+<%= render 'shared/toast' %>
 <div id="foods">
+  <% if current_customer %>
+    <hr>
+    <%= render 'suggestion_accordian', suggestions: @suggested_foods %>
+  <% end %>
   <% @categories.each do |category| %>
     <% if category.foods.count > 0 %>
       <hr />
