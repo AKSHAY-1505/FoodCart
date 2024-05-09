@@ -1,27 +1,28 @@
 module Services
   module CartHelper
     class CartTotalCalculator
-      def initialize(cart)
-        @cart = cart
+      def initialize(user, coupon_code = nil)
+        @cart_items = OrderItem.where(user: user, ordered: false)
+        @cart_details = {}
+        @coupon = Coupon.find_by(code: coupon_code) if coupon_code
       end
 
       def call
-        subtotal = @cart.cart_items.pluck(:subtotal).sum
-        delivery_charge = subtotal >= 500 ? 0 : 30
-        coupon_discount = apply_coupon_discount(subtotal)
-        promotions_discount = @cart.cart_items.pluck(:discount).sum
-        discount = coupon_discount + promotions_discount
-        total = subtotal + delivery_charge - discount
-        @cart.update(subtotal: subtotal, delivery_charge: delivery_charge, discount: discount, total: total)
+        @cart_details[:subtotal] = @cart_items.pluck(:subtotal).sum
+        @cart_details[:delivery_charge] = @cart_details[:subtotal] >= 500 ? 0 : 30
+        @cart_details[:coupon_discount] = apply_coupon_discount(@cart_details[:subtotal])
+        promotions_discount = @cart_items.pluck(:discount).sum
+        @cart_details[:discount] = promotions_discount + @cart_details[:coupon_discount]
+        @cart_details[:total] = @cart_details[:subtotal] + @cart_details[:delivery_charge] - @cart_details[:discount]
+        @cart_details
       end
 
       def apply_coupon_discount(subtotal)
-        return 0 unless @cart.coupon
+        return 0 unless @coupon
 
-        return @cart.coupon.discount unless subtotal < @cart.coupon.min_amount
+        return 0 if subtotal < @coupon.min_amount
 
-        @cart.coupon = nil
-        0
+        @coupon.discount
       end
     end
   end

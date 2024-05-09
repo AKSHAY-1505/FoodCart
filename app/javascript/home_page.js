@@ -52,14 +52,14 @@ $(document).ready(function () {
       let foodId = $(this).find("#quantity").data("food-id");
 
       let data = {
-        cart_item: {
+        order_item: {
           quantity: quantity,
           food_id: foodId,
         },
       };
 
       $.ajax({
-        url: "/cart_items",
+        url: "/order_items",
         type: "POST",
         data: data,
         headers: {

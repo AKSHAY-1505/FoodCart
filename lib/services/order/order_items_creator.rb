@@ -1,17 +1,15 @@
 module Services
   module Order
     class OrderItemsCreator
-      def initialize(order, cart)
+      def initialize(order)
         @order = order
-        @cart = cart
+        @user = order.user
       end
 
       def call
-        @cart.cart_items.each do |item|
-          OrderItem.create(order: @order, food_name: item.food.name, food_price: item.food.price,
-                           quantity: item.quantity)
+        OrderItem.where(user: @user, ordered: false).each do |item|
+          item.update(order: @order, ordered: true)
         end
-        @cart.cart_items.destroy_all
       end
     end
   end

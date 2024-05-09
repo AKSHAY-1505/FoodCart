@@ -17,8 +17,13 @@
     <% @cart_items.each do |item| %>
       <%= render partial: 'cart_entry', locals: {item: item} %>
     <% end %>
-    <!-- Cart summary and checkout button -->
-    <%= render 'cart_summary', cart: @cart %>
+    <!-- Cart summary -->
+    <div class="row">
+      <%= render 'cart_summary', cart_details: @cart_details %>
+      <div class="col-6 d-flex justify-content-center align-items-center">
+        <%= link_to "Proceed To Checkout", new_order_path, class: "btn btn-success"%>
+      </div>
+    </div>
   </div>
 <% else %>
   <div class="center">

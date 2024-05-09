@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addressCreateModal">
+<button type="button" class="btn btn-dark mt-0" data-bs-toggle="modal" data-bs-target="#addressCreateModal">
   <i class="bi bi-plus-lg me-2"></i>Add a new Delivery Address
 </button>
 <!-- Modal -->
@@ -27,7 +27,7 @@
           <div class="field">
             <%= form.text_field :phone_number, placeholder: "10 Digit Phone Number", class: "form-control" %>
           </div>
-          <%= form.hidden_field :customer_id, value: current_customer.id %>
+          <%= form.hidden_field :user_id, value: current_user.id %>
           <div class="field center">
             <%= form.submit "Add Address", class: "btn btn-success", data: { 'bs-dismiss': 'modal'} %>
           </div>

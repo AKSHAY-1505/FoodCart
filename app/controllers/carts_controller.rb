@@ -1,19 +1,21 @@
 class CartsController < ApplicationController
   before_action :authenticate_user, only: [:show]
-  before_action :set_cart, only: %i[show apply_coupon remove_coupon]
+  before_action :set_user, only: %i[show apply_coupon remove_coupon]
 
   def show
-    @cart_items = CartItem.where(cart: @cart)
-    Services::CartHelper::CartDiscountApplier.new(@cart).call # To apply best discounts available at the moment
+    # @cart_items = CartItem.where(cart: @cart)
+    @cart_items = OrderItem.where(user: @user, ordered: false)
+    Services::CartHelper::CartDiscountApplier.new(@cart_items).call # To apply best discounts available at the moment
+    @cart_details = Services::CartHelper::CartTotalCalculator.new(current_user).call
   end
 
   def apply_coupon
-    result = @cart.apply_coupon(params[:coupon_code])
+    @cart_details = Services::CartHelper::CartTotalCalculator.new(current_user, params[:code]).call
 
-    if result[:notice]
-      render partial: 'carts/cart_summary', locals: { cart: @cart }, status: :ok
+    if @cart_details[:coupon_discount] > 0 # rubocop:disable Style/NumericPredicate
+      render partial: 'carts/cart_summary', locals: { cart_details: @cart_details }, status: :ok
     else
-      render json: { message: result[:alert] }, status: :ok
+      render partial: 'carts/cart_summary', locals: { cart_details: @cart_details }, status: :unprocessable_entity
     end
   end
 
@@ -25,12 +27,12 @@ class CartsController < ApplicationController
   private
 
   def authenticate_user
-    return if params[:id].to_i == current_customer.cart.id
+    return if params[:id].to_i == current_user.id
 
     redirect_to root_path, alert: 'Error! You are not authorized to visit this page'
   end
 
-  def set_cart
-    @cart = current_customer.cart
+  def set_user
+    @user = current_user
   end
 end

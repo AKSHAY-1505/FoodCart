@@ -3,8 +3,7 @@ class DeliveryAgentsController < ApplicationController
   before_action :authenticate_user, only: %i[home]
 
   def create
-    @agent = DeliveryAgent.new(delivery_agent_params)
-    @agent.user.role = 2
+    @agent = User.new(delivery_agent_params)
     if @agent.save
       redirect_to admin_home_path, notice: 'Delivery Agent Created Successfully!'
     else
@@ -13,26 +12,25 @@ class DeliveryAgentsController < ApplicationController
   end
 
   def new
-    @agent = DeliveryAgent.new
-    @agent.build_user
+    @agent = User.new
   end
 
   def home
-    @active_orders = current_user.delivery_agent.orders.where(is_active: true)
+    @active_orders = current_user.orders.where(is_active: true)
     @statuses = Order.statuses
   end
 
   private
 
   def delivery_agent_params
-    params.require(:delivery_agent).permit(user_attributes: %i[name email password password_confirmation role])
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id)
   end
 
   def authenticate_user
-    redirect_to root_path alert: 'You are not authorized to visit that page!' unless current_user&.delivery_agent?
+    redirect_to root_path alert: 'You are not authorized to visit that page!' unless user_is_delivery_agent?
   end
 
   def authenticate_admin
-    redirect_to root_path alert: 'You are not authorized to visit that page!' unless current_user&.admin?
+    redirect_to root_path alert: 'You are not authorized to visit that page!' unless user_is_admin?
   end
 end

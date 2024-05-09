@@ -1,12 +1,30 @@
 <%= javascript_include_tag 'checkout' %>
 <%= stylesheet_link_tag "checkout", "data-turbo-track": "reload" %>
-<div class="center">
-  <div class="container shadow_box">
-    <div class="d-flex gap-3 mt-3">
-      <h3>Select your Delivery Address</h3>
-      <%= render 'shared/address_create_modal' %>
+<div class="container row center">
+  <div class="col-6 ">
+    <div class="shadow_box center flex-column w-auto ">
+      <h2 class="m-0 p-0">Cart Summary</h2>
+      <%= render 'carts/cart_summary', cart_details: @cart_details %>
     </div>
-    <div>
+  </div>
+  <div class="col-6">
+    <div class="container shadow_box">
+      <div class="d-flex flex-column">
+        <h5>Have a Coupon Code?</h5>
+        <div class="field center">
+          <input id="coupon_code" type="text"></input>
+      </div>
+      <div class="field center flex-column">
+        <div id="coupon-response">
+        </div>
+        <button class="btn btn-success" id="apply-coupon-button">Apply Coupon</button>
+      </div>
+    </div>
+    <div>        <hr>
+      <div class="d-flex flex-row gap-2">
+        <h5>Select your Delivery Address</h5>
+        <%= render 'shared/address_create_modal' %>
+      </div>
       <%= form_with url: orders_path, method: :post,remote: true do |form|%>
         <div class="addresses">
           <% @addresses.each do |address| %>
@@ -16,10 +34,12 @@
             </div>
           <% end %>
         </div>
+        <%= form.hidden_field :coupon, id: "coupon-code-field" %>
         <div class="center">
           <%= form.submit "Checkout", class: "btn btn-success", id: "checkout-button" %>
         </div>
       <% end %>
     </div>
   </div>
+</div>
 </div>

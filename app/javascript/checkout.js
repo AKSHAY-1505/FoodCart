@@ -1,4 +1,53 @@
 $(document).ready(function () {
+  $("#apply-coupon-button").on("click", function (e) {
+    e.preventDefault();
+    let code = $("#coupon_code").val();
+    let data = {
+      code: code,
+    };
+
+    // Apply Coupon Ajax
+    $.ajax({
+      url: "/applyCoupon",
+      type: "POST",
+      data: data,
+      headers: {
+        // Alternatively you can skip authenticity token verification in the controller
+        "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
+      },
+      success: function (response) {
+        let messageContainer = $("#coupon-response");
+        let successMessage = $("<p>").text("Coupon Applied Successfully");
+
+        successMessage.attr("id", "coupon-response");
+        successMessage.css({
+          color: "green",
+        });
+
+        messageContainer.replaceWith(successMessage);
+        $("#cart-summary").replaceWith($(response));
+
+        $("#coupon-code-field").val(code);
+      },
+      error: function (error) {
+        let messageContainer = $("#coupon-response");
+        let failureMessage = $("<p>").text(
+          "Invalid Coupon / Minimum Requirement Not Met"
+        );
+
+        failureMessage.attr("id", "coupon-response");
+        failureMessage.css({
+          color: "red",
+        });
+
+        messageContainer.replaceWith(failureMessage);
+        $("#cart-summary").replaceWith($(error.responseText));
+
+        $("#coupon-code-field").val("");
+      },
+    });
+  });
+
   $("#new-address-form").on("submit", function (e) {
     e.preventDefault();
     form = $(this);

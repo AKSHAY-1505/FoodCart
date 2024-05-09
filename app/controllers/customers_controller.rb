@@ -19,7 +19,7 @@ class CustomersController < ApplicationController
 
   def customer_orders
     @active_orders = current_user.orders.where(is_active: true)
-    @past_orders = current_customer.orders.where(is_active: false)
+    @past_orders = current_user.orders.where(is_active: false)
   end
 
   private

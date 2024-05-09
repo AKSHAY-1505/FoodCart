@@ -44,7 +44,7 @@ class CouponsController < ApplicationController
   end
 
   def authenticate_admin
-    return false unless current_user&.admin?
+    return false unless user_is_admin?
 
     true
   end
