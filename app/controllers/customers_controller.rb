@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
 
   def home
     @categories = Category.all
-    # @suggested_foods = Services::CustomerService::FoodSuggestion.new(current_user).call if user_signed_in?
+    @suggested_foods = Services::CustomerService::FoodSuggestion.new(current_user).call if user_signed_in?
   end
 
   def view_food

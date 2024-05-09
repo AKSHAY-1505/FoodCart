@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :order_items, dependent: :destroy
   belongs_to :address
+  has_one :order_delivery_agent
   # before_create :address_present?
 
   enum status: %i[order_placed delivery_agent_assigned out_for_delivery delivered]
@@ -9,7 +10,7 @@ class Order < ApplicationRecord
   after_create :create_order_items
 
   def assign_agent(agent)
-    self.delivery_agent = agent
+    OrderDeliveryAgent.create(order: self, user: agent, assigned_at: Time.now)
     self.status = 'delivery_agent_assigned'
     save
   end
@@ -17,6 +18,7 @@ class Order < ApplicationRecord
   def update_status(new_status)
     self.status = new_status
     self.is_active = false if status == 'delivered'
+    self.order_delivery_agent.update(delivered_at: Time.now) if status == 'delivered'
     save
   end
 

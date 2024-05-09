@@ -1,7 +1,10 @@
 <div id="foodCarousel" class="slide carousel" data-bs-ride="carousel">
   <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag food.images.first, class: "d-block w-100 food-image"%>
+    </div>
     <% food.images.each do |image| %>
-      <div class="carousel-item active">
+      <div class="carousel-item">
         <%= image_tag image, class: "d-block w-100 food-image"%>
       </div>
     <% end %>

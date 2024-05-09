@@ -1,6 +1,5 @@
 <%= javascript_include_tag 'home_page' %>
-<%= render 'shared/success_toast' %>
-<%= render 'shared/danger_toast' %>
+<%= render 'shared/toast' %>
 <div class="container d-flex gap-5 mt-5">
   <div class="foodCarouselContainer">
     <%= render 'food_carousel', food: @food %>
@@ -29,8 +28,8 @@
         <p><strong>Title: </strong><%= promotion.title %></p>
         <p><strong>Description: </strong><%= promotion.description %></p>
         <div class="d-flex gap-3">
-          <p><strong>Valid From: </strong><%= promotion.from %></p>
-          <p><strong>Valid Till: </strong><%= promotion.to %></p>
+          <p><strong>Valid From: </strong><%= promotion.from_date %></p>
+          <p><strong>Valid Till: </strong><%= promotion.to_date %></p>
         </div>
       </div>
     <% end %>

@@ -16,7 +16,7 @@
         <% orders.each do |order| %>
           <tr>
             <td>#<%= order.id %></td>
-            <td><%= order.customer.user.name %></td>
+            <td><%= order.user.name %></td>
             <td><%= order.created_at.to_date %></td>
             <td><%= order.status.titleize %></td>
             <td>Rs <%= order.total %></td>

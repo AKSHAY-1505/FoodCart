@@ -11,8 +11,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p><strong>Placed On: </strong><%= order.created_at.to_date
-         %></p>
+        <p><strong>Placed On: </strong><%= order.created_at.to_date %></p>
+        <%= render_delivery_time_estimation(order) %>
         <div class="order card shadow-sm mb-4">
           <div class="card-body">
             <div class="order_items mb-3">
@@ -20,10 +20,10 @@
               <% order.order_items.each do |item| %>
                 <div class="row">
                   <div class="col-6">
-                    <p><strong><%= item.food_name %></strong> x <%= item.quantity %></p>
+                    <p><strong><%= item.food.name %></strong> x <%= item.quantity %></p>
                   </div>
                   <div class="col-6">
-                    <p class="ms">Rs <%= item.food_price * item.quantity %>
+                    <p class="ms">Rs <%= item.subtotal %>
                     </div>
                   </div>
                 <% end %>

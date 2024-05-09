@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :order_items, dependent: :destroy
   has_many :addresses, dependent: :destroy
+  has_many :order_delivery_agents, dependent: :destroy
 
   def self.from_google(u)
     create_with(uid: u[:uid], provider: 'google', name: u[:info][:name],

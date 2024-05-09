@@ -23,10 +23,10 @@ class OrdersController < ApplicationController
   end
 
   def assign_agent
-    agent = DeliveryAgent.find(params[:delivery_agent])
+    agent = User.find(params[:delivery_agent])
 
     if @order.assign_agent(agent)
-      render json: { orderId: @order.id, agentName: agent.user.name }, status: :ok
+      render json: { orderId: @order.id, agentName: agent.name }, status: :ok
     else
       render json: { message: 'Unable to Assign Agent!' }, status: :unprocessable_entity
     end

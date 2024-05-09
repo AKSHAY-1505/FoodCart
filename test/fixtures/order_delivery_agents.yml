@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order: one
+  user: one
+  assigned_at: 2024-05-10 01:29:24
+  delivered_at: 2024-05-10 01:29:24
+
+two:
+  order: two
+  user: two
+  assigned_at: 2024-05-10 01:29:24
+  delivered_at: 2024-05-10 01:29:24

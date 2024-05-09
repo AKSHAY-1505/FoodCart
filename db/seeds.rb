@@ -8,9 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Role.create(name: 'Admin')
-Role.create(name: 'Delivery Agent')
-Role.create(name: 'Customer')
+# Role.create(name: 'Admin')
+# Role.create(name: 'Delivery Agent')
+# Role.create(name: 'Customer')
 
 User.create!(name: 'Admin 1', email: 'admin@mail.com', password: '111111', password_confirmation: '111111',
              role_id: 1)
