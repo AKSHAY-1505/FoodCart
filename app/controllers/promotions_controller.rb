@@ -1,4 +1,6 @@
 class PromotionsController < ApplicationController
+  before_action :authenticate_admin
+
   def new
     @promotion = Promotion.new
   end

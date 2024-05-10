@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_admin, only: [:index]
+  before_action :authenticate_admin, only: %i[index assign_agent]
+  before_action :authenticate_admin_or_delivery_agent, only: [:update]
   before_action :set_order, only: %i[update assign_agent]
   before_action :collect_cart_details, only: %i[new create]
 
@@ -42,8 +43,8 @@ class OrdersController < ApplicationController
 
   private
 
-  def authenticate_admin
-    redirect_to root_path, alert: 'You are not authorized to access this page!' unless user_is_admin?
+  def authenticate_admin_or_delivery_agent
+    redirect_to root_path, alert: 'You are not authorized to perform this action!' unless user_is_admin? || user_is_delivery_agent? # rubocop:disable Style/IfUnlessModifier
   end
 
   def set_order

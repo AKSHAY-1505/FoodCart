@@ -1,6 +1,6 @@
 class DeliveryAgentsController < ApplicationController
   before_action :authenticate_admin, only: %i[new create]
-  before_action :authenticate_user, only: %i[home]
+  before_action :authenticate_delivery_agent, only: %i[home]
 
   def create
     @agent = User.new(delivery_agent_params)
@@ -12,7 +12,7 @@ class DeliveryAgentsController < ApplicationController
   end
 
   def new
-    @agent = User.new
+    @delivery_agent = User.new
   end
 
   def home
@@ -24,13 +24,5 @@ class DeliveryAgentsController < ApplicationController
 
   def delivery_agent_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id)
-  end
-
-  def authenticate_user
-    redirect_to root_path alert: 'You are not authorized to visit that page!' unless user_is_delivery_agent?
-  end
-
-  def authenticate_admin
-    redirect_to root_path alert: 'You are not authorized to visit that page!' unless user_is_admin?
   end
 end

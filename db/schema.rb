@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_195924) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_10_061233) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,29 +49,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_195924) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
-  end
-
-  create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "cart_id", null: false
-    t.bigint "food_id", null: false
-    t.integer "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "subtotal"
-    t.integer "discount", default: 0
-    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
-    t.index ["food_id"], name: "index_cart_items_on_food_id"
-  end
-
-  create_table "carts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "subtotal", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "delivery_charge", default: 0
-    t.integer "discount", default: 0
-    t.integer "total", default: 0
-    t.bigint "coupon_id"
-    t.index ["coupon_id"], name: "index_carts_on_coupon_id"
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -180,9 +157,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_195924) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
-  add_foreign_key "cart_items", "carts"
-  add_foreign_key "cart_items", "foods"
-  add_foreign_key "carts", "coupons"
   add_foreign_key "foods", "categories"
   add_foreign_key "order_delivery_agents", "orders"
   add_foreign_key "order_delivery_agents", "users"

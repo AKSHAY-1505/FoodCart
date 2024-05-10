@@ -1,7 +1,4 @@
 class OrderItemsController < ApplicationController
-  def show
-  end
-
   def create
     order_item = Services::CartItemHelper::CartItemCreator.new(current_user, order_item_params[:food_id],
                                                                order_item_params[:quantity]).call

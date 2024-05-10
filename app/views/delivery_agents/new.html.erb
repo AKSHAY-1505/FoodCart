@@ -2,7 +2,7 @@
   <div class="shadow_box mt-5">
     <h2>Create Delivery Agent</h2>
     <hr />
-    <%= form_with url: delivery_agents_path, model: @agent do |form| %>
+    <%= form_with url: delivery_agents_path, model: @delivery_agent do |form| %>
       <div class="field">
         <%= form.label :name %><br />
         <%= form.text_field :name, autofocus: true %>

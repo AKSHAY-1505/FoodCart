@@ -1,13 +1,9 @@
 class CouponsController < ApplicationController
-  before_action :authenticate_admin, only: %i[index new create]
+  before_action :authenticate_admin, only: %i[index create]
 
   def index
     @coupon =  Coupon.new
     @coupons = Coupon.all
-  end
-
-  def new
-    @coupon = Coupon.new
   end
 
   def create
@@ -41,11 +37,5 @@ class CouponsController < ApplicationController
 
   def coupon_params
     params.require(:coupon).permit(:code, :discount, :min_amount, :from_date, :to_date)
-  end
-
-  def authenticate_admin
-    return false unless user_is_admin?
-
-    true
   end
 end

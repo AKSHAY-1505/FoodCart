@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_admin
   def create
     category = Category.new(category_params)
 

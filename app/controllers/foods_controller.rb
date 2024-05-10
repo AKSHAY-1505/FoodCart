@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[show edit update destroy]
-  before_action :authenticate_user
+  before_action :authenticate_admin
 
   def index
     @food = Food.new
@@ -11,16 +11,8 @@ class FoodsController < ApplicationController
     @promotion = Promotion.new
   end
 
-  def new
-    @food = Food.new
-  end
-
-  def edit
-  end
-
   def create
     @food = Food.new(food_params)
-
     if @food.save
       render partial: 'food', locals: { food: @food }, status: :created
     else
@@ -52,9 +44,5 @@ class FoodsController < ApplicationController
 
   def food_params
     params.require(:food).permit(:name, :description, :price, :quantity, :category_id, images: [])
-  end
-
-  def authenticate_user
-    redirect_to root_path, alert: 'You are not authorized to visit the page' unless user_is_admin?
   end
 end

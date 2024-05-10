@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :authenticate_admin
+
   def download
     @orders = Order.where(created_at: params[:start_date].to_date..params[:end_date].to_date)
 
