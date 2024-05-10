@@ -11,6 +11,6 @@ class Coupon < ApplicationRecord
   def valid_date_range
     return if from_date.nil? || to_date.nil?
 
-    errors.add(:to_date, 'must be greater than from_date') if to_date < from_date
+    errors.add('To Date must be greater than From Date') if to_date < from_date
   end
 end

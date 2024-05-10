@@ -44,9 +44,10 @@
             <%= render 'shared/order_detail', order: order%>
           </div>
           <div class="col center delivery_agent">
-            <% if order.order_delivery_agent.present? %>
+            <% render_delivery_agent_name(order) do %>
               <p><%= order.order_delivery_agent.user.name %></p>
-            <% else %>
+            <% end %>
+            <% render_assign_agent_model(order) do %>
               <%= render 'assign_agent_modal', order: order %>
             <% end %>
           </div>

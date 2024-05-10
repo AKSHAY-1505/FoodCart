@@ -1,7 +1,10 @@
 class OrderItemsController < ApplicationController
+  CART_ITEM_CREATOR_CLASS = Services::CartItemService::CartItemCreator
+  CART_TOTAL_CALCULATOR_CLASS = Services::CartService::CartTotalCalculator
+
   def create
-    order_item = Services::CartItemHelper::CartItemCreator.new(current_user, order_item_params[:food_id],
-                                                               order_item_params[:quantity]).call
+    order_item = CART_ITEM_CREATOR_CLASS.new(current_user, order_item_params[:food_id],
+                                             order_item_params[:quantity]).call
     if order_item.save
       render json: { message: 'Item added to cart successfully.' }, status: :created
     else
@@ -25,6 +28,6 @@ class OrderItemsController < ApplicationController
   end
 
   def collect_cart_details
-    Services::CartHelper::CartTotalCalculator.new(current_user).call
+    CART_TOTAL_CALCULATOR_CLASS.new(current_user).call
   end
 end

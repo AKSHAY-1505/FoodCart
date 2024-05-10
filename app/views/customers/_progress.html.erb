@@ -1,11 +1,13 @@
 <div class="progress-bar" style="border: 2px solid green;">
-  <% if order.status == "order_placed"%>
+  <% render_order_placed_status_bar(order) do %>
     <div class="bar" style="height: 10px; width: 15%; background-color: green;">
     </div>
-  <% elsif order.status == "delivery_agent_assigned"%>
+  <% end %>
+  <% render_agent_assigned_status_bar(order) do %>
     <div class="bar" style="height: 10px; width: 35%; background-color: green;">
     </div>
-  <% else %>
+  <% end %>
+  <% render_out_for_delivery_status_bar(order) do %>
     <div class="bar" style="height: 10px; width: 80%; background-color: green;">
     </div>
   <% end %>

@@ -1,5 +1,5 @@
 module Services
-  module CartItemHelper
+  module CartItemService
     class DiscountCalculator
       def initialize(item)
         @item = item

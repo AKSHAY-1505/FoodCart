@@ -1,7 +1,9 @@
 class CustomersController < ApplicationController
+  FOOD_SUGGESTION_CLASS = Services::CustomerService::FoodSuggestion
+
   def home
-    @categories = Category.all
-    @suggested_foods = Services::CustomerService::FoodSuggestion.new(current_user).call if user_signed_in?
+    @categories = Category.includes(:foods).all # To Prevent N+1 queries
+    @suggested_foods = FOOD_SUGGESTION_CLASS.new(current_user).call if user_signed_in?
   end
 
   def view_food

@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   root 'customers#home'
-  get '/customer/food/:id' => 'customers#view_food', as: :view_food
   get '/admin' => 'admins#home', as: :admin_home
   get '/delivery_agent' => 'delivery_agents#home', as: :delivery_agent_home
+  get '/customer/food/:id' => 'customers#view_food', as: :view_food
   get '/myorders' => 'customers#customer_orders', as: :customer_orders
   patch '/admin/assignAgent/:id' => 'orders#assign_agent', as: :assign_agent
   get 'reports/download' => 'reports#download', as: :download_report

@@ -26,5 +26,5 @@ require_relative '../lib/services/promotion_helper/promotion_destroyer'
 # end
 
 every 1.day do
-  runner 'Services::PromotionHelper::PromotionDestroyer.destroy_expired_promotions', environment: 'development'
+  runner 'Promotion.destroy_expired_promotions', environment: 'development'
 end

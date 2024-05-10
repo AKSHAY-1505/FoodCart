@@ -1,5 +1,5 @@
 module Services
-  module CartHelper
+  module CartService
     class CartTotalCalculator
       def initialize(user, coupon_code = nil)
         @cart_items = OrderItem.where(user: user, ordered: false)

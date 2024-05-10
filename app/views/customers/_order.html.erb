@@ -5,7 +5,7 @@
   <hr />
   <div class="d-flex gap-2 center">
     <%= render 'shared/order_detail', order: order %>
-    <% if order.is_active %>
+    <% render_order_tracking_modal(order) do %>
       <%= render 'tracking', order: order %>
     <% end %>
   </div>

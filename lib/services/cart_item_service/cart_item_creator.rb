@@ -1,5 +1,5 @@
 module Services
-  module CartItemHelper
+  module CartItemService
     class CartItemCreator
       def initialize(user, food_id, quantity)
         @user = user

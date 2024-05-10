@@ -1,5 +1,5 @@
 module Services
-  module CartHelper
+  module CartService
     class CartDiscountApplier
       def initialize(cart_items)
         @cart_items = cart_items
@@ -7,7 +7,7 @@ module Services
 
       def call
         @cart_items.each do |item|
-          item_discount = Services::CartItemHelper::DiscountCalculator.new(item).call
+          item_discount = Services::CartItemService::DiscountCalculator.new(item).call
           item.update(discount: item_discount)
         end
       end

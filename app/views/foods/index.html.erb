@@ -8,7 +8,7 @@
   <div id="newly_created" class="foods">
   </div>
   <% @categories.each do |category| %>
-    <% if category.foods.count > 0 %>
+    <% render_foods_of_category(category) do %>
       <h3> <%= category.name %></h3>
       <hr />
       <div class="foods d-flex">

@@ -1,9 +1,6 @@
 class PromotionsController < ApplicationController
   before_action :authenticate_admin
-
-  def new
-    @promotion = Promotion.new
-  end
+  before_action :set_promotion, only: %i[update destroy]
 
   def create
     @promotion = Promotion.new(promotion_params)
@@ -16,8 +13,6 @@ class PromotionsController < ApplicationController
   end
 
   def update
-    @promotion = Promotion.find(params[:id])
-
     if @promotion.update(promotion_params)
       render partial: 'promotions/promotion', locals: { promotion: @promotion, food: @promotion.food }, status: :ok
     else
@@ -26,7 +21,6 @@ class PromotionsController < ApplicationController
   end
 
   def destroy
-    @promotion = Promotion.find(params[:id])
     if @promotion.destroy
       render json: { promotionId: @promotion.id }, status: :ok
     else
@@ -38,5 +32,9 @@ class PromotionsController < ApplicationController
 
   def promotion_params
     params.require(:promotion).permit(:title, :description, :from_date, :to_date, :discount_percentage, :food_id)
+  end
+
+  def set_promotion
+    @promotion = Promotion.find(params[:id])
   end
 end

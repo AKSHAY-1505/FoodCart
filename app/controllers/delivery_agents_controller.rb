@@ -7,7 +7,7 @@ class DeliveryAgentsController < ApplicationController
     if @agent.save
       redirect_to admin_home_path, notice: 'Delivery Agent Created Successfully!'
     else
-      redirect_to admin_home_path, alert: @agent.errors.full_messages
+      redirect_to new_delivery_agent_path, alert: @agent.errors.full_messages
     end
   end
 
@@ -16,7 +16,7 @@ class DeliveryAgentsController < ApplicationController
   end
 
   def home
-    @active_orders = OrderDeliveryAgent.where(user: current_user, delivered_at: nil).map(&:order)
+    @active_orders = OrderDeliveryAgent.where(user: current_user, delivered_at: nil).map { |record| record.order }
     @statuses = Order.statuses
   end
 

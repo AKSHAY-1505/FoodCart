@@ -1,5 +1,5 @@
 module Services
-  module Order
+  module OrderService
     class OrderItemsCreator
       def initialize(order)
         @order = order

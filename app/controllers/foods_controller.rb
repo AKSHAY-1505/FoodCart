@@ -1,10 +1,10 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: %i[show edit update destroy]
+  before_action :set_food, only: %i[show update destroy]
   before_action :authenticate_admin
 
   def index
     @food = Food.new
-    @categories = Category.all
+    @categories = Category.includes(:foods).all # To Prevent N+1 queries
   end
 
   def show

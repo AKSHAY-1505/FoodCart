@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   helper_method :user_is_customer?, :user_is_admin?, :user_is_delivery_agent?, :delivery_address
 
+  ADMIN_ROLE_ID = 1
+  DELIVERY_AGENT_ROLE_ID = 2
+  CUSTOMER_ROLE_ID = 3
+
   def user_is_customer?
     current_user.role.name == 'Customer' if current_user
   end
