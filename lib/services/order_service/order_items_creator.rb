@@ -6,7 +6,7 @@ module Services
         @user = order.user
       end
 
-      def call
+      def create_order_items
         order_items = OrderItem.where(user: @user, ordered: false).includes(:food) # to handle n+1 queries
 
         order_items.each do |item|

@@ -7,7 +7,7 @@ module Services
         @quantity = quantity.to_i
       end
 
-      def call
+      def create_cart_item
         item_in_cart = OrderItem.where(user: @user, food: @food, ordered: false).first
         if item_in_cart.present?
           item_in_cart.quantity += @quantity

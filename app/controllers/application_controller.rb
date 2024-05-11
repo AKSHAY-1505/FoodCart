@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   helper_method :user_is_customer?, :user_is_admin?, :user_is_delivery_agent?, :delivery_address
 
+  CART_TOTAL_CALCULATOR_CLASS = Services::CartService::CartTotalCalculator
+  CART_DISCOUNT_APPLIER_CLASS = Services::CartService::CartDiscountApplier
+  FOOD_SUGGESTION_CLASS = Services::CustomerService::FoodSuggestion
+  CART_ITEM_CREATOR_CLASS = Services::CartItemService::CartItemCreator
+
   ADMIN_ROLE_ID = 1
   DELIVERY_AGENT_ROLE_ID = 2
   CUSTOMER_ROLE_ID = 3

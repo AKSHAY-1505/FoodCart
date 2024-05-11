@@ -37,7 +37,6 @@
           <p><strong>Status: </strong><%= order.status.titleize %></p>
         </div>
         <p>Order placed <%= time_ago_in_words(order.created_at) %> ago </p>
-        <p><strong>Estimated Delivery in: </strong><span id="est_<%= order.id %>">20 Minutes</span></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

@@ -5,7 +5,7 @@ module Services
         @customer = customer
       end
 
-      def call
+      def suggested_foods
         top_five_most_ordered_foods.map { |food_id| Food.find_by(id: food_id) }.compact
       end
 

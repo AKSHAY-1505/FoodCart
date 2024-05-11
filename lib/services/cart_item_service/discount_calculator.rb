@@ -5,7 +5,7 @@ module Services
         @item = item
       end
 
-      def call
+      def calculate_discount
         best_promotion = @item.food.promotions.where('? BETWEEN from_date AND to_date', Date.current).order(discount_percentage: :desc).first # rubocop:disable Layout/LineLength
         return 0 unless best_promotion
 

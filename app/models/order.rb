@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  ORDER_ITEMS_CREATOR_CLASS = Services::OrderService::OrderItemsCreator
+
   belongs_to :user
   has_many :order_items, dependent: :destroy
   has_many :foods, through: :order_items
@@ -23,7 +25,6 @@ class Order < ApplicationRecord
   private
 
   def create_order_items
-    Services::OrderService::OrderItemsCreator.new(self).call
+    ORDER_ITEMS_CREATOR_CLASS.new(self).create_order_items
   end
-
 end
