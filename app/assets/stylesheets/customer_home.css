@@ -50,7 +50,7 @@ input::-webkit-inner-spin-button {
   flex-wrap: wrap;
 }
 
-.foodCarouselContainer  {
+.foodCarouselContainer {
   width: 400px;
   height: 400px !important;
 }
@@ -63,4 +63,11 @@ img.food-image {
 
 .food-carousel-buttons {
   height: 400px;
+}
+
+a.disabled {
+  color: black;
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
 }

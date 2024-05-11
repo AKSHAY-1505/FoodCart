@@ -22,4 +22,12 @@ module CustomersHelper
   def render_order_tracking_modal(order)
     yield if order.is_active
   end
+
+  def render_out_of_stock_warning(food)
+    yield if food.quantity == 0
+  end
+
+  def render_quantity_selector(food)
+    yield if food.quantity > 0
+  end
 end

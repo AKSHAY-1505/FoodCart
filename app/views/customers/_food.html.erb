@@ -18,10 +18,15 @@
     <div class="center">
       <%= form_with remote: true, class: "add_to_cart_form" do |form| %>
         <div>
-          <%= render partial: '/shared/quantity_selector', locals: {form: form, food: food}%>
-        </div>
-        <div class="center">
-          <%= form.submit "Add to Cart", class: "btn btn-dark mt-3" %>
+          <% render_out_of_stock_warning(food) do %>
+            <p class="out_of_stock_warning" style="color: red;">Out Of Stock</p>
+          <% end %>
+          <% render_quantity_selector(food) do %>
+            <%= render partial: '/shared/quantity_selector', locals: {form: form, food: food}%>
+            <div class="center">
+              <%= form.submit "Add to Cart", class: "btn btn-dark mt-3" %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>

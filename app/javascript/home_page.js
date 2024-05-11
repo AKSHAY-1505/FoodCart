@@ -1,4 +1,21 @@
 $(document).ready(function () {
+  // Code to gray out and disable out-of-stock food items
+  const outOfStockWarnings = $(".out_of_stock_warning");
+
+  outOfStockWarnings.each(function () {
+    const foodItem = $(this).closest(".food_item");
+    foodItem.css("opacity", "0.5");
+
+    foodItem.find("img").css("filter", "grayscale(100%)");
+
+    foodItem
+      .find("a")
+      .addClass("disabled")
+      .on("click", function (e) {
+        e.preventDefault();
+      });
+  });
+
   function showSuccessToast() {
     var toastElement = document.getElementById("success-toast-message");
     var toast = new bootstrap.Toast(toastElement);
