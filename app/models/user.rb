@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :order_delivery_agents, dependent: :destroy
 
+  validates :name, presence: true, length: { maximum: 50 }
+
   def self.from_google(u)
     create_with(uid: u[:uid], provider: 'google', name: u[:info][:name],
                 password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])

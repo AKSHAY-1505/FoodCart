@@ -2,8 +2,6 @@ class CartsController < ApplicationController
   before_action :authenticate_customer, only: [:show]
   before_action :set_user, only: %i[show apply_coupon]
 
-
-
   def show
     @cart_items = OrderItem.where(user: @user, ordered: false)
     CART_DISCOUNT_APPLIER_CLASS.new(@cart_items).apply_discount # To apply best discounts available at the moment
