@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   FOOD_SUGGESTION_CLASS = Services::CustomerService::FoodSuggestion
   CART_ITEM_CREATOR_CLASS = Services::CartItemService::CartItemCreator
 
-  ADMIN_ROLE_ID = 1
-  DELIVERY_AGENT_ROLE_ID = 2
-  CUSTOMER_ROLE_ID = 3
+  ADMIN_ROLE = Role.find_by(name: 'Admin')
+  DELIVERY_AGENT_ROLE = Role.find_by(name: 'Delivery Agent')
+  CUSTOMER_ROLE = Role.find_by(name: 'Customer')
 
   def user_is_customer?
     current_user.role.name == 'Customer' if current_user
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     current_user.role.name == 'Delivery Agent' if current_user
   end
 
-  # Returns delivery address for an order
+  # Returns delivery address for an address record
   def delivery_address(address)
     [address.house_number, address.street_name, address.locality, address.city].join(',')
   end
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_customer
-    redirect_to root_path, alert: 'Error! You are not authorized to visit this page' unless params[:id].to_i == current_user&.id # rubocop:disable Style/IfUnlessModifier
+    redirect_to root_path, alert: 'Error! You are not authorized to visit this page' unless user_is_customer?
   end
 
   def authenticate_delivery_agent

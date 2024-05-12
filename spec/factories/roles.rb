@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :role do
-    name { Faker::Name.unique.name }
+    # id { 3 }
+    name { 'Customer' }
   end
 end

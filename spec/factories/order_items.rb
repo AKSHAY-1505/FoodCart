@@ -6,6 +6,6 @@ FactoryBot.define do
     quantity { 1 }
     ordered { true }
     subtotal { 1000 }
-    discount { 100 }
+    discount { 0 }
   end
 end

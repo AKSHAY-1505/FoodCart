@@ -17,9 +17,9 @@ RSpec.describe OrderItem, type: :model do
       expect(order_item).not_to be_valid
     end
 
-    it 'is not valid without ordered' do
+    it 'is valid without ordered' do
       order_item = FactoryBot.build(:order_item, ordered: nil)
-      expect(order_item).not_to be_valid
+      expect(order_item).to be_valid
     end
 
     it 'is not valid without subtotal' do

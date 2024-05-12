@@ -27,7 +27,6 @@
           <div class="field">
             <%= form.text_field :phone_number, placeholder: "10 Digit Phone Number", class: "form-control" %>
           </div>
-          <%= form.hidden_field :user_id, value: current_user.id %>
           <div class="field center">
             <%= form.submit "Add Address", class: "btn btn-success", data: { 'bs-dismiss': 'modal'} %>
           </div>

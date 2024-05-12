@@ -1,6 +1,8 @@
 class AddressesController < ApplicationController
+  before_action :authenticate_customer
+
   def create
-    @address = Address.new(address_params)
+    @address = current_user.addresses.new(address_params)
 
     if @address.save
       render json: { address: @address }, status: :created
@@ -12,6 +14,6 @@ class AddressesController < ApplicationController
   private
 
   def address_params
-    params.require(:address).permit(:house_number, :street_name, :locality, :city, :phone_number, :user_id)
+    params.require(:address).permit(:house_number, :street_name, :locality, :city, :phone_number)
   end
 end

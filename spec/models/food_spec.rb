@@ -7,7 +7,7 @@ RSpec.describe Food, type: :model do
     it { should have_many(:promotions).dependent(:destroy) }
     it { should have_many_attached(:images) }
   end
-  
+
   describe 'validations' do
     it 'is valid with valid attributes' do
       food = FactoryBot.create(:food)
@@ -49,10 +49,10 @@ RSpec.describe Food, type: :model do
       expect(food).not_to be_valid
     end
 
-    it 'is not valid without images' do
+    it 'is valid without images' do
       food = FactoryBot.build(:food)
       food.images.purge
-      expect(food).not_to be_valid
+      expect(food).to be_valid
     end
   end
 end

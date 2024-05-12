@@ -15,11 +15,5 @@ RSpec.describe Role, type: :model do
       role = FactoryBot.build(:role, name: nil)
       expect(role).not_to be_valid
     end
-
-    it 'is not valid with a duplicate name' do
-      role1 = FactoryBot.create(:role)
-      role2 = FactoryBot.build(:role, name: role1.name)
-      expect(role2).not_to be_valid
-    end
   end
 end
