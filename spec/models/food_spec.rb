@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-  describe 'creating a food' do
+  describe 'associations' do
+    it { should belong_to(:category) }
+    it { should have_many(:order_items) }
+    it { should have_many(:promotions).dependent(:destroy) }
+    it { should have_many_attached(:images) }
+  end
+  
+  describe 'validations' do
     it 'is valid with valid attributes' do
       food = FactoryBot.create(:food)
       expect(food).to be_valid

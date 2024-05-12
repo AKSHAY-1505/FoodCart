@@ -7,6 +7,12 @@ class Order < ApplicationRecord
   belongs_to :address
   has_one :order_delivery_agent
 
+  validates :subtotal, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :delivery_charge, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :discount, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :total, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :status, presence: true
+
   enum status: %i[order_placed delivery_agent_assigned out_for_delivery delivered]
 
   after_create :create_order_items
@@ -17,7 +23,7 @@ class Order < ApplicationRecord
   end
 
   def update_status(new_status)
-    order_delivery_agent.update(delivered_at: Time.now) if new_status == 'delivered'
+    # order_delivery_agent.update(delivered_at: Time.now) if new_status == 'delivered'
     update(is_active: false) if new_status == 'delivered'
     update(status: new_status)
   end

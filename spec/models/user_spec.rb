@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context 'creating a user' do
+  describe 'associations' do
+    it { should have_many(:orders).dependent(:destroy) }
+    it { should have_many(:order_items).dependent(:destroy) }
+    it { should have_many(:addresses).dependent(:destroy) }
+    it { should have_many(:order_delivery_agents).dependent(:destroy) }
+  end
+  describe 'validations' do
     it 'is valid with valid attributes' do
       user = FactoryBot.create(:user)
       expect(user).to be_valid

@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
-  describe 'creating a role' do
+  describe 'associations' do
+    it { should have_many(:users) }
+  end
+  
+  describe 'validations' do
     it 'is valid with valid attributes' do
       role = FactoryBot.create(:role)
       expect(role).to be_valid

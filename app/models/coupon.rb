@@ -1,7 +1,6 @@
 class Coupon < ApplicationRecord
-  has_many :carts, dependent: :nullify
-
   validates :code, presence: true, uniqueness: true
+  validates :discount,:min_amount, presence: true
   validates :discount, :min_amount, numericality: { greater_than_or_equal_to: 0 }
   validates :from_date, :to_date, presence: true
   validate :valid_date_range
