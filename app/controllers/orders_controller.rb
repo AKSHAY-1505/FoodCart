@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[update assign_agent]
   before_action :collect_cart_details, only: %i[new create]
 
-
   def index
     @orders = Order.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
   end
@@ -53,6 +52,6 @@ class OrdersController < ApplicationController
   end
 
   def collect_cart_details
-    @cart_details = CART_TOTAL_CALCULATOR_CLASS.new(current_user, params[:coupon]).calculate_total
+    @cart_details = Services::CartService::CartTotalCalculator.new(current_user, params[:coupon]).calculate_total
   end
 end

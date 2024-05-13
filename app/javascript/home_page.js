@@ -55,7 +55,7 @@ $(document).ready(function () {
       if (isNaN(currentValue)) {
         currentValue = 0;
       }
-      if (currentValue > 1) {
+      if (currentValue > 0) {
         $quantityInput.val(currentValue - 1);
       }
     });
@@ -67,29 +67,43 @@ $(document).ready(function () {
 
       let quantity = $(this).find("#quantity").val();
       let foodId = $(this).find("#quantity").data("food-id");
-
+      let form = $(this);
       let data = {
         order_item: {
           quantity: quantity,
           food_id: foodId,
         },
       };
-
-      $.ajax({
-        url: "/order_items",
-        type: "POST",
-        data: data,
-        headers: {
-          "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
-        },
-        success: function (response) {
-          console.log(response);
-          $(this).find("#quantity").val(1);
-          showSuccessToast();
-        },
-        error: function (error) {
-          showDangerToast();
-        },
-      });
+      if (quantity > 0) {
+        $.ajax({
+          url: "/order_items",
+          type: "POST",
+          data: data,
+          headers: {
+            "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
+          },
+          success: function (response) {
+            console.log(response);
+            form.find("#quantity").val(0);
+            showSuccessToast();
+            button = form.find(".increment");
+            console.log(button.data("quantity"));
+            previousQuantity = button.data("quantity");
+            newQuantity = previousQuantity - quantity;
+            button.data("quantity", newQuantity);
+          },
+          error: function (error) {
+            showDangerToast();
+          },
+        });
+      } else {
+        console.log("Quantity must be greater than 0");
+        var toastElement = document.getElementById("danger-toast-message");
+        $("#danger-toast-message .toast-body").text(
+          "Quantity must be greater than 0"
+        );
+        var toast = new bootstrap.Toast(toastElement);
+        toast.show();
+      }
     });
 });

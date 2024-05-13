@@ -7,6 +7,7 @@ RSpec.describe 'AdminsController', type: :request do
     context 'when user is an admin' do
       before do
         sign_in admin
+        FactoryBot.create(:role, name: 'Delivery Agent')
         get admin_home_path
       end
 

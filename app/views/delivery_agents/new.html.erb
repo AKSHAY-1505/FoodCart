@@ -19,6 +19,9 @@
         <%= form.label :password_confirmation %><br />
         <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
+      <div class="field">
+        <%= form.hidden_field :role_id, value: delivery_agent_role_id  %>
+      </div>
       <div class="center mt-3">
         <%= form.submit "Create Delivery Agent", class: "btn btn-success" %>
       </div>

@@ -7,7 +7,7 @@ RSpec.describe Promotion, type: :model do
 
   describe 'validations' do
     it 'is valid with valid attributes' do
-      promotion = FactoryBot.create(:promotion)
+      promotion = FactoryBot.build(:promotion)
       expect(promotion).to be_valid
     end
 

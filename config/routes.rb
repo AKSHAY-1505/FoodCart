@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   resources :coupons, only: %i[index new create destroy update]
 
   get 'up' => 'rails/health#show', as: :rails_health_check
-
   root 'customers#home'
+
   get '/admin' => 'admins#home', as: :admin_home
   get '/delivery_agent' => 'delivery_agents#home', as: :delivery_agent_home
   get '/customer/food/:id' => 'customers#view_food', as: :view_food

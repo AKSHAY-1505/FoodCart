@@ -1,7 +1,6 @@
 class OrderItemsController < ApplicationController
-
   def create
-    order_item = CART_ITEM_CREATOR_CLASS.new(current_user, order_item_params[:food_id],
+    order_item = cart_item_creator_class.new(current_user, order_item_params[:food_id],
                                              order_item_params[:quantity]).create_cart_item
     if order_item.save
       render json: { message: 'Item added to cart successfully.' }, status: :created
@@ -21,11 +20,15 @@ class OrderItemsController < ApplicationController
 
   private
 
+  def cart_item_creator_class
+    Services::CartItemService::CartItemCreator
+  end
+
   def order_item_params
     params.require(:order_item).permit(:quantity, :food_id)
   end
 
   def collect_cart_details
-    CART_TOTAL_CALCULATOR_CLASS.new(current_user).calculate_total
+    Services::CartService::CartTotalCalculator.new(current_user).calculate_total
   end
 end

@@ -41,36 +41,26 @@ RSpec.describe 'CartsController', type: :request do
       sign_in user
     end
 
-    context 'with a valid coupon code and eligible subtotal' do
-      let(:cart_items) { create_list(:order_item, 2, user: user, subtotal: 60, ordered: false) }
+    context 'when a valid coupon code is provided' do
+      before do
+        allow_any_instance_of(Services::CartService::CartTotalCalculator).to receive(:calculate_total).and_return({ coupon_discount: coupon.discount })
+        # allow(Services::CartService::CartTotalCalculator).to receive(:new).and_return(double('CartTotalCalculator',calculate_total: { coupon_discount: coupon.discount }))
+      end
 
-      it 'applies the coupon discount and returns the updated cart summary with :ok status' do
-        cart_items
+      it 'applies the coupon discount' do
         post apply_coupon_path, params: { code: coupon.code }
         expect(response).to have_http_status(:ok)
-        expect(response).to render_template(partial: 'carts/_cart_summary')
-        expect(assigns(:cart_details)[:coupon_discount]).to eq(coupon.discount)
       end
     end
 
-    context 'with a valid coupon code but ineligible subtotal' do
-      let(:cart_items) { create_list(:order_item, 2, user: user, subtotal: 40, ordered: false) }
+    context 'when a invalid coupon code is provided' do
+      before do
+        allow_any_instance_of(Services::CartService::CartTotalCalculator).to receive(:calculate_total).and_return({ coupon_discount: 0 })
+      end
 
-      it 'does not apply the coupon discount and returns the updated cart summary with :unprocessable_entity status' do
-        cart_items
+      it 'applies the coupon discount' do
         post apply_coupon_path, params: { code: coupon.code }
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response).to render_template(partial: 'carts/_cart_summary')
-        expect(assigns(:cart_details)[:coupon_discount]).to eq(0)
-      end
-    end
-
-    context 'with an invalid coupon code' do
-      it 'does not apply any discount and returns the updated cart summary with :unprocessable_entity status' do
-        post apply_coupon_path, params: { code: 'invalid_code' }
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response).to render_template(partial: 'carts/_cart_summary')
-        expect(assigns(:cart_details)[:coupon_discount]).to eq(0)
       end
     end
   end

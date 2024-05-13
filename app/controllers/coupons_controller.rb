@@ -26,7 +26,7 @@ class CouponsController < ApplicationController
 
   def update
     if @coupon.update(coupon_params)
-      render partial: 'coupons/coupon', locals: { coupon: coupon }, status: :ok
+      render partial: 'coupons/coupon', locals: { coupon: @coupon }, status: :ok
     else
       render json: { message: 'Unable to Create Coupon' }, status: :unprocessable_entity
     end

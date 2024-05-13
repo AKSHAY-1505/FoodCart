@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
-  helper_method :user_is_customer?, :user_is_admin?, :user_is_delivery_agent?, :delivery_address
+  helper_method :user_is_customer?, :user_is_admin?, :user_is_delivery_agent?, :delivery_address,
+                :delivery_agent_role_id
 
-  CART_TOTAL_CALCULATOR_CLASS = Services::CartService::CartTotalCalculator
-  CART_DISCOUNT_APPLIER_CLASS = Services::CartService::CartDiscountApplier
-  FOOD_SUGGESTION_CLASS = Services::CustomerService::FoodSuggestion
-  CART_ITEM_CREATOR_CLASS = Services::CartItemService::CartItemCreator
+  # CART_TOTAL_CALCULATOR_CLASS = Services::CartService::CartTotalCalculator
+  # CART_DISCOUNT_APPLIER_CLASS = Services::CartService::CartDiscountApplier
+  # FOOD_SUGGESTION_CLASS = Services::CustomerService::FoodSuggestion
+  # CART_ITEM_CREATOR_CLASS = Services::CartItemService::CartItemCreator
 
-  ADMIN_ROLE = Role.find_by(name: 'Admin')
-  DELIVERY_AGENT_ROLE = Role.find_by(name: 'Delivery Agent')
-  CUSTOMER_ROLE = Role.find_by(name: 'Customer')
+  # ADMIN_ROLE_ID = Role.find_by(name: 'Admin')
+  # CUSTOMER_ROLE_ID = Role.find_by(name: 'Customer')
 
   def user_is_customer?
     current_user.role.name == 'Customer' if current_user
@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate_delivery_agent
     redirect_to root_path, alert: 'You are not authorized to visit that page!' unless user_is_delivery_agent?
+  end
+
+  def delivery_agent_role_id
+    Role.find_by(name: 'Delivery Agent').id
   end
 
   private

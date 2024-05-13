@@ -1,8 +1,8 @@
 class CustomersController < ApplicationController
-
+  before_action :authenticate_customer, only: %i[customer_orders]
   def home
     @categories = Category.includes(:foods).all # To Prevent N+1 queries
-    @suggested_foods = FOOD_SUGGESTION_CLASS.new(current_user).suggested_foods if user_signed_in?
+    @suggested_foods = food_suggestion_class.new(current_user).suggested_foods if user_signed_in?
   end
 
   def view_food
@@ -15,6 +15,10 @@ class CustomersController < ApplicationController
   end
 
   private
+
+  def food_suggestion_class
+    Services::CustomerService::FoodSuggestion
+  end
 
   def customer_edit_params
     params.require(:customer).permit(:house_number, :street, :locality, :city, :phone_number)

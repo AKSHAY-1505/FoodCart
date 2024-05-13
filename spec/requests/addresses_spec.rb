@@ -27,10 +27,10 @@ RSpec.describe 'AddressesController', type: :request do
     end
 
     context 'when user is not a customer' do
-      let(:admin) { create(:user, role: create(:role, name: 'Other than customer')) }
+      let(:user) { create(:user, role: create(:role, name: 'Other than customer')) }
 
       before do
-        sign_in admin
+        sign_in user
       end
 
       it 'redirects to home page' do

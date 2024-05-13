@@ -3,6 +3,6 @@ class AdminsController < ApplicationController
 
   def home
     @active_orders = Order.where(is_active: true).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
-    @agents = User.where(role: DELIVERY_AGENT_ROLE)
+    @agents = User.where(role_id: delivery_agent_role_id)
   end
 end
