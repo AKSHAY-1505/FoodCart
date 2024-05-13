@@ -26,7 +26,6 @@ class OrdersController < ApplicationController
 
   def assign_agent
     agent = User.find(params[:delivery_agent])
-
     if @order.assign_agent(agent)
       render json: { orderId: @order.id, agentName: agent.name }, status: :ok
     else
@@ -35,9 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    debugger
     if @order.update_status(params[:status])
-      debugger
       render json: { order_id: @order.id, status: @order.status.titleize, active: @order.is_active }, status: :ok
     else
       render json: { message: 'Unable to update status' }, status: :unprocessable_entity

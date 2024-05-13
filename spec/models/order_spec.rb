@@ -43,12 +43,12 @@ RSpec.describe Order, type: :model do
     it 'is not valid without valid subtotal' do
       order = FactoryBot.build(:order, subtotal: -100)
       expect(order).not_to be_valid
-    end 
+    end
 
     it 'is not valid without valid delivery_charge' do
       order = FactoryBot.build(:order, delivery_charge: -100)
       expect(order).not_to be_valid
-    end 
+    end
 
     it 'is not valid without valid discount' do
       order = FactoryBot.build(:order, discount: -100)
@@ -72,6 +72,7 @@ RSpec.describe Order, type: :model do
 
     it 'becomes inactive after order is delivered' do
       order = FactoryBot.build(:order)
+      FactoryBot.build(:order_delivery_agent, order: order)
       order.update_status('delivered')
       expect(order.is_active).to be_falsy
     end

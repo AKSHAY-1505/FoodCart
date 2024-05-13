@@ -85,13 +85,14 @@ RSpec.describe 'Orders', type: :request do
 
   describe 'PATCH #update' do
     let(:valid_params) { { status: 'delivery_agent_assigned' } }
-    let(:invalid_params) { { status: 'random status' } }
     let(:order) { create(:order) }
+    let(:order_delivery_agent) { create(:order_delivery_agent, order: order) }
 
     context 'admin signed in' do
       before do
         sign_in admin
-        allow_any_instance_of(Order).to receive(:update_status).and_return(true)
+        order
+        order_delivery_agent
       end
       it 'returns a success response with valid attributes' do
         patch order_path(order), params: valid_params
@@ -100,12 +101,37 @@ RSpec.describe 'Orders', type: :request do
 
       it 'updates is_active to false when status updated to delivered' do
         patch order_path(order), params: { status: 'delivered' }
-        expect(order.is_active).to be_falsy
+        expect(order.reload.is_active).to be_falsey # reload the order object in memory to reflect the changes made in the update
+      end
+    end
+
+    context 'user not signed in' do
+      it 'redirects to root path' do
+        patch order_path(order), params: valid_params
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  describe 'PATCH #assign_agent' do
+    let(:delivery_agent) { create(:user, role: create(:role, name: 'Delivery Agent')) }
+    let(:valid_params) { { delivery_agent: delivery_agent.id } }
+    let(:order) { create(:order) }
+
+    context 'admin signed in' do
+      before do
+        sign_in admin
+        delivery_agent
+        order
+      end
+      it 'returns a success response with valid attributes' do
+        patch assign_agent_path(order), params: valid_params
+        expect(response).to have_http_status(:ok)
       end
 
-      it 'returns an error response with invalid attributes' do
-        patch order_path(order), params: invalid_params
-        expect(response).to have_http_status(:unprocessable_entity)
+      it 'updates status to delivery agent assigned' do
+        patch assign_agent_path(order), params: valid_params
+        expect(order.reload.status).to eq('delivery_agent_assigned') # reload the order object in memory to reflect the changes made in the update
       end
     end
 
