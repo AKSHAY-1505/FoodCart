@@ -1,4 +1,6 @@
 class OrderItemsController < ApplicationController
+  before_action :authenticate_customer
+
   def create
     order_item = cart_item_creator_class.new(current_user, order_item_params[:food_id],
                                              order_item_params[:quantity]).create_cart_item

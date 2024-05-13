@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_admin, only: %i[index assign_agent]
   before_action :authenticate_admin_or_delivery_agent, only: [:update]
+  before_action :authenticate_customer, only: %i[new create]
   before_action :set_order, only: %i[update assign_agent]
   before_action :collect_cart_details, only: %i[new create]
 
@@ -34,7 +35,9 @@ class OrdersController < ApplicationController
   end
 
   def update
+    debugger
     if @order.update_status(params[:status])
+      debugger
       render json: { order_id: @order.id, status: @order.status.titleize, active: @order.is_active }, status: :ok
     else
       render json: { message: 'Unable to update status' }, status: :unprocessable_entity

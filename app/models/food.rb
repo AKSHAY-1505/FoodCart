@@ -1,4 +1,6 @@
 class Food < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :category
   has_many :order_items
   has_many :promotions, dependent: :destroy
@@ -10,4 +12,12 @@ class Food < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :description, presence: true
+
+  before_destroy :remove_food_from_carts
+
+  private
+
+  def remove_food_from_carts
+    OrderItem.where(food: self, ordered: false).destroy_all
+  end
 end

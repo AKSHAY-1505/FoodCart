@@ -87,3 +87,5 @@ gem 'wkhtmltopdf-binary'
 
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+
+gem 'paranoia', '~> 2.6'

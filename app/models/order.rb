@@ -23,7 +23,7 @@ class Order < ApplicationRecord
   end
 
   def update_status(new_status)
-    # order_delivery_agent.update(delivered_at: Time.now) if new_status == 'delivered'
+    order_delivery_agent.update(delivered_at: Time.now) if new_status == 'delivered'
     update(is_active: false) if new_status == 'delivered'
     update(status: new_status)
   end

@@ -20,7 +20,7 @@
               <% order.order_items.each do |item| %>
                 <div class="row">
                   <div class="col-6">
-                    <p><strong><%= item.food.name %></strong> x <%= item.quantity %></p>
+                    <p><strong><%= find_food(item.food_id).name %></strong> x <%= item.quantity %></p>
                   </div>
                   <div class="col-6">
                     <p class="ms">Rs <%= item.subtotal %>
