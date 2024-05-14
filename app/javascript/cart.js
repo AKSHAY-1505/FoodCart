@@ -47,26 +47,28 @@ $(document).ready(function () {
     }
   });
 
-  $(".remove-button").on("click", function (event) {
-    let orderItemId = $(this).data("order-item-id");
-    let currentButton = $(this);
+  $(".remove-button")
+    .off("click")
+    .on("click", function (event) {
+      let orderItemId = $(this).data("order-item-id");
+      let currentButton = $(this);
 
-    $.ajax({
-      url: "/order_items/" + orderItemId,
-      type: "DELETE",
-      headers: {
-        // Alternatively you can skip authenticity token verification in the controller
-        "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
-      },
-      success: function (response) {
-        console.log(response);
-        let parentDiv = currentButton.closest(".row.cart-row");
-        parentDiv.remove();
-        $("#cart-summary").replaceWith($(response));
-      },
-      error: function (error) {
-        console.error("Error:", error);
-      },
+      $.ajax({
+        url: "/order_items/" + orderItemId,
+        type: "DELETE",
+        headers: {
+          // Alternatively you can skip authenticity token verification in the controller
+          "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+          console.log(response);
+          let parentDiv = currentButton.closest(".row.cart-row");
+          parentDiv.remove();
+          $("#cart-summary").replaceWith($(response));
+        },
+        error: function (error) {
+          console.error("Error:", error);
+        },
+      });
     });
-  });
 });
