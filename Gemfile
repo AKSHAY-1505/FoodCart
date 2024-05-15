@@ -70,6 +70,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'test-unit', '~> 3.1', '>= 3.1.8'
 end
 
 gem 'devise', '~> 4.9'
