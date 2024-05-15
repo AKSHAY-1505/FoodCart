@@ -10,6 +10,17 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def update
+    order_item = OrderItem.find(params[:id])
+    if order_item.update(order_item_params)
+      cart_item_updator_class.new(order_item).update_item_details
+      render json: { cart_entry_html: cart_entry_html(order_item), cart_summary_html: cart_summary_html }, status: :ok
+    else
+      render json: { message: 'Failed to remove item from cart.' }, status: :unprocessable_entity
+
+    end
+  end
+
   def destroy
     order_item = OrderItem.find(params[:id])
     if order_item.destroy
@@ -25,8 +36,12 @@ class OrderItemsController < ApplicationController
     Services::CartItemService::CartItemCreator
   end
 
+  def cart_item_updator_class
+    Services::CartItemService::CartItemUpdator
+  end
+
   def order_item_params
-    params.require(:order_item).permit(:quantity, :food_id)
+    params.require(:order_item).permit(:quantity, :food_id, :id)
   end
 
   def collect_cart_details
@@ -35,5 +50,9 @@ class OrderItemsController < ApplicationController
 
   def cart_summary_html
     render_to_string(partial: 'carts/cart_summary', locals: { cart_details: collect_cart_details })
+  end
+
+  def cart_entry_html(order_item)
+    render_to_string(partial: 'carts/cart_entry', locals: { item: order_item })
   end
 end

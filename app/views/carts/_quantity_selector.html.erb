@@ -1,0 +1,14 @@
+<div class="container mt-1">
+  <div class="input-group">
+    <button class="btn btn-danger decrement" type="button">
+      -
+    </button>
+    <input type="number" id="quantity" class="form-control text-center quantity" value="<%= item.quantity %>" data-food-id="<%= item.food.id %>" data-entry-id="<%= item.id %>">
+    <button class="btn btn-success increment" type="button" data-quantity="<%= item.food.quantity %>">
+      +
+    </button>
+  </div>
+  <div class="center">
+    <p class="warning text-danger mt-1"></p>
+  </div>
+</div>

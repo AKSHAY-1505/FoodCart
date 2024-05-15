@@ -1,4 +1,4 @@
-<div class="row cart-row">
+<div class="row cart-row" id="cart_entry_<%= item.id %>" >
   <!-- Product Image -->
   <div class="col center">
     <%= image_tag item.food.images.first.variant(:thumb), class: "img-fluid product-image"%>
@@ -13,7 +13,8 @@
   </div>
   <!-- Quantity -->
   <div class="col center">
-    <p><%= item.quantity %></p>
+    <%= render 'carts/quantity_selector', item: item%>
+    <!-- <p><%# item.quantity %></p> -->
   </div>
   <!-- Total Price -->
   <div class="col center">

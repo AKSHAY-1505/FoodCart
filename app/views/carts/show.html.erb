@@ -14,9 +14,11 @@
       <div class="col center"><strong>Remove</strong></div>
     </div>
     <!-- Shopping cart rows -->
-    <% @cart_items.each do |item| %>
-      <%= render partial: 'cart_entry', locals: {item: item} %>
-    <% end %>
+    <div class="cart-items">
+      <% @cart_items.each do |item| %>
+        <%= render partial: 'cart_entry', locals: {item: item} %>
+      <% end %>
+    </div>
     <!-- Cart summary -->
     <div class="row">
       <%= render 'cart_summary', cart_details: @cart_details %>
