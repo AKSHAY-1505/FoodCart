@@ -64,7 +64,9 @@ $(document).ready(function () {
           console.log(response);
           let parentDiv = currentButton.closest(".row.cart-row");
           parentDiv.remove();
-          $("#cart-summary").replaceWith($(response));
+          // $("#cart-summary").replaceWith($(response));
+          $("#cart-count").text(response.cart_count);
+          $("#cart-summary").replaceWith(response.cart_summary_html);
         },
         error: function (error) {
           console.error("Error:", error);

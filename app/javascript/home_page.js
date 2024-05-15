@@ -91,6 +91,7 @@ $(document).ready(function () {
             previousQuantity = button.data("quantity");
             newQuantity = previousQuantity - quantity;
             button.data("quantity", newQuantity);
+            $("#cart-count").text(response.cart_count);
           },
           error: function (error) {
             showDangerToast();

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :user_is_customer?, :user_is_admin?, :user_is_delivery_agent?, :delivery_address,
-                :delivery_agent_role_id
+                :delivery_agent_role_id, :cart_count
 
   # CART_TOTAL_CALCULATOR_CLASS = Services::CartService::CartTotalCalculator
   # CART_DISCOUNT_APPLIER_CLASS = Services::CartService::CartDiscountApplier
@@ -41,6 +41,10 @@ class ApplicationController < ActionController::Base
 
   def delivery_agent_role_id
     Role.find_by(name: 'Delivery Agent').id
+  end
+
+  def cart_count
+    OrderItem.where(user: current_user, ordered: false).count
   end
 
   private
