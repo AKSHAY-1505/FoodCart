@@ -7,15 +7,17 @@
     <hr>
     <%= render 'suggestion_accordian', suggestions: @suggested_foods %>
   <% end %>
-  <% @categories.each do |category| %>
-    <% render_category(category) do %>
-      <hr />
-      <h3> <%= category.name %> </h3>
-      <div class="category">
-        <% category.foods.each do |food| %>
-          <%= render partial: 'food', locals: {food: food} %>
-        <% end %>
-      </div>
+  <div class="categories">
+    <% @categories.each do |category| %>
+      <% render_category(category) do %>
+        <hr />
+        <h3> <%= category.name %> </h3>
+        <div class="category">
+          <% category.foods.each do |food| %>
+            <%= render partial: 'food', locals: {food: food} %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

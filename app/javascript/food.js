@@ -50,7 +50,6 @@ $(document).ready(function () {
   $("#food_create_form").on("submit", function (e) {
     e.preventDefault();
     data = new FormData($(this)[0]);
-
     // FOOD Create AJAX
     $.ajax({
       url: "/foods",
@@ -65,6 +64,7 @@ $(document).ready(function () {
       success: function (response) {
         let parentDiv = $("#newly_created");
         parentDiv.append($(response));
+        $("#food_create_form")[0].reset();
       },
       error: function (error) {
         console.error("Error:", error);

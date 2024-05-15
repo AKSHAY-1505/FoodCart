@@ -2,7 +2,7 @@
 <div class="container mt-2 header">
   <div class="d-flex">
     <h3 class="me-3">Coupons</h3>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#couponFormModal_<%= @coupon.id %>">
+    <button type="button" class="btn btn-success" id="coupon-create-modal-trigger" data-bs-toggle="modal" data-bs-target="#couponFormModal_<%= @coupon.id %>">
       <span><i class="bi bi-plus-lg"></i></span> Create a Coupon
     </button>
     <%= render 'coupon_form_modal', coupon: @coupon %>

@@ -64,6 +64,7 @@ $(document).ready(function () {
         contentType: false,
         success: function (response) {
           $(".coupons").append($(response));
+          form[0].reset();
         },
         error: function (error) {
           console.error("Error:", error);

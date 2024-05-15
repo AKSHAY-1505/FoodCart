@@ -14,7 +14,7 @@
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <% if user_is_customer? %>
             <li class="nav-item center btn btn-dark">
-              <%= link_to cart_path(current_user), class: "nav-link active" do %>
+              <%= link_to cart_path(current_user), class: "nav-link active", id: "cart-button" do %>
                 <i class="bi bi-cart2 me-0"></i>
                 Cart
               <% end %>

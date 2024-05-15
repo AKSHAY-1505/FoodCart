@@ -9,7 +9,7 @@
     <div class="header">
       <div class="d-flex center gap-3">
         <h3>Promotions</h3>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PromotionForm<%= @promotion.id %>">
+        <button type="button" class="btn btn-success" id="create-promotion-modal-trigger" data-bs-toggle="modal" data-bs-target="#PromotionForm<%= @promotion.id %>">
           Create New Promotion
         </button>
         <%= render partial: 'promotions/promotion_form_modal', locals: { promotion: @promotion, food: @food } %>

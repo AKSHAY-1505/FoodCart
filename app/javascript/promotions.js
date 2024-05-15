@@ -53,7 +53,7 @@ $(document).ready(function () {
       url = form.attr("action");
       data = new FormData(form[0]);
 
-      // Option Create AJAX
+      // Promotion Create AJAX
       $.ajax({
         url: url,
         type: "POST",
@@ -63,6 +63,7 @@ $(document).ready(function () {
         success: function (response) {
           let parentDiv = $("#promotions");
           parentDiv.append($(response));
+          form[0].reset();
         },
         error: function (error) {
           console.error("Error:", error);

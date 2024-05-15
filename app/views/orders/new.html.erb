@@ -29,7 +29,7 @@
         <div class="addresses">
           <% @addresses.each do |address| %>
             <div class="address field">
-              <%= form.radio_button :address_id, address.id, id: address.id, class: "hidden-radio" %>
+              <%= form.radio_button :address_id, address.id, id: address.id, class: "hidden-radio delivery-address" %>
               <%= form.label :address_id, delivery_address(address), for: address.id %>
             </div>
           <% end %>
