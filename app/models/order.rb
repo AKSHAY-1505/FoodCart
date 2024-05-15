@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   ORDER_ITEMS_CREATOR_CLASS = Services::OrderService::OrderItemsCreator
 
   belongs_to :user
-  has_many :order_items, dependent: :destroy
+  has_many :order_items
   has_many :foods, through: :order_items
   belongs_to :address
   has_one :order_delivery_agent

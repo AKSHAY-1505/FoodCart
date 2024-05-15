@@ -17,7 +17,7 @@
         </div>
       </div>
       <% @active_orders.each do |order| %>
-        <div class="row p-1 m-1" id="order_<%= order.id %>">
+        <div class="row p-1 m-1 assigned-orders" id="order_<%= order.id %>">
           <div class="col center">
             <p><%= order.id %></p>
           </div>
