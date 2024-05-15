@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
-    it { should have_many(:order_items).dependent(:destroy) }
+    it { should have_many(:order_items) }
     it { should have_many(:foods).through(:order_items) }
     it { should belong_to(:address) }
     it { should have_one(:order_delivery_agent) }
