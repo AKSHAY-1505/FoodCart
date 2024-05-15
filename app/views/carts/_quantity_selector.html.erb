@@ -4,7 +4,7 @@
       -
     </button>
     <input type="number" id="quantity" class="form-control text-center quantity" value="<%= item.quantity %>" data-food-id="<%= item.food.id %>" data-entry-id="<%= item.id %>">
-    <button class="btn btn-success increment" type="button" data-quantity="<%= item.food.quantity %>">
+    <button class="btn btn-success increment" type="button" data-quantity="<%= item.food.quantity + item.quantity %>">
       +
     </button>
   </div>

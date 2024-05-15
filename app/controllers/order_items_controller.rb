@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :authenticate_customer
+  before_action :set_order_item, only: %i[update destroy]
 
   def create
     order_item = cart_item_creator_class.new(current_user, order_item_params[:food_id], order_item_params[:quantity]).create_cart_item # rubocop:disable Layout/LineLength
@@ -11,10 +12,8 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    order_item = OrderItem.find(params[:id])
-    if order_item.update(order_item_params)
-      cart_item_updator_class.new(order_item).update_item_details
-      render json: { cart_entry_html: cart_entry_html(order_item), cart_summary_html: cart_summary_html }, status: :ok
+    if cart_item_updator_class.new(@order_item, order_item_params[:quantity]).update_item_details
+      render json: { cart_entry_html: cart_entry_html(@order_item), cart_summary_html: cart_summary_html }, status: :ok
     else
       render json: { message: 'Failed to remove item from cart.' }, status: :unprocessable_entity
 
@@ -22,8 +21,7 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    order_item = OrderItem.find(params[:id])
-    if order_item.destroy
+    if @order_item.destroy
       render json: { cart_count: cart_count, cart_summary_html: cart_summary_html }, status: :ok
     else
       render json: { message: 'Failed to remove item from cart.' }, status: :unprocessable_entity
@@ -31,6 +29,10 @@ class OrderItemsController < ApplicationController
   end
 
   private
+
+  def set_order_item
+    @order_item = OrderItem.find(params[:id])
+  end
 
   def cart_item_creator_class
     Services::CartItemService::CartItemCreator
