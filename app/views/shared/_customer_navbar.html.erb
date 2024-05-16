@@ -12,7 +12,7 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <% if user_is_customer? %>
+          <% display_customer_buttons do %>
             <li class="nav-item center btn btn-dark">
               <%= link_to cart_path(current_user), class: "nav-link active", id: "cart-button" do %>
                 <i class="bi bi-cart2 me-0"></i>
@@ -30,7 +30,8 @@
             <li class="nav-item center btn btn-dark">
               <%= button_to "Log out" , destroy_user_session_path, method: :delete, class: "nav-link active"%>
             </li>
-          <% else %>
+          <% end %>
+          <% display_signed_out_buttons do %>
             <li class="nav-item center btn btn-dark">
               <%= link_to "Sign in" , new_user_session_path, class: "nav-link active"%>
             </li>

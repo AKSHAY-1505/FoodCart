@@ -1,8 +1,8 @@
 <%= javascript_include_tag 'admin.js' %>
 <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
-<h1 class="center mt-3">Active Orders</h1>
-<div class="container border border-dark mt-5">
-  <% if @active_orders.any? %>
+<% display_active_orders(@active_orders) do %>
+  <h1 class="center mt-3">Active Orders</h1>
+  <div class="container border border-dark mt-5">
     <div class="orders-header">
       <div class="row p-2 m-2 border-bottom border-dark">
         <div class="col center">
@@ -56,6 +56,9 @@
     </div>
   <% end %>
 </div>
+<% display_no_orders_received(@active_orders) do %>
+  <h1 class="center">No Orders Received</h1>
+<% end %>
 <div class="apple_pagination center">
   <%= will_paginate @active_orders %>
 </div>

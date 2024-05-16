@@ -30,4 +30,16 @@ module CustomersHelper
   def render_quantity_selector(food)
     yield if food.quantity > 0
   end
+
+  def display_food_image(food)
+    yield if food.images.any?
+  end
+
+  def display_customer_past_orders(past_orders)
+    yield if past_orders.any?
+  end
+
+  def display_customer_active_orders(active_orders)
+    yield if active_orders.any?
+  end
 end

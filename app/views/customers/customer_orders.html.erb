@@ -1,6 +1,6 @@
 <h1 class="center">My Orders</h1>
 <div class="customer-orders">
-  <% if @active_orders.any? %>
+  <% display_customer_active_orders(@active_orders) do%>
     <h3>Active Orders</h3>
     <hr />
     <div class="orders d-flex">
@@ -9,7 +9,7 @@
       <% end %>
     </div>
   <% end %>
-  <% if @past_orders.any? %>
+  <% display_customer_past_orders(@past_orders) do%>
     <h3>Past Orders</h3>
     <hr />
     <div class="orders d-flex">

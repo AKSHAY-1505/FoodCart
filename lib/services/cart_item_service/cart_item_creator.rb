@@ -8,7 +8,6 @@ module Services
       end
 
       def create_cart_item
-        # debugger
         item_in_cart = OrderItem.find_or_initialize_by(user: @user, food: @food, ordered: false)
         if item_in_cart.quantity
           item_in_cart.quantity += @quantity

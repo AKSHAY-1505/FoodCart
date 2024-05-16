@@ -1,6 +1,8 @@
 <div id="<%= dom_id food %>" class="food_item ">
   <div class = "image_container">
-    <%= image_tag food.images.first.variant(:thumb) if food.images.any? %>
+    <% display_food_image(food) do %>
+      <%= image_tag food.images.first.variant(:thumb) %>
+    <% end %>
   </div>
   <div class = "food_details p-2">
     <p>
