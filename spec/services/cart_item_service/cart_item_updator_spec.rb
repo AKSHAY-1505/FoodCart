@@ -8,7 +8,6 @@ RSpec.describe Services::CartItemService::CartItemUpdator do
     let(:new_quantity) { 3 }
 
     before do
-      # Stub the DiscountCalculator to return a fixed discount for testing purposes
       allow_any_instance_of(Services::CartItemService::DiscountCalculator).to receive(:calculate_discount).and_return(5)
     end
 

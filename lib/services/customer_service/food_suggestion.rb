@@ -6,7 +6,8 @@ module Services
       end
 
       def suggested_foods
-        top_five_most_ordered_foods.map { |food_id| Food.find_by(id: food_id) }.compact
+        top_five_food_ids = top_five_most_ordered_foods
+        Food.where(id: top_five_food_ids)
       end
 
       def top_five_most_ordered_foods

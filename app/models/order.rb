@@ -1,6 +1,4 @@
 class Order < ApplicationRecord
-  ORDER_ITEMS_CREATOR_CLASS = Services::OrderService::OrderItemsCreator
-
   belongs_to :user
   has_many :order_items
   has_many :foods, through: :order_items
@@ -31,6 +29,7 @@ class Order < ApplicationRecord
   private
 
   def create_order_items
-    ORDER_ITEMS_CREATOR_CLASS.new(self).create_order_items
+    order_items = OrderItem.where(user: user, ordered: false)
+    order_items.update_all(order_id: id, ordered: true)
   end
 end
