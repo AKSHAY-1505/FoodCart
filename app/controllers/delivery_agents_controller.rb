@@ -19,7 +19,8 @@ class DeliveryAgentsController < ApplicationController
 
   def home
     @active_orders = Order.includes(:order_delivery_agent)
-                          .where(order_delivery_agent: { user: current_user, delivered_at: nil })
+                          .where(order_delivery_agent: { user: current_user,
+                                                         delivered_at: nil }).order('assigned_at DESC')
 
     @statuses = Order.statuses
   end

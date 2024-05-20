@@ -72,20 +72,27 @@ group :test do
   gem 'shoulda-matchers'
 end
 
+# gem for authentication
 gem 'devise', '~> 4.9'
 
 gem 'image_processing', '~> 1.12'
 
+# ruby formatter
 gem 'rubocop'
 
+# pagination gem
 gem 'will_paginate', '~> 4.0'
 
+# gem for cron jobs
 gem 'whenever', require: false
 
+# pdf generation gems
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+# omniauth gems
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
+# gem for soft delete
 gem 'paranoia', '~> 2.6'
