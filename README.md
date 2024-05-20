@@ -9,15 +9,15 @@ Rails Version: 7.1.3.2
 
 1. Clone this repository
 
-2. Run "bundle install" command to install the gems used.
+2. Run `bundle install` command to install the gems used.
 
-3. Run "rails db:create" command to create the database.
+3. Run `rails db:create` command to create the database.
 
-4. Run "rails db:migrate" command to run all the database migrations.
+4. Run `rails db:migrate` command to run all the database migrations.
 
 5. Run `rails db:seed` command to seed the database with some data.
 
-6. Run "rails s" command to start the server
+6. Run `rails s` command to start the server
 
 7. visit "localhost:3000" in the browser
 
