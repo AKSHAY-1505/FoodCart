@@ -1,0 +1,13 @@
+======================================
+FoodCart Coupon
+======================================   
+Hello <% @user.name %>,
+
+A new coupon has been created on FoodCart.
+
+Coupon Code: <%= @coupon.code %>
+Valid from: <%= @coupon.from_date %>
+Valid to: <%= @coupon.to_date %>
+Flat Rs <%= @coupon.discount %> off on Minimum Cart Value of <%= @coupon.min_amount %>
+
+have a great day!

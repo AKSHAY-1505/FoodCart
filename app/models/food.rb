@@ -15,8 +15,14 @@ class Food < ApplicationRecord
 
   before_destroy :remove_food_from_carts
 
+  # Search query for foods
+  def self.search(name)
+    Food.where('name LIKE ?', "%#{name.downcase}%")
+  end
+
   private
 
+  # To remove food from carts when food is deleted
   def remove_food_from_carts
     OrderItem.where(food: self, ordered: false).destroy_all
   end

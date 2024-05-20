@@ -22,7 +22,8 @@ $(document).ready(function () {
     toast.show();
   }
 
-  function showDangerToast() {
+  function showDangerToast(message) {
+    $("#danger-toast-message .toast-body").text(message);
     var toastElement = document.getElementById("danger-toast-message");
     var toast = new bootstrap.Toast(toastElement);
     toast.show();
@@ -94,17 +95,36 @@ $(document).ready(function () {
             $("#cart-count").text(response.cart_count);
           },
           error: function (error) {
-            showDangerToast();
+            showDangerToast("Please Login to add to cart!");
           },
         });
       } else {
-        console.log("Quantity must be greater than 0");
-        var toastElement = document.getElementById("danger-toast-message");
-        $("#danger-toast-message .toast-body").text(
-          "Quantity must be greater than 0"
-        );
-        var toast = new bootstrap.Toast(toastElement);
-        toast.show();
+        showDangerToast("Quantity Must be Greater than 0 !");
       }
     });
+
+  $("#search-form").on("submit", function (event) {
+    event.preventDefault();
+    let data = {
+      name: $("#search_name").val(),
+    };
+    console.log(data);
+
+    // Search Food Ajax
+    $.ajax({
+      url: "/search",
+      type: "GET",
+      data: data,
+      headers: {
+        // Alternatively you can skip authenticity token verification in the controller
+        "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
+      },
+      success: function (response) {
+        $("#results").replaceWith($(response));
+      },
+      error: function (error) {
+        showDangerToast("No Matches Found!");
+      },
+    });
+  });
 });

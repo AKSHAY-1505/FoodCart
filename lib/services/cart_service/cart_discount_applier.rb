@@ -1,5 +1,6 @@
 module Services
   module CartService
+    # This class is responsible for applying the discount to the cart items.
     class CartDiscountApplier
       DISCOUNT_CALCULATOR_CLASS = Services::CartItemService::DiscountCalculator
 

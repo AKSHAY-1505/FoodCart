@@ -11,11 +11,12 @@ $(document).ready(function () {
         let currentValue = parseInt(quantityInput.val());
         let entryId = quantityInput.data("entry-id");
         if (isNaN(currentValue)) {
-          console.log("HERE");
           currentValue = 0;
         }
         if (currentValue < quantity) {
           quantityInput.val(currentValue + 1);
+
+          // Increase quantity ajax
           $.ajax({
             url: `/order_items/${entryId}`,
             type: "PATCH",
@@ -50,6 +51,8 @@ $(document).ready(function () {
         }
         if (currentValue > 1) {
           quantityInput.val(currentValue - 1);
+
+          // Decrease quantity ajax
           $.ajax({
             url: `/order_items/${entryId}`,
             type: "PATCH",
@@ -78,6 +81,7 @@ $(document).ready(function () {
         let orderItemId = $(element).data("order-item-id");
         let currentButton = $(element);
 
+        // Remove order item ajax
         $.ajax({
           url: "/order_items/" + orderItemId,
           type: "DELETE",
@@ -98,56 +102,4 @@ $(document).ready(function () {
         });
       }
     });
-
-  // $(".cartContainer").on("click", function (e) {
-  //   let element = $(e.target);
-
-  //   if (element.hasClass("remove-coupon")) {
-  //     e.preventDefault();
-
-  //     //Remove Coupon Ajax
-  //     $.ajax({
-  //       url: "/removeCoupon",
-  //       type: "POST",
-  //       headers: {
-  //         // Alternatively you can skip authenticity token verification in the controller
-  //         "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
-  //       },
-  //       processData: false,
-  //       contentType: false,
-  //       success: function (response) {
-  //         $("#cart-summary").replaceWith($(response));
-  //       },
-  //       error: function (error) {
-  //         console.error("Error:", error);
-  //       },
-  //     });
-  //   } else if (element.hasClass("apply-coupon-button")) {
-  //     e.preventDefault();
-  //     let form = element.parent().parent();
-  //     console.log(form);
-
-  //     let data = new FormData(form[0]);
-
-  //     // Apply Coupon Ajax
-  //     $.ajax({
-  //       url: "/applyCoupon",
-  //       type: "POST",
-  //       data: data,
-  //       processData: false,
-  //       contentType: false,
-  //       success: function (response) {
-  //         console.log(response);
-  //         $("#cart-summary").replaceWith($(response));
-  //       },
-  //       error: function (error) {
-  //         console.error("Error:", error);
-  //       },
-  //     });
-  //   }
-  // });
-
-  // $(".remove-button")
-  //   .off("click")
-  //   .on("click", function (event) {});
 });

@@ -8,9 +8,10 @@ class CartsController < ApplicationController
     @cart_details = cart_total_calculator_class.new(@user).calculate_total
   end
 
+  # Applied coupon discount to the cart.
   def apply_coupon
     @cart_details = cart_total_calculator_class.new(@user, params[:code]).calculate_total
-    if @cart_details[:coupon_discount] > 0 # rubocop:disable Style/NumericPredicate
+    if @cart_details[:coupon_discount].positive?
       render partial: 'carts/cart_summary', locals: { cart_details: @cart_details }, status: :ok
     else
       render partial: 'carts/cart_summary', locals: { cart_details: @cart_details }, status: :unprocessable_entity

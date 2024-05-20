@@ -5,10 +5,12 @@ class CustomersController < ApplicationController
     @suggested_foods = food_suggestion_class.new(current_user).suggested_foods if user_signed_in?
   end
 
+  # Food Show page for customer
   def view_food
     @food = Food.find(params[:id])
   end
 
+  # Customer Order History page
   def customer_orders
     @active_orders = current_user.orders.where(is_active: true)
     @past_orders = current_user.orders.where(is_active: false)

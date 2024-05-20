@@ -68,21 +68,13 @@ $(document).ready(function () {
         var radioButton = $("<input>").attr({
           type: "radio",
           name: "address_id",
-          value: newAddress.id,
-          id: "address_" + newAddress.id,
+          value: response.id,
+          id: "address_" + response.id,
           class: "hidden-radio",
         });
         var label = $("<label>")
-          .attr("for", "address_" + newAddress.id)
-          .text(
-            newAddress.house_number +
-              "," +
-              newAddress.street_name +
-              "," +
-              newAddress.locality +
-              "," +
-              newAddress.city
-          );
+          .attr("for", "address_" + response.id)
+          .text(newAddress);
 
         addressField.append(radioButton).append(label);
 

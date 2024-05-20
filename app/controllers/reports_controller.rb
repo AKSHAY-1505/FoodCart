@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_admin
 
+  # to download the report as a pdf file
   def download
     @orders = Order.where(created_at: params[:start_date].to_date..params[:end_date].to_date)
 

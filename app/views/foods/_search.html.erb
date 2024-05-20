@@ -1,0 +1,17 @@
+<div id="results">
+  <h5 class="ms-2">Search Results (<%= @foods.count%> Matches Found)</h5>
+  <div class="d-flex">
+    <% @foods.each do |food| %>
+      <div class="shadow_box d-flex gap-3">
+        <div class="image-container">
+          <%= link_to image_tag(food.images.first, height: 100, width: 100, class: 'rounded-circle'), view_food_path(food) %>
+        </div>
+        <div class="details d-flex flex-column gap-2">
+          <strong><%= link_to food.name, view_food_path(food), class: "text-black text-decoration-none" %></strong>
+          <i><%= food.description %></i>
+          <p><strong>Price: </strong>Rs <%= food.price %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

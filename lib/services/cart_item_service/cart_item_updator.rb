@@ -1,5 +1,6 @@
 module Services
   module CartItemService
+    # This class is responsible for updating the details of a cart item and adjusting the stock of the food.
     class CartItemUpdator
       def initialize(item, quantity)
         @item = item

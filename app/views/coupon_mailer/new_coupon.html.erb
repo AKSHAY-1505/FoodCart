@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>New Coupon on FoodCart ! </h1>
+    <h2>Hello <%= @user.name %></h2>
+    <h3>Coupon Code: <%= @coupon.code %></h3>
+    <br />
+    <h5>Valid from: <%= @coupon.from_date %></h5>
+    <h5>Valid to: <%= @coupon.to_date %></h5>
+    <i>Flat Rs <%= @coupon.discount %> off on Minimum Cart Value of <%= @coupon.min_amount %></i>
+    <p>have a great day!</p>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+FoodCart has Received your Order!
+
+Hello <%= @user.name %>,
+
+Order ID: #<%= @order.id %>
+
+Delivering To:<%= delivery_address(@order.address) %>
+Delivery Agent will be assigned soon!
+
+Order Summary:
+Subtotal: Rs <%= @order.subtotal %>
+Delivery Charge: Rs <%= @order.delivery_charge %>
+Discount: Rs <%= @order.discount %>
+Total: Rs <%= @order.total %>
+
+Have a great day!

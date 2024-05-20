@@ -1,14 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :user_is_customer?, :user_is_admin?, :user_is_delivery_agent?, :delivery_address,
-                :delivery_agent_role_id, :cart_count
-
-  # CART_TOTAL_CALCULATOR_CLASS = Services::CartService::CartTotalCalculator
-  # CART_DISCOUNT_APPLIER_CLASS = Services::CartService::CartDiscountApplier
-  # FOOD_SUGGESTION_CLASS = Services::CustomerService::FoodSuggestion
-  # CART_ITEM_CREATOR_CLASS = Services::CartItemService::CartItemCreator
-
-  # ADMIN_ROLE_ID = Role.find_by(name: 'Admin')
-  # CUSTOMER_ROLE_ID = Role.find_by(name: 'Customer')
+                :cart_count
 
   def user_is_customer?
     current_user.role.name == 'Customer' if current_user
@@ -22,27 +14,26 @@ class ApplicationController < ActionController::Base
     current_user.role.name == 'Delivery Agent' if current_user
   end
 
-  # Returns delivery address for an address record
-  def delivery_address(address)
-    [address.house_number, address.street_name, address.locality, address.city].join(',')
-  end
-
   def authenticate_admin
     redirect_to root_path, alert: 'You are not authorised to access this page!' unless user_is_admin?
   end
 
   def authenticate_customer
-    redirect_to root_path, alert: 'Error! You are not authorized to visit this page', status: :unauthorized unless user_is_customer?
+    return if user_is_customer?
+
+    redirect_to root_path, alert: 'Error! You are not authorized to visit this page', status: :unauthorized
   end
 
   def authenticate_delivery_agent
     redirect_to root_path, alert: 'You are not authorized to visit that page!' unless user_is_delivery_agent?
   end
 
-  def delivery_agent_role_id
-    Role.find_by(name: 'Delivery Agent').id
+  # Returns delivery address for an address record
+  def delivery_address(address)
+    [address.house_number, address.street_name, address.locality, address.city].join(',')
   end
 
+  # returns cart count for current user
   def cart_count
     OrderItem.where(user: current_user, ordered: false).count
   end

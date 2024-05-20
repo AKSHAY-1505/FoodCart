@@ -6,6 +6,7 @@ class Promotion < ApplicationRecord
   validates :description, presence: true
   validate :valid_date_range
 
+  # to destroy expired promotions
   def self.destroy_expired_promotions
     expired_promotions = Promotion.where('to_date < ?', Date.current)
     expired_promotions.destroy_all
@@ -13,6 +14,7 @@ class Promotion < ApplicationRecord
 
   private
 
+  # custom validation to ensure to_date is greater than from_date
   def valid_date_range
     return if from_date.nil? || to_date.nil?
 

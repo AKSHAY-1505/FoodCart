@@ -1,5 +1,6 @@
 module Services
   module CartItemService
+    # This class is responsible for creating a new cart item and adjusting the stock of the food.
     class CartItemCreator
       def initialize(user, food_id, quantity)
         @user = user

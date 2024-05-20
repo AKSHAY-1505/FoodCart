@@ -1,5 +1,6 @@
 module Services
   module CartItemService
+    # This class is responsible for calculating the discount for a cart item.
     class DiscountCalculator
       def initialize(item)
         @item = item

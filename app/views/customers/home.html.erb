@@ -3,6 +3,13 @@
 <%= render 'banner_carousel' %>
 <%= render 'shared/toast' %>
 <div id="foods">
+  <div class="search center">
+    <%= form_with url: search_path, method: 'get', class: 'd-flex gap-3 w-75', id: "search-form"  do |f| %>
+      <%= f.text_field :name, class: 'w-100 form-control', placeholder: 'Search for foods', id: "search_name" %>
+      <%= f.submit 'Search', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+  <div id="results" class="d-flex"></div>
   <% render_suggestion_accrodian do %>
     <hr>
     <%= render 'suggestion_accordian', suggestions: @suggested_foods %>
@@ -11,7 +18,7 @@
     <% @categories.each do |category| %>
       <% render_category(category) do %>
         <hr />
-        <h3> <%= category.name %> </h3>
+        <h3 class="ms-2"> <%= category.name %> </h3>
         <div class="category">
           <% category.foods.each do |food| %>
             <%= render partial: 'food', locals: {food: food} %>

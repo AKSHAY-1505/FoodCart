@@ -1,21 +1,21 @@
 <div id="<%= dom_id food %>" class="food_item ">
   <div class = "image_container">
     <% display_food_image(food) do %>
-      <%= image_tag food.images.first.variant(:thumb) %>
+      <%= link_to image_tag(food.images.first.variant(:thumb)), view_food_path(food) %>
     <% end %>
   </div>
   <div class = "food_details p-2">
     <p>
       <strong>Name:</strong>
-      <%= link_to food.name, view_food_path(food) %>
+      <%= link_to food.name, view_food_path(food), class: "text-black text-decoration-none" %>
     </p>
     <p>
       <strong>Description:</strong>
-      <%= food.description %>
+      <i><%= food.description %></i>
     </p>
     <p>
       <strong>Price:</strong>
-      <%= food.price %>
+      Rs <%= food.price %>
     </p>
     <div class="center">
       <%= form_with remote: true, class: "add_to_cart_form" do |form| %>

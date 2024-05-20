@@ -3,8 +3,6 @@ class DeliveryAgentsController < ApplicationController
   before_action :authenticate_delivery_agent, only: %i[home]
 
   def create
-    # debugger
-    # @agent = DELIVERY_AGENT_ROLE.users.new(delivery_agent_params)
     @agent = User.new(delivery_agent_params)
 
     if @agent.save
@@ -15,12 +13,14 @@ class DeliveryAgentsController < ApplicationController
   end
 
   def new
-    
+    @deliery_agent_role_id = Role.find_by(name: 'Delivery Agent').id
     @delivery_agent = User.new
   end
 
   def home
-    @active_orders = OrderDeliveryAgent.where(user: current_user, delivered_at: nil).map { |record| record.order }
+    @active_orders = Order.includes(:order_delivery_agent)
+                          .where(order_delivery_agent: { user: current_user, delivered_at: nil })
+
     @statuses = Order.statuses
   end
 

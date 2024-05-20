@@ -1,5 +1,6 @@
 module Services
   module CartService
+    # This class is responsible for calculating the total amount of the cart.
     class CartTotalCalculator
       DELIVERY_CHARGE = 30
       FREE_DELIVERY = 0
@@ -8,22 +9,17 @@ module Services
       def initialize(user, coupon_code = nil)
         @cart_items = OrderItem.where(user: user, ordered: false)
         @coupon = find_coupon(coupon_code)
+        @cart_details = {}
       end
 
       def calculate_total
-        subtotal = @cart_items.pluck(:subtotal).sum
-        delivery_charge = subtotal >= MINIMUM_AMOUNT_FOR_FREE_DELIVERY ? FREE_DELIVERY : DELIVERY_CHARGE
-        coupon_discount = apply_coupon_discount(subtotal)
+        @cart_details[:subtotal] = @cart_items.pluck(:subtotal).sum
+        @cart_details[:delivery_charge] = @cart_details[:subtotal] >= MINIMUM_AMOUNT_FOR_FREE_DELIVERY ? FREE_DELIVERY : DELIVERY_CHARGE
+        @cart_details[:coupon_discount] = apply_coupon_discount(@cart_details[:subtotal])
         promotions_discount = @cart_items.pluck(:discount).sum
-        discount = promotions_discount + coupon_discount
-        total = subtotal + delivery_charge - discount
-        {
-          subtotal: subtotal,
-          delivery_charge: delivery_charge,
-          coupon_discount: coupon_discount,
-          discount: discount,
-          total: total
-        }
+        @cart_details[:discount] = promotions_discount + @cart_details[:coupon_discount]
+        @cart_details[:total] = @cart_details[:subtotal] + @cart_details[:delivery_charge] - @cart_details[:discount]
+        @cart_details
       end
 
       def apply_coupon_discount(subtotal)

@@ -1,11 +1,12 @@
 class AddressesController < ApplicationController
+
   before_action :authenticate_customer
 
   def create
     @address = current_user.addresses.new(address_params)
 
     if @address.save
-      render json: { address: @address }, status: :created
+      render json: { id: @address.id, address: delivery_address(@address) }, status: :created
     else
       render json: { errors: @address.errors.full_messages }, status: :unprocessable_entity
     end

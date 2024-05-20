@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[show update destroy]
-  before_action :authenticate_admin
+  before_action :authenticate_admin, except: %i[search]
 
   def index
     @food = Food.new
@@ -33,6 +33,16 @@ class FoodsController < ApplicationController
       render json: { message: 'Food Deleted Successfully !' }, status: :ok
     else
       render json: { message: 'Error! Unable to Delete Food' }, status: :unprocessable_entity
+    end
+  end
+
+  # Search action for foods
+  def search
+    @foods = Food.search(params[:name])
+    if @foods.any?
+      render partial: 'search', locals: { foods: @foods }, status: :ok
+    else
+      render json: { message: 'No matches found !' }, status: :unprocessable_entity
     end
   end
 

@@ -12,7 +12,9 @@
       </div>
       <div class="modal-body">
         <p><strong>Placed On: </strong><%= order.created_at.to_date %></p>
-        <%= render_delivery_time_estimation(order) %>
+        <% delivery_time_estimation(order) do %>
+          <p>Order Delivered in <strong><%= time_estimation(order) %></strong></p>
+        <% end %>
         <div class="order card shadow-sm mb-4">
           <div class="card-body">
             <div class="order_items mb-3">

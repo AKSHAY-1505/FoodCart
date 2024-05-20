@@ -9,6 +9,7 @@ class OrderItem < ApplicationRecord
 
   before_destroy :increase_food_stock
 
+  # to increase food stock when order item is deleted
   def increase_food_stock
     food = self.food
     previous_quantity = food.quantity

@@ -47,36 +47,39 @@ $(document).ready(function () {
     }
   });
 
-  $("#food_create_form").on("submit", function (e) {
-    e.preventDefault();
-    data = new FormData($(this)[0]);
-    // FOOD Create AJAX
-    $.ajax({
-      url: "/foods",
-      type: "POST",
-      data: data,
-      processData: false,
-      contentType: false,
-      headers: {
-        // Alternatively you can skip authenticity token verification in the controller
-        "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
-      },
-      success: function (response) {
-        let parentDiv = $("#newly_created");
-        parentDiv.append($(response));
-        $("#food_create_form")[0].reset();
-      },
-      error: function (error) {
-        console.error("Error:", error);
-      },
+  $("#food_create_form")
+    .off("submit")
+    .on("submit", function (e) {
+      e.preventDefault();
+      data = new FormData($(this)[0]);
+      // FOOD Create AJAX
+      $.ajax({
+        url: "/foods",
+        type: "POST",
+        data: data,
+        processData: false,
+        contentType: false,
+        headers: {
+          // Alternatively you can skip authenticity token verification in the controller
+          "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+          let parentDiv = $("#newly_created");
+          parentDiv.append($(response));
+          $("#food_create_form")[0].reset();
+        },
+        error: function (error) {
+          console.error("Error:", error);
+        },
+      });
     });
-  });
 
   $("#new-category-form").on("submit", function (event) {
     event.preventDefault();
     let url = $(this).attr("action");
     let data = new FormData($(this)[0]);
 
+    // Category create ajax
     $.ajax({
       url: url,
       method: "POST",
