@@ -7,7 +7,7 @@ RSpec.describe 'AddressesController', type: :request do
         post addresses_path,
              params: { address: { house_number: '123', street_name: 'Main St', locality: 'City', city: 'State',
                                   phone_number: '1234567890' } }
-        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
@@ -37,7 +37,7 @@ RSpec.describe 'AddressesController', type: :request do
         post addresses_path,
              params: { address: { house_number: '123', street_name: 'Main St', locality: 'City', city: 'State',
                                   phone_number: '1234567890' } }
-        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

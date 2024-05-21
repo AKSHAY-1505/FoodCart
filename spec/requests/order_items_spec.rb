@@ -31,9 +31,9 @@ RSpec.describe 'OrderItems', type: :request do
     end
 
     context 'user not signed in' do
-      it 'responds with created status' do
+      it 'redirects to root path' do
         post order_items_path, params: valid_params
-        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'it creates a cart item' do
@@ -69,9 +69,9 @@ RSpec.describe 'OrderItems', type: :request do
         order_item
       end
 
-      it 'responds with a success response' do
+      it 'redirects to root path' do
         delete order_item_path(order_item)
-        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
       it 'deletes order item' do
         expect do

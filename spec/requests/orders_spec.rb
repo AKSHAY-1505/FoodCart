@@ -50,7 +50,7 @@ RSpec.describe 'Orders', type: :request do
     context 'user not signed in'
     it 'redirects to root path' do
       get new_order_path
-      expect(response).to redirect_to(root_path)
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 
@@ -78,7 +78,7 @@ RSpec.describe 'Orders', type: :request do
     context 'user not signed in' do
       it 'redirects to root path' do
         post orders_path, params: valid_params
-        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

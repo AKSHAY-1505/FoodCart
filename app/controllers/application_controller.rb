@@ -19,9 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_customer
-    return if user_is_customer?
-
-    redirect_to root_path, alert: 'Error! You are not authorized to visit this page', status: :unauthorized
+    redirect_to root_path, alert: 'Error! You are not authorized to visit this page', status: :unprocessable_entity unless user_is_customer?
   end
 
   def authenticate_delivery_agent

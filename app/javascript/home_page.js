@@ -88,7 +88,6 @@ $(document).ready(function () {
             form.find("#quantity").val(0);
             showSuccessToast();
             button = form.find(".increment");
-            console.log(button.data("quantity"));
             previousQuantity = button.data("quantity");
             newQuantity = previousQuantity - quantity;
             button.data("quantity", newQuantity);
